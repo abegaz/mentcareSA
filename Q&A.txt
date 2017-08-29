@@ -1,4 +1,6 @@
-This is a document that allows us to post and answer each other’s questions. This also allows us to become more familiar with pull, commit, and push. See example below (This is also a valid question I have)
+This is a document that allows us to post and answer each other’s questions. 
+This also allows us to become more familiar with pull, commit, and push. 
+See example below (This is also a valid question I have)
 
 1) From: Josh To: Dr. Abegaz
 Q: What is the difference between commit and push?
