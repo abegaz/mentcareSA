@@ -6,7 +6,7 @@ Functional Requirements:
 1. details of patient information
 2. authorization of patient information
 3. UI ( Login screens, main page, tabbed interfaces, etc)
-4.
+4. Database to hold patients
 5.
 6.
 7.
@@ -17,3 +17,4 @@ Functional Requirements:
 Non Functional Requirements:
 1. Security
 2. Usability
+
