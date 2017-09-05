@@ -1,1 +1,1 @@
-1. As a registered user, I want to see my patients? information so that I can provide proper care to them.
+1. As a registered user, I want to see my patients’ information so that I can provide proper care to them.
