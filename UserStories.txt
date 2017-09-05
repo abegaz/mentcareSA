@@ -4,7 +4,7 @@
 
 
 
-7. As any user, I should see an user interface UI so that I can navigate the software.
+7. As any user, I should see a user interface UI so that I can navigate the software.
 
 
 
