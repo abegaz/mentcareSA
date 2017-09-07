@@ -2,14 +2,10 @@
 2. 
 3. As any user, I should see a user interface UI so that I can navigate the software.
 4. 
-5. 
-6. 
-7. 
-8. 
-
+5.
 6. As a physician, I should be able to see the patient's medical history so that I can determine the best treatment for him or her.
 7. As a physician, I need to be able to access the treatment plan so that I can make changes as necessary and share the information with the other personal caring for the patient.  
-
+8.
 9. As a Patient or Physician, I should be able to access and change patient medication information so that updates and changes can be made.
 10. As a patient, I need to be able to contact my physician/psychiatrist through MentCare so that I can take advantage of this resource.
 
