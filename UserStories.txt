@@ -1,6 +1,11 @@
 1. As a registered user, I want to see my patients’ information so that I can provide proper care to them.
-
+2. 
 3. As any user, I should see a user interface UI so that I can navigate the software.
+4. 
+5. 
+6. 
+7. 
+8. 
 
 
 
