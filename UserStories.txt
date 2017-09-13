@@ -13,5 +13,5 @@ Functional Requirement User Stories
 Nonfunctional Requirement User Stories
 1. 
 2. 
-3. 
+3. As a patient or physician, I need to be able to rely on the software so that I can give/ recieve help effectively and in a timely manner.
 4. As a patient, I need to be able to have control over who has access to my medical information so that sensitive information remains private.
