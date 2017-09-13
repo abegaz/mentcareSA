@@ -11,7 +11,7 @@ Functional Requirement User Stories
 10. As a patient, I need to be able to contact my physician/psychiatrist through MentCare so that I can take advantage of this resource.
 
 Nonfunctional Requirement User Stories
-1. 
-2. 
+1. As a patient, I want my information to be secure so that I do not have to worry about unauthorized use of my information.
+2. As a patient or physician, I need to be able to easily use and navigate throughout the software so that it is the most effective for my needs.
 3. As a patient or physician, I need to be able to rely on the software so that I can give/ recieve help effectively and in a timely manner.
 4. As a patient, I need to be able to have control over who has access to my medical information so that sensitive information remains private.
