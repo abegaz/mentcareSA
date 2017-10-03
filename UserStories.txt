@@ -15,3 +15,6 @@ Nonfunctional Requirement User Stories
 2. As a patient or physician, I need to be able to easily use and navigate throughout the software so that it is the most effective for my needs.
 3. As a patient or physician, I need to be able to rely on the software so that I can give/ recieve help effectively and in a timely manner.
 4. As a patient, I need to be able to have control over who has access to my medical information so that sensitive information remains private.
+
+
+Very good!
