@@ -6,15 +6,15 @@ Functional Requirements:
 1. Details of patient information
 2. Authorization of patient information
 3. UI ( Login screens, main page, tabbed interfaces, etc)
-4. MySQL Database to hold patients
-5. Automatic backup of information
+4. MySQL Database to hold patients? This is very broad
+5. Automatic backup of information ?
 6. Patient medical history
 7. Treatment plan
 8. Maintaining patient information updated
 9. Patient Medication information
 10. Patients need to be able to contact their physician/psychiatrist through MentCare
 
-Non Functional Requirements:
+Non Functional Requirements: (too broad)
 1. Security
 2. Usability
 3. Reliability
