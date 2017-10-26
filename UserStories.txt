@@ -1,5 +1,5 @@
 Functional Requirement User Stories
-1. As a registered user, I want to see my patients’ information so that I can provide proper care to them.
+1. (M) As a registered user, I want to see my patients’ information so that I can provide proper care to them.
 2. As a patient, I would like my medical information to be kept confidential and only allow medical staff to access.
 3. As any user, I should see a user interface UI so that I can navigate the software.
 4. As a developer, I want to have a working MySQL database that holds and maintains all data so that I can develope our software.
