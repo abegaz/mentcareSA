@@ -1,0 +1,10 @@
+All the stuff we need to do
+
+create user interface
+create database((maintain information)
+figure out how to keep information secure
+backup files(need a failsafe in case of system malfunctions)
+create different level of authority (who has access to what)
+information in database should be changeable 
+creat way to contact doctor/patient
+make the UI easy to use 
