@@ -3,6 +3,14 @@ package com.mentCare.model;
 public class Address {
 	private String address1, address2, city, state, zip;
 	
+	public Address() {
+		address1 = "";
+		address2 = "";
+		city = "";
+		state = "";
+		zip = "";
+	}
+	
 	public Address(String address, String city, String state, String zip){
 		this.address1 = address;
 		this.city = city;
@@ -10,7 +18,7 @@ public class Address {
 		this.zip = zip;
 	}
 	
-	public Address(String address, String address2, String city, String State, String zip) {
+	public Address(String address, String address2, String city, String state, String zip) {
 		this.address1 = address;
 		this.address2 = address2;
 		this.city = city;
@@ -86,5 +94,17 @@ public class Address {
 	 */
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	
+	public String toString() {
+		String returnMe = address1;
+		
+		if(address2 != null) {
+			returnMe += " " + address2;
+		}
+		
+		returnMe += " " + city + ", " + state + " " + zip;
+		
+		return returnMe;
 	}
 }

@@ -3,6 +3,13 @@ package com.mentCare.model;
 public class EmergencyContact {
 	private String lastName, firstName, phoneNum, email;
 
+	public EmergencyContact() {
+		lastName = "";
+		firstName = "";
+		phoneNum = "";
+		email = "";
+	}
+	
 	public EmergencyContact(String lastName, String firstName, String phoneNum, String email) {
 		super();
 		this.lastName = lastName;
