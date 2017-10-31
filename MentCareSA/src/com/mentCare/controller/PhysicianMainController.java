@@ -3,9 +3,9 @@ package com.mentCare.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -47,6 +47,8 @@ public class PhysicianMainController {
 	@FXML private TextArea treatmentArea;
 	@FXML private TextArea notesArea;
 	@FXML private GridPane gridPane;
+	@FXML private Button newButton;
+	@FXML private Button deleteButton;
 	
 	public void initialize() {
 		genderCombo.setItems(genderOptions);
@@ -58,6 +60,11 @@ public class PhysicianMainController {
 	
 	//******************Button Actions**********************
 	
+	/*newPatientButtonPushed
+	 * Executes when the button labeled "New Patient" is pressed
+	 * if unsaved data exists, a prompt pops up on screen asking to save the data
+	 * the data in the main pane clears in order to get ready to accept new data.
+	 */
 	public void newPatientButtonPushed() {
 		
 	}
