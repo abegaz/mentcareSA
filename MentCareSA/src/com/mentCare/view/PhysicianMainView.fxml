@@ -95,7 +95,7 @@
                                     <Label text="Conditions:" GridPane.rowIndex="7" />
                                     <Label text="Notes:" GridPane.rowIndex="9" />
                                     <Label text="Treatments:" GridPane.rowIndex="8" />
-                                    <TextField fx:id="nameField" promptText="Joe Snuffy" GridPane.columnIndex="1" />
+                                    <TextField fx:id="nameField" promptText="Joe Mathis Snuffy" GridPane.columnIndex="1" />
                                     <DatePicker fx:id="dobPicker" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <ComboBox fx:id="genderCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <ComboBox fx:id="bloodTypeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
