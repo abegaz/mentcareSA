@@ -25,12 +25,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="New Patient" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Edit Patient" />
+                  <MenuItem mnemonicParsing="false" text="Delete Patient" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -48,9 +50,9 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="patientsTableView" prefHeight="568.0" prefWidth="200.0">
+                              <TableView fx:id="patientTableView" prefHeight="568.0" prefWidth="200.0">
                                 <columns>
-                                  <TableColumn fx:id="patientsTableColumn" prefWidth="199.0" text="Patients" />
+                                  <TableColumn fx:id="patientTableColumn" prefWidth="199.0" text="Patients" />
                                 </columns>
                               </TableView>
                            </children>
@@ -71,16 +73,16 @@
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="209.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="152.0" minHeight="6.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="181.0" minHeight="3.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="SSN:" GridPane.rowIndex="3" />
@@ -93,21 +95,21 @@
                                     <Label text="Conditions:" GridPane.rowIndex="7" />
                                     <Label text="Notes:" GridPane.rowIndex="9" />
                                     <Label text="Treatments:" GridPane.rowIndex="8" />
-                                    <TextField promptText="Joe Snuffy" GridPane.columnIndex="1" />
-                                    <DatePicker promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField promptText="xxx-xx-1234" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="nameField" promptText="Joe Snuffy" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="dobPicker" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="genderCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="bloodTypeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="ssnField" promptText="xxx-xx-1234" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Accordion GridPane.columnIndex="1" GridPane.rowIndex="5">
                                       <panes>
                                         <TitledPane animated="false" text="Phone Number">
                                              <content>
-                                                <TextField promptText="555-555-5555" />
+                                                <TextField fx:id="phoneNumField" promptText="555-555-5555" />
                                              </content>
                                           </TitledPane>
                                         <TitledPane animated="false" text="Email">
                                              <content>
-                                                <TextField promptText="blahblahblah@test.com" />
+                                                <TextField fx:id="emailField" promptText="blahblahblah@test.com" />
                                              </content>
                                           </TitledPane>
                                       </panes>
@@ -116,29 +118,29 @@
                                       <panes>
                                         <TitledPane animated="false" text="Name">
                                              <content>
-                                                <TextField promptText="Jane Snuffy" />
+                                                <TextField fx:id="emerNameField" promptText="Jane Snuffy" />
                                              </content>
                                           </TitledPane>
                                         <TitledPane animated="false" text="Phone Number">
                                              <content>
-                                                <TextField promptText="111-111-1111" />
+                                                <TextField fx:id="emerPhoneField" promptText="111-111-1111" />
                                              </content>
                                           </TitledPane>
                                           <TitledPane animated="false" layoutX="10.0" layoutY="37.0" text="Email">
                                              <content>
-                                                <TextField promptText="janesnuffy@test.com" />
+                                                <TextField fx:id="emerEmailField" promptText="janesnuffy@test.com" />
                                              </content>
                                           </TitledPane>
                                           <TitledPane animated="false" layoutX="10.0" layoutY="64.0" text="Relation">
                                              <content>
-                                                <TextField promptText="spouse" />
+                                                <TextField fx:id="emerRelationField" promptText="spouse" />
                                              </content>
                                           </TitledPane>
                                       </panes>
                                     </Accordion>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <TextArea fx:id="conditionArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextArea fx:id="treatmentArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <TextArea fx:id="notesArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                  </children>
                               </GridPane>
                            </children>
