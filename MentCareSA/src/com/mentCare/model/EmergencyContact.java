@@ -74,5 +74,38 @@ public class EmergencyContact {
 		this.email = email;
 	}
 	
+	/*equals
+	 * used to compare 2 contacts to each other. Returns true if they are the exact same, false otherwise.
+	 */
+	public boolean equals(EmergencyContact newContact) {
+		boolean theSame = false;
+		
+		if(firstName.equals(newContact.getFirstName()) &&
+		   lastName.equals(newContact.getLastName()) &&
+		   phoneNum.equals(newContact.getPhoneNum()) &&
+		   email.equals(newContact.getEmail())) {
+			theSame = true;
+		}
+		
+		return theSame;
+	}
+	
+	/*equalsIgnoreCase
+	 * used to compare 2 contacts to each other. Returns true if they are the same (ignoring case), false otherwise
+	 * "A".equalsIgnoreCase("a"); will return true
+	 */
+	
+	public boolean equalsIgnoreCase(EmergencyContact newContact) {
+		boolean theSame = false;
+		
+		if(firstName.equalsIgnoreCase(newContact.getFirstName()) &&
+		   lastName.equalsIgnoreCase(newContact.getLastName()) &&
+		   phoneNum.equalsIgnoreCase(newContact.getPhoneNum()) &&
+		   email.equalsIgnoreCase(newContact.getEmail())) {
+			theSame = true;
+		}
+		
+		return theSame;
+	}
 	
 }

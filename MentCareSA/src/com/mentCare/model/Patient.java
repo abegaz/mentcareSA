@@ -148,6 +148,27 @@ public class Patient {
 	public String getNotes() {
 		return notes;
 	}
+	
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @return the emerContact
+	 */
+	public EmergencyContact getEmerContact() {
+		return emerContact;
+	}
 
 	//*********************Setters*********************
 	
@@ -240,6 +261,84 @@ public class Patient {
 	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	/**
+	 * @param emerContact the emerContact to set
+	 */
+	public void setEmerContact(EmergencyContact emerContact) {
+		this.emerContact = emerContact;
+	}
+	
+	/*equals
+	 * used to compare 2 patients to each other. Returns true if they are the exact same, false otherwise.
+	 */
+
+	public boolean equals(Patient newPatient) {
+		boolean theSame = false;
+		
+		if(lastName.equals(newPatient.getLastName()) &&
+		   middleName.equals(newPatient.getMiddleName()) &&
+		   lastName.equals(newPatient.getLastName()) &&
+		   address.equals(newPatient.getAddress()) &&
+		   bloodType.equals(newPatient.getBloodType()) &&
+		   condition.equals(newPatient.getCondition()) &&
+		   email.equals(newPatient.getEmail()) && 
+		   emerContact.equals(newPatient.getEmerContact()) &&
+		   height.equals(newPatient.getHeight()) &&
+		   notes.equals(newPatient.getNotes()) &&
+		   isOrganDonor() == newPatient.isOrganDonor() &&
+		   phoneNum.equals(newPatient.getPhoneNum()) &&
+		   ssn.equals(newPatient.getSsn()) &&
+		   treatment.equals(newPatient.getTreatment()) &&
+		   weight.equals(newPatient.getWeight())) {
+			theSame = true;
+		}
+		
+		return theSame;
+	}
+	
+	/*equalsIgnoreCase
+	 * used to compare 2 contacts to each other. Returns true if they are the same (ignoring case), false otherwise
+	 * "A".equalsIgnoreCase("a"); will return true
+	 */
+	
+	public boolean equalsIgnoreCase(Patient newPatient) {
+		boolean theSame = false;
+		
+		if(lastName.equalsIgnoreCase(newPatient.getLastName()) &&
+		   middleName.equalsIgnoreCase(newPatient.getMiddleName()) &&
+		   lastName.equalsIgnoreCase(newPatient.getLastName()) &&
+		   address.equalsIgnoreCase(newPatient.getAddress()) &&
+		   bloodType.equalsIgnoreCase(newPatient.getBloodType()) &&
+		   condition.equalsIgnoreCase(newPatient.getCondition()) &&
+		   email.equalsIgnoreCase(newPatient.getEmail()) && 
+		   emerContact.equalsIgnoreCase(newPatient.getEmerContact()) &&
+		   height.equalsIgnoreCase(newPatient.getHeight()) &&
+		   notes.equalsIgnoreCase(newPatient.getNotes()) &&
+		   isOrganDonor() == newPatient.isOrganDonor() &&
+		   phoneNum.equalsIgnoreCase(newPatient.getPhoneNum()) &&
+		   ssn.equalsIgnoreCase(newPatient.getSsn()) &&
+		   treatment.equalsIgnoreCase(newPatient.getTreatment()) &&
+		   weight.equalsIgnoreCase(newPatient.getWeight())) {
+			theSame = true;
+		}
+		
+		return theSame;
 	}
 
 	public String toString() {

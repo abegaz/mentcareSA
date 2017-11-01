@@ -96,6 +96,43 @@ public class Address {
 		this.zip = zip;
 	}
 	
+	/*equals
+	 * used to compare 2 addresses to each other. Returns true if they are the exact same, false otherwise.
+	 */
+	
+	public boolean equals(Address newAddress) {
+		boolean theSame = false;
+		
+		if(address1.equals(newAddress.getAddress1()) &&
+		   address2.equals(newAddress.getAddress2()) &&
+		   city.equals(newAddress.getCity()) &&
+		   state.equals(newAddress.getState()) &&
+		   zip.equals(newAddress.getZip())) {
+			theSame = true;
+		}
+		
+		return theSame;
+	}
+	
+	/*equalsIgnoreCase
+	 * used to compare 2 addresses to each other. Returns true if they are the same (ignoring case), false otherwise
+	 * "A".equalsIgnoreCase("a"); will return true
+	 */
+	
+	public boolean equalsIgnoreCase(Address newAddress) {
+		boolean theSame = false;
+		
+		if(address1.equalsIgnoreCase(newAddress.getAddress1()) &&
+		   address2.equalsIgnoreCase(newAddress.getAddress2()) &&
+		   city.equalsIgnoreCase(newAddress.getCity()) &&
+		   state.equalsIgnoreCase(newAddress.getState()) &&
+		   zip.equalsIgnoreCase(newAddress.getZip())) {
+			theSame = true;
+		}
+		
+		return theSame;
+	}
+	
 	public String toString() {
 		String returnMe = address1;
 		
