@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -175,5 +177,11 @@
       <Button fx:id="deleteButton" layoutX="682.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
       <Button fx:id="newButton" layoutY="2.0" mnemonicParsing="false" onAction="#newButtonPressed" text="New" AnchorPane.topAnchor="2.0" />
       <ToggleButton fx:id="editToggleButton" layoutX="749.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
+      <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Print" />
+        </items>
+      </MenuButton>
+      <Button fx:id="saveButton" layoutX="53.0" layoutY="2.0" mnemonicParsing="false" onAction="#savedButtonPressed" text="Save" />
    </children>
 </AnchorPane>
