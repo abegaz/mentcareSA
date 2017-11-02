@@ -11,6 +11,8 @@
 
 package com.mentCare.controller;
 
+import java.time.LocalDate;
+
 import com.mentCare.model.Address;
 import com.mentCare.model.EmergencyContact;
 import com.mentCare.model.Patient;
@@ -301,6 +303,35 @@ public class PhysicianMainController {
 		notesArea.setDisable(true);
 	}
 
+	/*clearAllElements
+	 * wipes the data in all of the input fields
+	 */
+	private void clearAllElements(){
+		nameField.setText("");
+		dobPicker.setValue(null);
+		genderCombo.setValue("Male");
+		ssnField.setText("");
+		bloodTypeCombo.setValue("A+");
+		feetPicker.setValue("1");
+		inchesPicker.setValue("0");
+		organDonorToggleButton.setText("Yes");
+		organDonorToggleButton.setSelected(true);
+		phoneNumField.setText("");
+		emailField.setText("");
+		address1Field.setText("");
+		address2Field.setText("");
+		statePicker.setValue("AL");
+		zipField.setText("");
+		emerNameField.setText("");
+		emerPhoneField.setText("");
+		emerEmailField.setText("");
+		emerRelationField.setText("");
+		conditionArea.setText("");
+		treatmentArea.setText("");
+		notesArea.setText("");
+		weightField.setText("");
+	}
+
 	/*promptSaveChanges
 	 * used to create an alert on screen asking if the user would like to save changes
 	 * usually used before changes are about to be discarded, in order to preserve data.
@@ -327,6 +358,8 @@ public class PhysicianMainController {
 	public void dataChanged() {
 		if(!unsavedChanges) {
 			unsavedChanges = true;
+			//puts a star beside the patient's name at the top of the page to indicate that there are
+			//usaved changes
 			patientNameLabel.setText("*" + patientNameLabel.getText());
 		}
 	}
@@ -351,6 +384,13 @@ public class PhysicianMainController {
 		if(unsavedChanges) {
 			promptSaveChanges();
 		}
+		//create new cell in patient table view
+		//Change name at top of Window
+		//clear all input fields
+		clearAllElements();
+		//act as if you pressed the edit button
+		editToggleButton.setSelected(true);
+		editButtonToggled();
 	}
 
 	/*deleteButtonPressed
@@ -389,8 +429,6 @@ public class PhysicianMainController {
 	 * once changes are saved/discarded, the fields are re-disabled.
 	 */
 	public void editButtonToggled() {
-		Patient temp = new Patient();
-
 		if(editToggleButton.isSelected()){//If the button is toggled on
 			editToggleButton.setText("Done");
 			//enable the view elements
@@ -402,21 +440,17 @@ public class PhysicianMainController {
 				Alert alert = promptSaveChanges();
 
 				if(alert.getResult() == ButtonType.YES){
-					editToggleButton.setText("Edit");
-					//disable the view elements
-					disableAllElements();
 					//save the data
 					saveButtonPressed();
 				} else if(alert.getResult() == ButtonType.NO){
-					editToggleButton.setText("Edit");
-					//disable the view elements
-					disableAllElements();
 					//reload the data from the database
 
 				} else if(alert.getResult() == ButtonType.CANCEL){
 					editToggleButton.setSelected(true);
 				}
 			}
+			editToggleButton.setText("Edit");
+			disableAllElements();
 		}
 	}
 
@@ -427,5 +461,17 @@ public class PhysicianMainController {
 
 	}
 
-
+	/*orgonDonorPressed
+	 * if the button says yes, change text to no; and vice versa
+	 */
+	public void organDonorPressed(){
+		String buttonText = organDonorToggleButton.getText();
+		if(buttonText.equalsIgnoreCase("yes")){
+			organDonorToggleButton.setText("No");
+		}
+		else{
+			organDonorToggleButton.setText("Yes");
+		}
+		dataChanged();
+	}
 }
