@@ -56,6 +56,12 @@ public class Patient {
 		this.notes = notes;
 	}
 
+	public Patient(String lastName, String firstName, String middleName) {
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.firstName = firstName;
+	}
+
 //*********************Getters*********************	
 	
 	/**
