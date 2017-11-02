@@ -6,10 +6,13 @@
 /*To-Do:
  * For Treatments, instead of textArea, add ability to add medication, dosage, and doctor prescribed
  	* implies that a tableView of physicians is required
+ * Fix TableView so that when you double click a row, the patient's data loads.
  */
 
 package com.mentCare.controller;
 
+import com.mentCare.model.Address;
+import com.mentCare.model.EmergencyContact;
 import com.mentCare.model.Patient;
 
 import javafx.collections.FXCollections;
@@ -22,12 +25,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -123,8 +128,8 @@ public class PhysicianMainController {
 			"VI");
 
 	//configure the Patient Table
-	@FXML private TableView patientTableView;
-	@FXML private TableColumn patientTableColumn;
+	@FXML private TableView<Patient> patientTableView;
+	@FXML private TableColumn<Patient, String> patientTableColumn;
 
 	//configure Patient Fields
 	@FXML private TextField nameField;
@@ -156,6 +161,7 @@ public class PhysicianMainController {
 	@FXML private Button saveButton;
 	@FXML private MenuButton optionsMenuButton;
 	@FXML private Label patientNameLabel;
+	@FXML private TextField searchField;
 
 	private boolean unsavedChanges;
 
@@ -176,14 +182,16 @@ public class PhysicianMainController {
 		//populate statePicker
 		statePicker.setItems(stateOptions);
 		statePicker.getSelectionModel().selectFirst();
-		//initialize the Table
-		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
-
+		//set up the columns in the table
+		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
+		//static data, will replace with the database record later
 		patientTableView.setItems(populatePatientTable());
 		System.out.println(populatePatientTable().toString());
-		
+
 		patientTableView.setEditable(false);
 		patientTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
 	}
 
 	//******************Created Functions**********************
@@ -192,9 +200,49 @@ public class PhysicianMainController {
 	 */
 	public ObservableList<Patient> populatePatientTable() {
 		//added static data used for testing
+		ObservableList<Patient> patients = addStaticData();
+
+		return patients;
+	}
+
+	/*addStaticData
+	 * used to create a static list of patients
+	 * mainly used for testing purposes
+	 */
+	public ObservableList<Patient> addStaticData(){
 		ObservableList<Patient> patients = FXCollections.observableArrayList();
-		patients.add(new Patient("Knight", "Joshua", "Matthew"));
-		patients.add(new Patient("Snuffy", "Joe", "Mathis"));
+		Patient josh = new Patient("Knight", "Joshua", "Matthew");
+		josh.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
+		josh.setBloodType("O+");
+		josh.setCondition("Mentally Handicapped");
+		josh.setEmail("jmknig0314@ung.edu");
+		josh.setEmerContact(new EmergencyContact("Snuffy", "Joseph", "770-555-1234", "joe.snuffy@ung.edu"));
+		josh.setHeight("69");
+		josh.setNotes("None");
+		josh.setOrganDonor(true);
+		josh.setPassword("p@ssW0rd!");
+		josh.setPhoneNum("706-201-9393");
+		josh.setSsn("111-22-3333");
+		josh.setTreatment("There is no hope for him");
+		josh.setWeight("190");
+
+		Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
+		joe.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
+		joe.setBloodType("A-");
+		joe.setCondition("Alzheimer's");
+		joe.setEmail("joe.snuffy@ung.edu");
+		joe.setEmerContact(new EmergencyContact("Knight", "Joshua", "706-201-9393", "jmknig0314@ung.edu"));
+		joe.setHeight("72");
+		joe.setNotes("uhhh. I can't remember.");
+		joe.setOrganDonor(false);
+		joe.setPassword("root");
+		joe.setPhoneNum("770-555-1234");
+		joe.setSsn("123-45-6789");
+		joe.setTreatment("Alzheimer's pills 2/dy");
+		joe.setWeight("175");
+
+		patients.add(josh);
+		patients.add(joe);
 		return patients;
 	}
 	/*enableAllElements
@@ -252,7 +300,7 @@ public class PhysicianMainController {
 		treatmentArea.setDisable(true);
 		notesArea.setDisable(true);
 	}
-	
+
 	/*promptSaveChanges
 	 * used to create an alert on screen asking if the user would like to save changes
 	 * usually used before changes are about to be discarded, in order to preserve data.
@@ -263,14 +311,33 @@ public class PhysicianMainController {
 		alert.showAndWait();
 
 		if(alert.getResult() == ButtonType.YES){
-			
+
 		} else if(alert.getResult() == ButtonType.NO){
-			
+
 		} else if(alert.getResult() == ButtonType.CANCEL){
-			
+
 		}
-		
+
 		return alert;
+	}
+
+	/*dataChanged()
+	 * called when an input field is altered. Lets the system know that an unsaved change has been made
+	 */
+	public void dataChanged() {
+		if(!unsavedChanges) {
+			unsavedChanges = true;
+			patientNameLabel.setText("*" + patientNameLabel.getText());
+		}
+	}
+
+	/*searchPatients
+	 * called when the button labeled "Search" is pressed
+	 * function takes the data in the searchField and traverses the PatientTable to find a match
+	 */
+
+	public void searchPatients(){
+
 	}
 
 	//******************Button Actions**********************
@@ -333,7 +400,7 @@ public class PhysicianMainController {
 			//ask user if they would like to save changes if any are present
 			if(unsavedChanges) {
 				Alert alert = promptSaveChanges();
-				
+
 				if(alert.getResult() == ButtonType.YES){
 					editToggleButton.setText("Edit");
 					//disable the view elements
@@ -345,7 +412,7 @@ public class PhysicianMainController {
 					//disable the view elements
 					disableAllElements();
 					//reload the data from the database
-					
+
 				} else if(alert.getResult() == ButtonType.CANCEL){
 					editToggleButton.setSelected(true);
 				}
@@ -359,14 +426,6 @@ public class PhysicianMainController {
 	public void printButtonPressed(){
 
 	}
-	
-	/*dataChanged()
-	 * called when an input field is altered. Lets the system know that an unsaved change has been made
-	 */
-	public void dataChanged() {
-		if(!unsavedChanges) {
-			unsavedChanges = true;
-			patientNameLabel.setText("*" + patientNameLabel.getText());
-		}
-	}
+
+
 }
