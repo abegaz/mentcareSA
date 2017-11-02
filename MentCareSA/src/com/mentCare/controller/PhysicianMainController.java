@@ -1,3 +1,13 @@
+/*Class Name: PhysicianMainController
+ *
+ *
+ *
+ */
+/*To-Do:
+ * For Treatments, instead of textArea, add ability to add medication, dosage, and doctor prescribed
+ 	* implies that a tableView of physicians is required
+ */
+
 package com.mentCare.controller;
 
 import com.mentCare.model.Patient;
@@ -9,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -33,13 +44,85 @@ public class PhysicianMainController {
 			"AB-",
 			"O+",
 			"O-");
-	ObservableList<String> feetOptions = FXCollections.observableArrayList();
-	ObservableList<String> inchesOptions = FXCollections.observableArrayList();
-	ObservableList<String> stateOptions = FXCollections.observableArrayList();
+	ObservableList<String> feetOptions = FXCollections.observableArrayList(
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8");
+	ObservableList<String> inchesOptions = FXCollections.observableArrayList(
+			"0",
+			"1",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"10",
+			"11");
+	ObservableList<String> stateOptions = FXCollections.observableArrayList(
+			"AL",
+			"AK",
+			"AZ",
+			"AR",
+			"CA",
+			"CO",
+			"CT",
+			"DE",
+			"FL",
+			"GA",
+			"HI",
+			"ID",
+			"IL",
+			"IN",
+			"IA",
+			"KS",
+			"KY",
+			"LA",
+			"ME",
+			"MD",
+			"MA",
+			"MI",
+			"MN",
+			"MS",
+			"MO",
+			"MT",
+			"NE",
+			"NV",
+			"NH",
+			"NJ",
+			"NM",
+			"NY",
+			"NC",
+			"ND",
+			"OH",
+			"OK",
+			"OR",
+			"PA",
+			"RI",
+			"SC",
+			"TN",
+			"TX",
+			"UT",
+			"VT",
+			"VA",
+			"WA",
+			"WV",
+			"WI",
+			"WY",
+			"GU",
+			"PR",
+			"VI");
+
 	//configure the Patient Table
 	@FXML private TableView patientTableView;
 	@FXML private TableColumn patientTableColumn;
-	
+
 	//configure Patient Fields
 	@FXML private TextField nameField;
 	@FXML private DatePicker dobPicker;
@@ -67,8 +150,13 @@ public class PhysicianMainController {
 	@FXML private Button deleteButton;
 	@FXML private ToggleButton editToggleButton;
 	@FXML private ToggleButton organDonorToggleButton;
-	
+	@FXML private Button saveButton;
+	@FXML private MenuButton optionsMenuButton;
+
+	private boolean unsavedChanges;
+
 	public void initialize() {
+		unsavedChanges = false;
 		//populate genderCombo
 		genderCombo.setItems(genderOptions);
 		genderCombo.getSelectionModel().selectFirst();
@@ -84,19 +172,19 @@ public class PhysicianMainController {
 		//populate statePicker
 		statePicker.setItems(stateOptions);
 		statePicker.getSelectionModel().selectFirst();
-		
+
 		populatePatientTable();
 	}
-	
+
 	//******************Created Functions**********************
 	/*populatePatientTable
 	 * this is used to take the data from the database and put the patient's name into the table view
 	 */
 	public void populatePatientTable() {
-		
+
 	}
 	/*enableAllElements
-	 * used to set the disabled property for all elements in the window to false 
+	 * used to set the disabled property for all elements in the window to false
 	 */
 	public void enableAllElements(){
 		nameField.setDisable(false);
@@ -122,9 +210,9 @@ public class PhysicianMainController {
 		treatmentArea.setDisable(false);
 		notesArea.setDisable(false);
 	}
-	
+
 	/*disableAllElements
-	 * used to set the disabled property for all elements in the window to true 
+	 * used to set the disabled property for all elements in the window to true
 	 */
 	public void disableAllElements(){
 		nameField.setDisable(true);
@@ -150,35 +238,63 @@ public class PhysicianMainController {
 		treatmentArea.setDisable(true);
 		notesArea.setDisable(true);
 	}
-	
+
 	//******************Button Actions**********************
-	
+
 	/*newPatientButtonPushed
 	 * Executes when the button labeled "New Patient" is pressed
 	 * if unsaved data exists, a prompt pops up on screen asking to save the data
 	 * the data in the main pane clears in order to get ready to accept new data.
 	 */
 	public void newButtonPressed() {
-		
+
 	}
-	
+
+	/*deleteButtonPressed
+	 * Executes when the button labeled "Delete" is pressed
+	 * a prompt appears that asks the user if they are sure they want to delete the data
+	 * if they confirm, the patient currently selected is deleted from the database and the view
+	 */
 	public void deleteButtonPressed() {
-		
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete this patient?", ButtonType.YES, ButtonType.CANCEL);
+		alert.showAndWait();
+
+		if(alert.getResult() == ButtonType.YES){
+			//The Table Cell is deleted
+			//The Input fields are cleared
+		}
 	}
-	
+
+	/*saveButtonPressed
+	 * Executes when the button labeled "Save" is pressed
+	 * the data is compared to that of the database and the database is updated
+	 */
+	public void saveButtonPressed(){
+
+
+		unsavedChanges = false;
+	}
+
+	/*editButtonToggled
+	 * Executes when the button labeled "Edit" is pressed
+	 * the editable fields are enabled to allow the user to edit the patient information
+	 * the edit button is changed to "Done" to allow the user to finish changes
+	 * at the end of the changes, a prompt appears to ask if the user would like to save the changes
+	 * once changes are saved/discarded, the fields are re-disabled.
+	 */
 	public void editButtonToggled() {
 		Patient temp = new Patient();
-		
+
 		if(editToggleButton.isSelected()){//If the button is toggled on
 			editToggleButton.setText("Done");
 			//enable the view elements
 			enableAllElements();
-			
+
 		} else {//If the button is toggled off
 			//ask user if they would like to save changes if any are present
 			Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like to save your changes?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
 			alert.showAndWait();
-			
+
 			if(alert.getResult() == ButtonType.YES){
 				editToggleButton.setText("Edit");
 				//disable the view elements
@@ -191,5 +307,12 @@ public class PhysicianMainController {
 				editToggleButton.setSelected(true);
 			}
 		}
+	}
+
+	/*printButtonPressed
+	 * exports the data to a pdf and uses the system printer window to print the data
+	 */
+	public void printButtonPressed(){
+
 	}
 }
