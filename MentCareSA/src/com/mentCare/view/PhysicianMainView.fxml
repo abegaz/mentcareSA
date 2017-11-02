@@ -101,7 +101,7 @@
                                              </children>
                                           </Pane>
                                           <Label text="Organ Donor" GridPane.rowIndex="7" />
-                                          <ToggleButton fx:id="organDonorToggleButton" disable="true" mnemonicParsing="false" onAction="#dataChanged" selected="true" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <ToggleButton fx:id="organDonorToggleButton" disable="true" mnemonicParsing="false" onAction="#organDonorPressed" selected="true" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <Label text="Address:" GridPane.rowIndex="9" />
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="9">
                                             <columnConstraints>
@@ -185,7 +185,7 @@
         </items>
       </MenuButton>
       <Button fx:id="saveButton" layoutX="53.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveButtonPressed" text="Save" />
-      <Label fx:id="patientNameLabel" layoutX="343.0" layoutY="4.0" text="Patient Name">
+      <Label fx:id="patientNameLabel" alignment="CENTER" layoutX="187.0" layoutY="1.0" prefHeight="27.0" prefWidth="488.0" text="Select Patient From Sidebar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
