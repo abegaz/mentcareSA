@@ -1,7 +1,10 @@
 package com.mentCare.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Patient {
 	//Declare variables
+	private SimpleStringProperty displayName;
 	private String lastName, middleName, firstName;
 	private String email;
 	private String password;
@@ -13,13 +16,14 @@ public class Patient {
 	private boolean organDonor;
 	private EmergencyContact emerContact;
 	private String condition, treatment, notes;
-	
+
 	//******************Constructors******************************
 	public Patient() {
 		super();
 		lastName = "";
 		middleName = "";
 		firstName = "";
+		displayName = new SimpleStringProperty(lastName + ", " + firstName);
 		email = "";
 		password = "";
 		ssn = "";
@@ -34,13 +38,14 @@ public class Patient {
 		treatment = "";
 		notes = "";
 	}
-	
+
 	public Patient(String lastName, String middleName, String firstName, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, String treatment, String notes) {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
+		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
 		this.email = email;
 		this.password = password;
 		this.ssn = ssn;
@@ -60,10 +65,11 @@ public class Patient {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
+		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
 	}
 
-//*********************Getters*********************	
-	
+//*********************Getters*********************
+
 	/**
 	 * @return the lastName
 	 */
@@ -83,6 +89,13 @@ public class Patient {
 	 */
 	public String getFirstName() {
 		return firstName;
+	}
+	
+	/**
+	 * @return the displayName
+	 */
+	public String getDisplayName(){
+		return displayName.get();
 	}
 
 	/**
@@ -154,7 +167,7 @@ public class Patient {
 	public String getNotes() {
 		return notes;
 	}
-	
+
 	/**
 	 * @return the password
 	 */
@@ -175,9 +188,16 @@ public class Patient {
 	public EmergencyContact getEmerContact() {
 		return emerContact;
 	}
+	
+	/**
+	 * @return the displayName itself
+	 */
+	public SimpleStringProperty displayNameProperty(){
+		return displayName;
+	}
 
 	//*********************Setters*********************
-	
+
 	/**
 	 * @param lastName the lastName to set
 	 */
@@ -289,21 +309,21 @@ public class Patient {
 	public void setEmerContact(EmergencyContact emerContact) {
 		this.emerContact = emerContact;
 	}
-	
+
 	/*equals
 	 * used to compare 2 patients to each other. Returns true if they are the exact same, false otherwise.
 	 */
 
 	public boolean equals(Patient newPatient) {
 		boolean theSame = false;
-		
+
 		if(lastName.equals(newPatient.getLastName()) &&
 		   middleName.equals(newPatient.getMiddleName()) &&
 		   lastName.equals(newPatient.getLastName()) &&
 		   address.equals(newPatient.getAddress()) &&
 		   bloodType.equals(newPatient.getBloodType()) &&
 		   condition.equals(newPatient.getCondition()) &&
-		   email.equals(newPatient.getEmail()) && 
+		   email.equals(newPatient.getEmail()) &&
 		   emerContact.equals(newPatient.getEmerContact()) &&
 		   height.equals(newPatient.getHeight()) &&
 		   notes.equals(newPatient.getNotes()) &&
@@ -314,25 +334,25 @@ public class Patient {
 		   weight.equals(newPatient.getWeight())) {
 			theSame = true;
 		}
-		
+
 		return theSame;
 	}
-	
+
 	/*equalsIgnoreCase
 	 * used to compare 2 contacts to each other. Returns true if they are the same (ignoring case), false otherwise
 	 * "A".equalsIgnoreCase("a"); will return true
 	 */
-	
+
 	public boolean equalsIgnoreCase(Patient newPatient) {
 		boolean theSame = false;
-		
+
 		if(lastName.equalsIgnoreCase(newPatient.getLastName()) &&
 		   middleName.equalsIgnoreCase(newPatient.getMiddleName()) &&
 		   lastName.equalsIgnoreCase(newPatient.getLastName()) &&
 		   address.equalsIgnoreCase(newPatient.getAddress()) &&
 		   bloodType.equalsIgnoreCase(newPatient.getBloodType()) &&
 		   condition.equalsIgnoreCase(newPatient.getCondition()) &&
-		   email.equalsIgnoreCase(newPatient.getEmail()) && 
+		   email.equalsIgnoreCase(newPatient.getEmail()) &&
 		   emerContact.equalsIgnoreCase(newPatient.getEmerContact()) &&
 		   height.equalsIgnoreCase(newPatient.getHeight()) &&
 		   notes.equalsIgnoreCase(newPatient.getNotes()) &&
@@ -343,7 +363,7 @@ public class Patient {
 		   weight.equalsIgnoreCase(newPatient.getWeight())) {
 			theSame = true;
 		}
-		
+
 		return theSame;
 	}
 
@@ -354,6 +374,6 @@ public class Patient {
 				+ organDonor + ", emerContact=" + emerContact + ", condition=" + condition + ", treatment=" + treatment
 				+ ", notes=" + notes + "]";
 	}
-	
-	
+
+
 }
