@@ -20,13 +20,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ScrollPane hbarPolicy="NEVER" prefHeight="673.0" prefWidth="200.0">
+                  <ScrollPane hbarPolicy="NEVER" layoutY="28.0" prefHeight="645.0" prefWidth="200.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -39,6 +39,7 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
+                  <TextField fx:id="searchField" layoutY="2.0" onKeyTyped="#searchPatients" prefHeight="25.0" prefWidth="200.0" promptText="Search" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
