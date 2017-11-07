@@ -117,7 +117,12 @@
                                                 <TextField fx:id="address1Field" disable="true" onKeyTyped="#dataChanged" promptText="Address 1" />
                                                 <TextField fx:id="address2Field" disable="true" onKeyTyped="#dataChanged" promptText="Address 2 (optional)" GridPane.rowIndex="1" />
                                                 <TextField fx:id="zipField" disable="true" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
-                                                <ComboBox fx:id="statePicker" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.rowIndex="2" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                   <children>
+                                                      <ComboBox fx:id="statePicker" disable="true" layoutX="195.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="68.0" />
+                                                      <TextField fx:id="cityField" layoutY="1.0" promptText="City" />
+                                                   </children>
+                                                </Pane>
                                              </children>
                                           </GridPane>
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="8">
