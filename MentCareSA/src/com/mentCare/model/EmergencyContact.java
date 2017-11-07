@@ -1,35 +1,28 @@
 package com.mentCare.model;
 
 public class EmergencyContact {
-	private String lastName, firstName, phoneNum, email;
+	private String name, phoneNum, email, relation;
 
 	public EmergencyContact() {
-		lastName = "";
-		firstName = "";
+		name = "";
 		phoneNum = "";
 		email = "";
+		relation = "";
 	}
 	
-	public EmergencyContact(String lastName, String firstName, String phoneNum, String email) {
+	public EmergencyContact(String name, String phoneNum, String email, String relation) {
 		super();
-		this.lastName = lastName;
-		this.firstName = firstName;
+		this.name = name;
 		this.phoneNum = phoneNum;
 		this.email = email;
+		this.relation = relation;
 	}
 
 	/**
-	 * @return the lastName
+	 * @return the Name
 	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -45,19 +38,16 @@ public class EmergencyContact {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getRelation(){
+		return relation;
+	}
 
 	/**
 	 * @param lastName the lastName to set
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setLastName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -74,16 +64,20 @@ public class EmergencyContact {
 		this.email = email;
 	}
 	
+	public void setRelation(String relation){
+		this.relation = relation;
+	}
+	
 	/*equals
 	 * used to compare 2 contacts to each other. Returns true if they are the exact same, false otherwise.
 	 */
 	public boolean equals(EmergencyContact newContact) {
 		boolean theSame = false;
 		
-		if(firstName.equals(newContact.getFirstName()) &&
-		   lastName.equals(newContact.getLastName()) &&
+		if(name.equals(newContact.getName()) &&
 		   phoneNum.equals(newContact.getPhoneNum()) &&
-		   email.equals(newContact.getEmail())) {
+		   email.equals(newContact.getEmail()) && 
+		   relation.equals(newContact.getRelation())) {
 			theSame = true;
 		}
 		
@@ -98,10 +92,10 @@ public class EmergencyContact {
 	public boolean equalsIgnoreCase(EmergencyContact newContact) {
 		boolean theSame = false;
 		
-		if(firstName.equalsIgnoreCase(newContact.getFirstName()) &&
-		   lastName.equalsIgnoreCase(newContact.getLastName()) &&
+		if(name.equalsIgnoreCase(newContact.getName()) &&
 		   phoneNum.equalsIgnoreCase(newContact.getPhoneNum()) &&
-		   email.equalsIgnoreCase(newContact.getEmail())) {
+		   email.equalsIgnoreCase(newContact.getEmail()) &&
+		   relation.equalsIgnoreCase(newContact.getRelation())) {
 			theSame = true;
 		}
 		
