@@ -16,13 +16,15 @@ public class Patient {
 	private boolean organDonor;
 	private EmergencyContact emerContact;
 	private String condition, treatment, notes;
+	private boolean isMale;
 
-	//******************Constructors******************************
+//******************Constructors******************************
 	public Patient() {
 		super();
 		lastName = "";
 		middleName = "";
 		firstName = "";
+		displayName = new SimpleStringProperty("Untitled Patient");
 		displayName = new SimpleStringProperty(lastName + ", " + firstName);
 		email = "";
 		password = "";
@@ -37,15 +39,17 @@ public class Patient {
 		condition = "";
 		treatment = "";
 		notes = "";
+		isMale = true;
 	}
 
-	public Patient(String lastName, String middleName, String firstName, String email, String password, String ssn,
+	public Patient(String lastName, String middleName, String firstName, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, String treatment, String notes) {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
 		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		this.isMale = isMale;
 		this.email = email;
 		this.password = password;
 		this.ssn = ssn;
