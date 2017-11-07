@@ -1,11 +1,15 @@
 package com.mentCare.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class Patient {
 	//Declare variables
 	private SimpleStringProperty displayName;
 	private String lastName, middleName, firstName;
+	private LocalDate dob;
 	private String email;
 	private String password;
 	private String ssn;
@@ -25,7 +29,6 @@ public class Patient {
 		middleName = "";
 		firstName = "";
 		displayName = new SimpleStringProperty("Untitled Patient");
-		displayName = new SimpleStringProperty(lastName + ", " + firstName);
 		email = "";
 		password = "";
 		ssn = "";
@@ -42,13 +45,14 @@ public class Patient {
 		isMale = true;
 	}
 
-	public Patient(String lastName, String middleName, String firstName, boolean isMale, String email, String password, String ssn,
+	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, String treatment, String notes) {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
 		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		this.dob = dob;
 		this.isMale = isMale;
 		this.email = email;
 		this.password = password;
@@ -100,6 +104,10 @@ public class Patient {
 	 */
 	public String getDisplayName(){
 		return displayName.get();
+	}
+	
+	public LocalDate getDob() {
+		return dob;
 	}
 
 	/**
@@ -221,6 +229,10 @@ public class Patient {
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+	
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
 	}
 
 	/**
