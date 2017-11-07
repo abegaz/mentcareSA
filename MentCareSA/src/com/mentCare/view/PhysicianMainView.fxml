@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
@@ -72,26 +72,21 @@
                                           <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
+                                          <Label text="Full Name: (Last Name, First Name, Middle name)" />
                                           <Label text="SSN:" GridPane.rowIndex="3" />
                                           <Label text="Date of Birth:" GridPane.rowIndex="1" />
                                           <Label text="Gender:" GridPane.rowIndex="2" />
-                                          <Label text="Full Name: (Last Name, First Name, Middle name)" />
                                           <Label layoutX="10.0" layoutY="37.0" text="Blood Type:" GridPane.rowIndex="4" />
                                           <Label text="Contact Info:" GridPane.rowIndex="8" />
                                           <Label text="Emergency Contact:" GridPane.rowIndex="10" />
                                           <Label text="Conditions:" GridPane.rowIndex="11" />
                                           <Label text="Notes:" GridPane.rowIndex="13" />
                                           <Label text="Treatments:" GridPane.rowIndex="12" />
-                                          <TextField fx:id="nameField" disable="true" onKeyTyped="#dataChanged" promptText="Snuffy, Joe, Mathis" GridPane.columnIndex="1" />
-                                          <DatePicker fx:id="dobPicker" disable="true" onAction="#dataChanged" onKeyTyped="#dataChanged" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="nameField" editable="false" onKeyTyped="#dataChanged" promptText="Snuffy, Joe, Mathis" GridPane.columnIndex="1" />
+                                          <DatePicker fx:id="dobPicker" editable="false" onAction="#dataChanged" onKeyTyped="#dataChanged" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <ComboBox fx:id="genderCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="ssnField" editable="false" onKeyTyped="#dataChanged" promptText="xxx-xx-1234" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <ComboBox fx:id="bloodTypeCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextField fx:id="ssnField" disable="true" onKeyTyped="#dataChanged" promptText="xxx-xx-1234" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextArea fx:id="conditionArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <TextArea fx:id="treatmentArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                          <TextArea fx:id="notesArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                          <Label text="Height" GridPane.rowIndex="5" />
-                                          <Label text="Weight" GridPane.rowIndex="6" />
                                           <Pane prefHeight="39.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <children>
                                                 <ComboBox fx:id="feetPicker" disable="true" editable="true" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="65.0" />
@@ -100,9 +95,29 @@
                                                 <Label layoutX="189.0" layoutY="6.0" text="Inches" />
                                              </children>
                                           </Pane>
-                                          <Label text="Organ Donor" GridPane.rowIndex="7" />
+                                          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <children>
+                                                <TextField fx:id="weightField" editable="false" layoutX="14.0" layoutY="11.0" onKeyTyped="#dataChanged" prefHeight="25.0" prefWidth="67.0" promptText="175" />
+                                                <Label layoutX="88.0" layoutY="15.0" text="lbs" />
+                                             </children>
+                                          </Pane>
                                           <ToggleButton fx:id="organDonorToggleButton" disable="true" mnemonicParsing="false" onAction="#organDonorPressed" selected="true" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <Label text="Address:" GridPane.rowIndex="9" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="45.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="232.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TextField fx:id="phoneNumField" editable="false" onKeyTyped="#dataChanged" promptText="555-555-5555" GridPane.columnIndex="1" />
+                                                <TextField fx:id="emailField" editable="false" onKeyTyped="#dataChanged" promptText="blahblahblah@test.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Phone:" />
+                                                <Label text="Email:" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="9">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -114,31 +129,15 @@
                                                 <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TextField fx:id="address1Field" disable="true" onKeyTyped="#dataChanged" promptText="Address 1" />
-                                                <TextField fx:id="address2Field" disable="true" onKeyTyped="#dataChanged" promptText="Address 2 (optional)" GridPane.rowIndex="1" />
-                                                <TextField fx:id="zipField" disable="true" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
+                                                <TextField fx:id="address1Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 1" />
+                                                <TextField fx:id="address2Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 2 (optional)" GridPane.rowIndex="1" />
+                                                <TextField fx:id="zipField" editable="false" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
                                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                    <children>
+                                                      <TextField fx:id="cityField" editable="false" promptText="City" />
                                                       <ComboBox fx:id="statePicker" disable="true" layoutX="195.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="68.0" />
-                                                      <TextField fx:id="cityField" disable="true" layoutY="1.0" promptText="City" />
                                                    </children>
                                                 </Pane>
-                                             </children>
-                                          </GridPane>
-                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="8">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="45.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="232.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <TextField fx:id="phoneNumField" disable="true" onKeyTyped="#dataChanged" promptText="555-555-5555" GridPane.columnIndex="1" />
-                                                <TextField fx:id="emailField" disable="true" onKeyTyped="#dataChanged" promptText="blahblahblah@test.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="Phone:" />
-                                                <Label text="Email:" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="10">
@@ -153,22 +152,23 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TextField fx:id="emerNameField" disable="true" onKeyTyped="#dataChanged" promptText="Jane Snuffy" GridPane.columnIndex="1" />
-                                                <TextField fx:id="emerEmailField" disable="true" onKeyTyped="#dataChanged" promptText="janesnuffy@test.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="emerRelationField" disable="true" onKeyTyped="#dataChanged" promptText="spouse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="emerPhoneField" disable="true" onKeyTyped="#dataChanged" promptText="111-111-1111" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <TextField fx:id="emerNameField" editable="false" onKeyTyped="#dataChanged" promptText="Jane Snuffy" GridPane.columnIndex="1" />
+                                                <TextField fx:id="emerPhoneField" editable="false" onKeyTyped="#dataChanged" promptText="111-111-1111" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <TextField fx:id="emerEmailField" editable="false" onKeyTyped="#dataChanged" promptText="janesnuffy@test.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="emerRelationField" editable="false" onKeyTyped="#dataChanged" promptText="spouse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <Label text="Name:" />
                                                 <Label text="Phone:" GridPane.rowIndex="1" />
                                                 <Label text="Email:" GridPane.rowIndex="2" />
                                                 <Label text="Relation:" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
-                                          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                             <children>
-                                                <TextField fx:id="weightField" disable="true" layoutX="14.0" layoutY="11.0" onKeyTyped="#dataChanged" prefHeight="25.0" prefWidth="67.0" promptText="175" />
-                                                <Label layoutX="88.0" layoutY="15.0" text="lbs" />
-                                             </children>
-                                          </Pane>
+                                          <TextArea fx:id="conditionArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                          <TextArea fx:id="treatmentArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                          <TextArea fx:id="notesArea" disable="true" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                          <Label text="Height" GridPane.rowIndex="5" />
+                                          <Label text="Weight" GridPane.rowIndex="6" />
+                                          <Label text="Organ Donor" GridPane.rowIndex="7" />
+                                          <Label text="Address:" GridPane.rowIndex="9" />
                                        </children>
                                     </GridPane>
                                  </children>

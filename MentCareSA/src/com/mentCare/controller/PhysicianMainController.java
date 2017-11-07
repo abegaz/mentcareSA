@@ -234,6 +234,7 @@ public class PhysicianMainController {
 		josh.setSsn("111-22-3333");
 		josh.setTreatment("There is no hope for him");
 		josh.setWeight("190");
+		josh.setMale(true);
 
 		Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
 		joe.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
@@ -249,6 +250,7 @@ public class PhysicianMainController {
 		joe.setSsn("123-45-6789");
 		joe.setTreatment("Alzheimer's pills 2/dy");
 		joe.setWeight("175");
+		joe.setMale(true);
 
 		patientList.add(josh);
 		patientList.add(joe);
@@ -266,58 +268,58 @@ public class PhysicianMainController {
 	 * used to set the disabled property for all elements in the window to false
 	 */
 	public void enableAllElements(){
-		nameField.setDisable(false);
-		dobPicker.setDisable(false);
+		nameField.setEditable(true);
+		dobPicker.setEditable(true);
 		genderCombo.setDisable(false);
-		ssnField.setDisable(false);
+		ssnField.setEditable(true);
 		bloodTypeCombo.setDisable(false);
 		feetPicker.setDisable(false);
 		inchesPicker.setDisable(false);
-		weightField.setDisable(false);
+		weightField.setEditable(true);
 		organDonorToggleButton.setDisable(false);
-		phoneNumField.setDisable(false);
-		emailField.setDisable(false);
-		address1Field.setDisable(false);
-		address2Field.setDisable(false);
-		statePicker.setDisable(false);
-		zipField.setDisable(false);
-		emerNameField.setDisable(false);
-		emerPhoneField.setDisable(false);
-		emerEmailField.setDisable(false);
-		emerRelationField.setDisable(false);
-		conditionArea.setDisable(false);
-		treatmentArea.setDisable(false);
-		notesArea.setDisable(false);
-		cityField.setDisable(false);
+		phoneNumField.setEditable(true);
+		emailField.setEditable(true);
+		address1Field.setEditable(true);
+		address2Field.setEditable(true);
+		statePicker.setEditable(true);
+		zipField.setEditable(true);
+		emerNameField.setEditable(true);
+		emerPhoneField.setEditable(true);
+		emerEmailField.setEditable(true);
+		emerRelationField.setEditable(true);
+		conditionArea.setEditable(true);
+		treatmentArea.setEditable(true);
+		notesArea.setEditable(true);
+		cityField.setEditable(true);
 	}
 
 	/*disableAllElements
 	 * used to set the disabled property for all elements in the window to true
 	 */
 	public void disableAllElements(){
-		nameField.setDisable(true);
-		dobPicker.setDisable(true);
+		nameField.setEditable(false);
+		dobPicker.setEditable(false);
 		genderCombo.setDisable(true);
-		ssnField.setDisable(true);
+		ssnField.setEditable(false);
 		bloodTypeCombo.setDisable(true);
 		feetPicker.setDisable(true);
 		inchesPicker.setDisable(true);
-		weightField.setDisable(true);
+		weightField.setEditable(false);
 		organDonorToggleButton.setDisable(true);
-		phoneNumField.setDisable(true);
-		emailField.setDisable(true);
-		address1Field.setDisable(true);
-		address2Field.setDisable(true);
+		phoneNumField.setEditable(false);
+		emailField.setEditable(false);
+		address1Field.setEditable(false);
+		address2Field.setEditable(false);
 		statePicker.setDisable(true);
-		zipField.setDisable(true);
-		emerNameField.setDisable(true);
-		emerPhoneField.setDisable(true);
-		emerEmailField.setDisable(true);
-		emerRelationField.setDisable(true);
-		conditionArea.setDisable(true);
-		treatmentArea.setDisable(true);
-		notesArea.setDisable(true);
-		cityField.setDisable(true);
+		zipField.setEditable(false);
+		emerNameField.setEditable(false);
+		emerPhoneField.setEditable(false);
+		emerEmailField.setEditable(false);
+		emerRelationField.setEditable(false);
+		conditionArea.setEditable(false);
+		treatmentArea.setEditable(false);
+		notesArea.setEditable(false);
+		cityField.setEditable(false);
 	}
 
 	/*clearAllElements
@@ -348,6 +350,7 @@ public class PhysicianMainController {
 		notesArea.setText("");
 		weightField.setText("");
 		cityField.setText("");
+		patientNameLabel.setText("Select Patient from Sidebar");
 	}
 
 	/*promptSaveChanges
@@ -440,6 +443,7 @@ public class PhysicianMainController {
 		} else if(alert.getResult() == ButtonType.NO){
 			tableCellDoubleClicked();
 			newPatient = false;
+			
 		} else if(alert.getResult() == ButtonType.CANCEL){
 			
 		}
@@ -453,7 +457,7 @@ public class PhysicianMainController {
 	 * called when an input field is altered. Lets the system know that an unsaved change has been made
 	 */
 	public void dataChanged() {
-		if(!unsavedChanges) {
+		if(!unsavedChanges && editToggleButton.isSelected()) {
 			unsavedChanges = true;
 			//puts a star beside the patient's name at the top of the page to indicate that there are
 			//unsaved changes
@@ -502,12 +506,17 @@ public class PhysicianMainController {
 	 * if they confirm, the patient currently selected is deleted from the database and the view
 	 */
 	public void deleteButtonPressed() {
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete this patient?", ButtonType.YES, ButtonType.CANCEL);
-		alert.showAndWait();
+		if(selectedPatient != null){
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete this patient?", ButtonType.YES, ButtonType.CANCEL);
+			alert.showAndWait();
 
-		if(alert.getResult() == ButtonType.YES){
-			//The Table Cell is deleted
-			//The Input fields are cleared
+			if(alert.getResult() == ButtonType.YES){
+				//The Selected Patient is deleted
+				patientList.remove(selectedPatient);
+				clearAllElements();//The Input fields are cleared
+				editToggleButton.setSelected(false);
+				editButtonToggled();
+			}
 		}
 	}
 
@@ -546,18 +555,24 @@ public class PhysicianMainController {
 			if(unsavedChanges) {
 				Alert alert = promptSaveChanges();
 
-				if(alert.getResult() == ButtonType.YES){
+				if(alert.getResult() == ButtonType.YES){//Data is saved
 					//save the data
 					saveButtonPressed();
-				} else if(alert.getResult() == ButtonType.NO){
+
+					editToggleButton.setText("Edit");
+					disableAllElements();
+				} else if(alert.getResult() == ButtonType.NO){//Data is discarded
 					//reload the data from the database
 
-				} else if(alert.getResult() == ButtonType.CANCEL){
+					editToggleButton.setText("Edit");
+					disableAllElements();
+				} else if(alert.getResult() == ButtonType.CANCEL){//Dialog box is dismissed. Editing is allowed
 					editToggleButton.setSelected(true);
 				}
+			} else {
+				editToggleButton.setText("Edit");
+				disableAllElements();
 			}
-			//editToggleButton.setText("Edit");
-			//disableAllElements();
 		}
 	}
 
@@ -603,6 +618,7 @@ public class PhysicianMainController {
 		} else {
 			gender = "Female";
 		}
+		System.out.println(p.isMale() + ": " + gender);
 		genderCombo.setValue(gender);
 		
 		ssnField.setText(p.getSsn());
