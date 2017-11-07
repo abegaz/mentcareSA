@@ -195,7 +195,7 @@ public class PhysicianMainController {
 			row.setOnMouseClicked(event -> {
 				if(event.getClickCount() == 2 && (! row.isEmpty())){
 					Patient rowData = row.getItem();
-					//selectedPatient = rowData;
+					selectedPatient = rowData;
 					tableCellDoubleClicked();
 				}
 			});
@@ -438,10 +438,10 @@ public class PhysicianMainController {
 			
 			newPatient = false;
 		} else if(alert.getResult() == ButtonType.NO){
-			
+			tableCellDoubleClicked();
 			newPatient = false;
 		} else if(alert.getResult() == ButtonType.CANCEL){
-
+			
 		}
 
 		newButton.setDisable(newPatient);
@@ -471,15 +471,6 @@ public class PhysicianMainController {
 	}
 
 	//******************Button Actions**********************
-
-	/*patientTableClicked
-	 * ran when the user clicks on the Table.
-	 * used to get the selected row in the table and change the selected patient.
-	 */
-	public void patientTableClicked(){
-		selectedPatient = patientTableView.getSelectionModel().getSelectedItem();
-	}
-	
 	
 	/*newPatientButtonPushed
 	 * Executes when the button labeled "New Patient" is pressed
@@ -496,6 +487,7 @@ public class PhysicianMainController {
 		selectedPatient = p;
 		patientList.add(selectedPatient);
 		//Change name at top of Window
+		patientNameLabel.setText("Untitled Patient");
 		//clear all input fields
 		clearAllElements();
 		//act as if you pressed the edit button
@@ -541,6 +533,9 @@ public class PhysicianMainController {
 	 * once changes are saved/discarded, the fields are re-disabled.
 	 */
 	public void editButtonToggled() {
+		if(selectedPatient == null) {
+			editToggleButton.setSelected(false);
+		}
 		if(editToggleButton.isSelected()){//If the button is toggled on
 			editToggleButton.setText("Done");
 			//enable the view elements
@@ -561,8 +556,8 @@ public class PhysicianMainController {
 					editToggleButton.setSelected(true);
 				}
 			}
-			editToggleButton.setText("Edit");
-			disableAllElements();
+			//editToggleButton.setText("Edit");
+			//disableAllElements();
 		}
 	}
 
@@ -615,6 +610,13 @@ public class PhysicianMainController {
 		phoneNumField.setText(p.getPhoneNum());
 		emailField.setText(p.getEmail());
 		
+		int inches, feet, total;
+		total = Integer.parseInt(p.getHeight());
+		feet = total / 12;
+		inches = total % 12;
+		feetPicker.setValue("" + feet);
+		inchesPicker.setValue("" + inches);
+		
 		EmergencyContact emer = p.getEmerContact();
 		emerNameField.setText(emer.getName());
 		emerPhoneField.setText(emer.getPhoneNum());
@@ -633,5 +635,6 @@ public class PhysicianMainController {
 		treatmentArea.setText(p.getTreatment());
 		notesArea.setText(p.getNotes());
 		
+		patientNameLabel.setText(selectedPatient.getDisplayName());
 	}
 }

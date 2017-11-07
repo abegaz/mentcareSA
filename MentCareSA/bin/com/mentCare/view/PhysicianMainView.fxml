@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
@@ -30,7 +30,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="patientTableView" onMouseClicked="#patientTableClicked" prefHeight="673.0" prefWidth="200.0">
+                              <TableView fx:id="patientTableView" prefHeight="673.0" prefWidth="200.0">
                                 <columns>
                                   <TableColumn fx:id="patientTableColumn" prefWidth="199.0" text="Patients" />
                                 </columns>
@@ -94,9 +94,9 @@
                                           <Label text="Weight" GridPane.rowIndex="6" />
                                           <Pane prefHeight="39.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <children>
-                                                <ComboBox fx:id="feetPicker" disable="true" editable="true" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="41.0" />
-                                                <ComboBox fx:id="inchesPicker" disable="true" editable="true" layoutX="139.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="49.0" />
-                                                <Label layoutX="50.0" layoutY="6.0" text="Feet" />
+                                                <ComboBox fx:id="feetPicker" disable="true" editable="true" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="65.0" />
+                                                <ComboBox fx:id="inchesPicker" disable="true" editable="true" layoutX="131.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="58.0" />
+                                                <Label layoutX="65.0" layoutY="6.0" text="Feet" />
                                                 <Label layoutX="189.0" layoutY="6.0" text="Inches" />
                                              </children>
                                           </Pane>
