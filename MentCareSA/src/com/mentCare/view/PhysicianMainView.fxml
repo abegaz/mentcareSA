@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
@@ -75,14 +75,14 @@
                                           <Label text="SSN:" GridPane.rowIndex="3" />
                                           <Label text="Date of Birth:" GridPane.rowIndex="1" />
                                           <Label text="Gender:" GridPane.rowIndex="2" />
-                                          <Label text="Full Name:" />
+                                          <Label text="Full Name: (Last Name, First Name, Middle name)" />
                                           <Label layoutX="10.0" layoutY="37.0" text="Blood Type:" GridPane.rowIndex="4" />
                                           <Label text="Contact Info:" GridPane.rowIndex="8" />
                                           <Label text="Emergency Contact:" GridPane.rowIndex="10" />
                                           <Label text="Conditions:" GridPane.rowIndex="11" />
                                           <Label text="Notes:" GridPane.rowIndex="13" />
                                           <Label text="Treatments:" GridPane.rowIndex="12" />
-                                          <TextField fx:id="nameField" disable="true" onKeyTyped="#dataChanged" promptText="Joe Mathis Snuffy" GridPane.columnIndex="1" />
+                                          <TextField fx:id="nameField" disable="true" onKeyTyped="#dataChanged" promptText="Snuffy, Joe, Mathis" GridPane.columnIndex="1" />
                                           <DatePicker fx:id="dobPicker" disable="true" onAction="#dataChanged" onKeyTyped="#dataChanged" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <ComboBox fx:id="genderCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <ComboBox fx:id="bloodTypeCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
