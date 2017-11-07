@@ -169,6 +169,7 @@ public class PhysicianMainController {
 	private boolean unsavedChanges;
 	private boolean newPatient;
 	private ObservableList<Patient> patientList;
+	private Patient selectedPatient;
 
 	public void initialize() {
 		patientList = FXCollections.observableArrayList();
@@ -188,6 +189,19 @@ public class PhysicianMainController {
 		//populate statePicker
 		statePicker.setItems(stateOptions);
 		statePicker.getSelectionModel().selectFirst();
+		
+		patientTableView.setRowFactory(tv -> {
+			TableRow<Patient> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() == 2 && (! row.isEmpty())){
+					Patient rowData = row.getItem();
+					//selectedPatient = rowData;
+					tableCellDoubleClicked();
+				}
+			});
+			return row;
+		});
+		
 		//set up the columns in the table
 		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
 		//static data, will replace with the database record later
@@ -274,6 +288,7 @@ public class PhysicianMainController {
 		conditionArea.setDisable(false);
 		treatmentArea.setDisable(false);
 		notesArea.setDisable(false);
+		cityField.setDisable(false);
 	}
 
 	/*disableAllElements
@@ -302,6 +317,7 @@ public class PhysicianMainController {
 		conditionArea.setDisable(true);
 		treatmentArea.setDisable(true);
 		notesArea.setDisable(true);
+		cityField.setDisable(true);
 	}
 
 	/*clearAllElements
@@ -331,6 +347,7 @@ public class PhysicianMainController {
 		treatmentArea.setText("");
 		notesArea.setText("");
 		weightField.setText("");
+		cityField.setText("");
 	}
 
 	/*promptSaveChanges
@@ -343,83 +360,83 @@ public class PhysicianMainController {
 		alert.showAndWait();
 
 		if(alert.getResult() == ButtonType.YES){
-			if(newPatient) {
-				patientList.remove(patientList.size() - 1);
-				String lastName, firstName, middleName;
-				LocalDate dob;
-				String gender, ssn, bloodType, feet, inches;
-				boolean organDonor;
-				String phoneNum, email, address1, address2, city, state, zip;
-				String emerName, emerEmail, emerPhone, emerRelation, condition;
-				String treatments, notes, weight;
-				Address address;
-				EmergencyContact emer;
-				Patient p;
-				int in, ft, height;
-				
-				String name = nameField.getText();
-				String[] sepNames = separateNames(name);
-				try {
-					lastName = sepNames[0];
-				} catch(ArrayIndexOutOfBoundsException e) {
-					lastName = "";
-				}
-				try {	
-					firstName = sepNames[1];
-				} catch(ArrayIndexOutOfBoundsException e) {
-					firstName = "";
-				}
-				try {
-					middleName = sepNames[2];
-				} catch(ArrayIndexOutOfBoundsException e){
-					middleName = "";
-				}
-				
-				dob = dobPicker.getValue();
-				gender = genderCombo.getValue();
-				ssn = ssnField.getText();
-				bloodType = bloodTypeCombo.getValue();
-				feet = feetPicker.getValue();
-				inches = inchesPicker.getValue();
-				organDonor = organDonorToggleButton.isSelected();
-				phoneNum = phoneNumField.getText();
-				email = emailField.getText();
-				address1 = address1Field.getText();
-				address2 = address2Field.getText();
-				city = cityField.getText();
-				state = statePicker.getValue();
-				zip = zipField.getText();
-				emerName = emerNameField.getText();
-				emerEmail = emerEmailField.getText();
-				emerPhone = emerPhoneField.getText();
-				emerRelation = emerRelationField.getText();
-				condition = conditionArea.getText();
-				treatments = treatmentArea.getText();
-				notes = notesArea.getText();
-				weight = weightField.getText();
-				address = new Address(address1, address2, city, state, zip);
-				emer = new EmergencyContact(emerName, emerEmail, emerPhone, emerRelation);
-				
-				in = Integer.parseInt(inches);
-				ft = Integer.parseInt(feet) * 12;
-				height = in + ft;
-				
-				String heightString = "" + height;
-				
-				boolean isMale;
-				
-				if(gender.equalsIgnoreCase("Male")){
-					isMale = true;
-				} else {
-					isMale = false;
-				}
-				
-				p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
-				
-				patientList.add(p);
-				
-				newPatient = false;
+			patientList.remove(selectedPatient);//remove the placeholder patient
+			//initialize local variables used to assign input fields to
+			String lastName, firstName, middleName;
+			LocalDate dob;
+			String gender, ssn, bloodType, feet, inches;
+			boolean organDonor;
+			String phoneNum, email, address1, address2, city, state, zip;
+			String emerName, emerEmail, emerPhone, emerRelation, condition;
+			String treatments, notes, weight;
+			Address address;
+			EmergencyContact emer;
+			Patient p;
+			int in, ft, height;
+			
+			String name = nameField.getText();//get name from the input field
+			String[] sepNames = separateNames(name);
+			//in case the name is not inserted as predicted, the program will not crash
+			try {
+				lastName = sepNames[0];
+			} catch(ArrayIndexOutOfBoundsException e) {
+				lastName = "";
 			}
+			try {	
+				firstName = sepNames[1];
+			} catch(ArrayIndexOutOfBoundsException e) {
+				firstName = "";
+			}
+			try {
+				middleName = sepNames[2];
+			} catch(ArrayIndexOutOfBoundsException e){
+				middleName = "";
+			}
+			//get the values from the input fields and assign them to the local variables
+			dob = dobPicker.getValue();
+			gender = genderCombo.getValue();
+			ssn = ssnField.getText();
+			bloodType = bloodTypeCombo.getValue();
+			feet = feetPicker.getValue();
+			inches = inchesPicker.getValue();
+			organDonor = organDonorToggleButton.isSelected();
+			phoneNum = phoneNumField.getText();
+			email = emailField.getText();
+			address1 = address1Field.getText();
+			address2 = address2Field.getText();
+			city = cityField.getText();
+			state = statePicker.getValue();
+			zip = zipField.getText();
+			emerName = emerNameField.getText();
+			emerEmail = emerEmailField.getText();
+			emerPhone = emerPhoneField.getText();
+			emerRelation = emerRelationField.getText();
+			condition = conditionArea.getText();
+			treatments = treatmentArea.getText();
+			notes = notesArea.getText();
+			weight = weightField.getText();
+			address = new Address(address1, address2, city, state, zip);
+			emer = new EmergencyContact(emerName, emerEmail, emerPhone, emerRelation);
+			//calculate the total height in inches
+			in = Integer.parseInt(inches);
+			ft = Integer.parseInt(feet) * 12;
+			height = in + ft;
+			//convert the total inches into a String
+			String heightString = "" + height;
+			
+			boolean isMale;
+			//assign the isMale variable
+			if(gender.equalsIgnoreCase("Male")){
+				isMale = true;
+			} else {
+				isMale = false;
+			}
+			//create a new patient based on the input data
+			p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
+			//add the new patient to the patientList
+			patientList.add(p);
+			
+			newPatient = false;
 		} else if(alert.getResult() == ButtonType.NO){
 			
 			newPatient = false;
@@ -427,6 +444,8 @@ public class PhysicianMainController {
 
 		}
 
+		newButton.setDisable(newPatient);
+		
 		return alert;
 	}
 
@@ -453,6 +472,15 @@ public class PhysicianMainController {
 
 	//******************Button Actions**********************
 
+	/*patientTableClicked
+	 * ran when the user clicks on the Table.
+	 * used to get the selected row in the table and change the selected patient.
+	 */
+	public void patientTableClicked(){
+		selectedPatient = patientTableView.getSelectionModel().getSelectedItem();
+	}
+	
+	
 	/*newPatientButtonPushed
 	 * Executes when the button labeled "New Patient" is pressed
 	 * if unsaved data exists, a prompt pops up on screen asking to save the data
@@ -465,7 +493,8 @@ public class PhysicianMainController {
 		}
 		//create new cell in patient table view
 		Patient p = new Patient();
-		patientList.add(p);
+		selectedPatient = p;
+		patientList.add(selectedPatient);
 		//Change name at top of Window
 		//clear all input fields
 		clearAllElements();
@@ -556,5 +585,53 @@ public class PhysicianMainController {
 			organDonorToggleButton.setText("Yes");
 		}
 		dataChanged();
+	}
+	
+	/*tableCellDoubleClicked
+	 * called when a cell in the patientViewTable is double clicked
+	 * used to load the data from the patient into the view
+	 */
+	public void tableCellDoubleClicked(){
+		Patient p = selectedPatient;
+		
+		String name = p.getLastName() + ", " + p.getFirstName();
+		
+		if(p.getMiddleName() != ""){
+			name += ", " + p.getMiddleName();
+		}
+		nameField.setText(name);
+		dobPicker.setValue(p.getDob());
+		
+		String gender;
+		if(p.isMale()){
+			gender = "Male";
+		} else {
+			gender = "Female";
+		}
+		genderCombo.setValue(gender);
+		
+		ssnField.setText(p.getSsn());
+		bloodTypeCombo.setValue(p.getBloodType());
+		phoneNumField.setText(p.getPhoneNum());
+		emailField.setText(p.getEmail());
+		
+		EmergencyContact emer = p.getEmerContact();
+		emerNameField.setText(emer.getName());
+		emerPhoneField.setText(emer.getPhoneNum());
+		emerEmailField.setText(emer.getEmail());
+		emerRelationField.setText(emer.getRelation());
+		
+		Address a = p.getAddress();
+		address1Field.setText(a.getAddress1());
+		address2Field.setText(a.getAddress2());
+		cityField.setText(a.getCity());
+		statePicker.setValue(a.getState());
+		zipField.setText(a.getZip());
+		
+		weightField.setText(p.getWeight());
+		conditionArea.setText(p.getCondition());
+		treatmentArea.setText(p.getTreatment());
+		notesArea.setText(p.getNotes());
+		
 	}
 }

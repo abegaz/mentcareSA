@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
@@ -30,7 +30,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="patientTableView" prefHeight="673.0" prefWidth="200.0">
+                              <TableView fx:id="patientTableView" onMouseClicked="#patientTableClicked" prefHeight="673.0" prefWidth="200.0">
                                 <columns>
                                   <TableColumn fx:id="patientTableColumn" prefWidth="199.0" text="Patients" />
                                 </columns>
@@ -120,7 +120,7 @@
                                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                    <children>
                                                       <ComboBox fx:id="statePicker" disable="true" layoutX="195.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="68.0" />
-                                                      <TextField fx:id="cityField" layoutY="1.0" promptText="City" />
+                                                      <TextField fx:id="cityField" disable="true" layoutY="1.0" promptText="City" />
                                                    </children>
                                                 </Pane>
                                              </children>

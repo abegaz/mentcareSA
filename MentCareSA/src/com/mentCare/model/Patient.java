@@ -201,6 +201,10 @@ public class Patient {
 		return emerContact;
 	}
 	
+	public boolean isMale() {
+		return isMale;
+	}
+
 	/**
 	 * @return the displayName itself
 	 */
@@ -324,6 +328,10 @@ public class Patient {
 	 */
 	public void setEmerContact(EmergencyContact emerContact) {
 		this.emerContact = emerContact;
+	}
+
+	public void setMale(boolean isMale) {
+		this.isMale = isMale;
 	}
 
 	/*equals
