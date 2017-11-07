@@ -344,7 +344,7 @@ public class PhysicianMainController {
 
 		if(alert.getResult() == ButtonType.YES){
 			if(newPatient) {
-				patientList.remove(new Patient());
+				patientList.remove(patientList.size() - 1);
 				String lastName, firstName, middleName;
 				LocalDate dob;
 				String gender, ssn, bloodType, feet, inches;
@@ -359,9 +359,22 @@ public class PhysicianMainController {
 				
 				String name = nameField.getText();
 				String[] sepNames = separateNames(name);
-				lastName = sepNames[0];
-				firstName = sepNames[1];
-				middleName = sepNames[2];
+				try {
+					lastName = sepNames[0];
+				} catch(ArrayIndexOutOfBoundsException e) {
+					lastName = "";
+				}
+				try {	
+					firstName = sepNames[1];
+				} catch(ArrayIndexOutOfBoundsException e) {
+					firstName = "";
+				}
+				try {
+					middleName = sepNames[2];
+				} catch(ArrayIndexOutOfBoundsException e){
+					middleName = "";
+				}
+				
 				dob = dobPicker.getValue();
 				gender = genderCombo.getValue();
 				ssn = ssnField.getText();
@@ -401,7 +414,7 @@ public class PhysicianMainController {
 					isMale = false;
 				}
 				
-				p = new Patient(lastName, middleName, firstName, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
+				p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
 				
 				patientList.add(p);
 				
@@ -483,11 +496,12 @@ public class PhysicianMainController {
 	 */
 	public void saveButtonPressed(){
 		//upload any changes to the database
-
-		unsavedChanges = false;
-		String patientName = patientNameLabel.getText();
-		patientName = patientName.substring(1);
-		patientNameLabel.setText(patientName);
+		if(unsavedChanges) {
+			unsavedChanges = false;
+			String patientName = patientNameLabel.getText();
+			patientName = patientName.substring(1);
+			patientNameLabel.setText(patientName);
+		}
 	}
 
 	/*editButtonToggled
