@@ -164,10 +164,14 @@ public class PhysicianMainController {
 	@FXML private MenuButton optionsMenuButton;
 	@FXML private Label patientNameLabel;
 	@FXML private TextField searchField;
+	@FXML private TextField cityField;
 
 	private boolean unsavedChanges;
+	private boolean newPatient;
+	private ObservableList<Patient> patientList;
 
 	public void initialize() {
+		patientList = FXCollections.observableArrayList();
 		unsavedChanges = false;
 		//populate genderCombo
 		genderCombo.setItems(genderOptions);
@@ -187,32 +191,21 @@ public class PhysicianMainController {
 		//set up the columns in the table
 		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
 		//static data, will replace with the database record later
-		patientTableView.setItems(populatePatientTable());
-		System.out.println(populatePatientTable().toString());
+		addStaticData();
+		patientTableView.setItems(patientList);
 
 		patientTableView.setEditable(false);
 		patientTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
 	}
-
-	//******************Created Functions**********************
-	/*populatePatientTable
-	 * this is used to take the data from the database and put the patient's name into the table view
-	 */
-	public ObservableList<Patient> populatePatientTable() {
-		//added static data used for testing
-		ObservableList<Patient> patients = addStaticData();
-
-		return patients;
-	}
+	/* this is used to take the data from the database and put the patient's name into the t
 
 	/*addStaticData
 	 * used to create a static list of patients
 	 * mainly used for testing purposes
 	 */
-	public ObservableList<Patient> addStaticData(){
-		ObservableList<Patient> patients = FXCollections.observableArrayList();
+	public void addStaticData(){
 		Patient josh = new Patient("Knight", "Joshua", "Matthew");
 		josh.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
 		josh.setBloodType("O+");
@@ -243,10 +236,18 @@ public class PhysicianMainController {
 		joe.setTreatment("Alzheimer's pills 2/dy");
 		joe.setWeight("175");
 
-		patients.add(josh);
-		patients.add(joe);
-		return patients;
+		patientList.add(josh);
+		patientList.add(joe);
 	}
+	
+	/* separateNames
+	 * takes in a string as input. Separates the string up into 3 strings using a space
+	 * as the separator.
+	 */
+	public String[] separateNames(String name) {
+		return name.split(", ");
+	}
+	
 	/*enableAllElements
 	 * used to set the disabled property for all elements in the window to false
 	 */
@@ -342,9 +343,73 @@ public class PhysicianMainController {
 		alert.showAndWait();
 
 		if(alert.getResult() == ButtonType.YES){
-
+			if(newPatient) {
+				patientList.remove(new Patient());
+				String lastName, firstName, middleName;
+				LocalDate dob;
+				String gender, ssn, bloodType, feet, inches;
+				boolean organDonor;
+				String phoneNum, email, address1, address2, city, state, zip;
+				String emerName, emerEmail, emerPhone, emerRelation, condition;
+				String treatments, notes, weight;
+				Address address;
+				EmergencyContact emer;
+				Patient p;
+				int in, ft, height;
+				
+				String name = nameField.getText();
+				String[] sepNames = separateNames(name);
+				lastName = sepNames[0];
+				firstName = sepNames[1];
+				middleName = sepNames[2];
+				dob = dobPicker.getValue();
+				gender = genderCombo.getValue();
+				ssn = ssnField.getText();
+				bloodType = bloodTypeCombo.getValue();
+				feet = feetPicker.getValue();
+				inches = inchesPicker.getValue();
+				organDonor = organDonorToggleButton.isSelected();
+				phoneNum = phoneNumField.getText();
+				email = emailField.getText();
+				address1 = address1Field.getText();
+				address2 = address2Field.getText();
+				city = cityField.getText();
+				state = statePicker.getValue();
+				zip = zipField.getText();
+				emerName = emerNameField.getText();
+				emerEmail = emerEmailField.getText();
+				emerPhone = emerPhoneField.getText();
+				emerRelation = emerRelationField.getText();
+				condition = conditionArea.getText();
+				treatments = treatmentArea.getText();
+				notes = notesArea.getText();
+				weight = weightField.getText();
+				address = new Address(address1, address2, city, state, zip);
+				emer = new EmergencyContact(emerName, emerEmail, emerPhone, emerRelation);
+				
+				in = Integer.parseInt(inches);
+				ft = Integer.parseInt(feet) * 12;
+				height = in + ft;
+				
+				String heightString = "" + height;
+				
+				boolean isMale;
+				
+				if(gender.equalsIgnoreCase("Male")){
+					isMale = true;
+				} else {
+					isMale = false;
+				}
+				
+				p = new Patient(lastName, middleName, firstName, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
+				
+				patientList.add(p);
+				
+				newPatient = false;
+			}
 		} else if(alert.getResult() == ButtonType.NO){
-
+			
+			newPatient = false;
 		} else if(alert.getResult() == ButtonType.CANCEL){
 
 		}
@@ -359,7 +424,7 @@ public class PhysicianMainController {
 		if(!unsavedChanges) {
 			unsavedChanges = true;
 			//puts a star beside the patient's name at the top of the page to indicate that there are
-			//usaved changes
+			//unsaved changes
 			patientNameLabel.setText("*" + patientNameLabel.getText());
 		}
 	}
@@ -381,16 +446,20 @@ public class PhysicianMainController {
 	 * the data in the main pane clears in order to get ready to accept new data.
 	 */
 	public void newButtonPressed() {
+		newButton.setDisable(true);
 		if(unsavedChanges) {
 			promptSaveChanges();
 		}
 		//create new cell in patient table view
+		Patient p = new Patient();
+		patientList.add(p);
 		//Change name at top of Window
 		//clear all input fields
 		clearAllElements();
 		//act as if you pressed the edit button
 		editToggleButton.setSelected(true);
 		editButtonToggled();
+		newPatient = true;
 	}
 
 	/*deleteButtonPressed
