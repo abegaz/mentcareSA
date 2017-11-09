@@ -204,6 +204,10 @@ public class Patient {
 	public boolean isMale() {
 		return isMale;
 	}
+	
+	public String getFullName(){
+		return getFirstName() + getMiddleName() + getFirstName();
+	}
 
 	/**
 	 * @return the displayName itself
