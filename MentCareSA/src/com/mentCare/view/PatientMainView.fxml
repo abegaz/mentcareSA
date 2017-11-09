@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PatientMainController">
+   <top>
+      <AnchorPane prefHeight="797.0" prefWidth="1005.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView accessibleText="Picture" fitHeight="200.0" fitWidth="160.0" layoutX="29.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/Mario/Desktop/Framework.UserProfileBadge.actProfileDaylight100.png" />
+               </image></ImageView>
+            <AnchorPane layoutX="6.0" layoutY="232.0" prefHeight="567.0" prefWidth="430.0">
+               <children>
+                  <GridPane gridLinesVisible="true" layoutY="2.0" prefHeight="559.0" prefWidth="412.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="145.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="267.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="TOP_LEFT" text="Full Name:" />
+                        <Label alignment="TOP_LEFT" text="Date of Birth:" GridPane.rowIndex="1" />
+                        <Label alignment="TOP_LEFT" text="Gender:" GridPane.rowIndex="2" />
+                        <Label alignment="TOP_LEFT" text="SSN:" GridPane.rowIndex="3" />
+                        <Label alignment="TOP_LEFT" text="Blood Type:" GridPane.rowIndex="4" />
+                        <Label alignment="TOP_LEFT" text="Height" GridPane.rowIndex="5" />
+                        <Label alignment="TOP_LEFT" text="Weight" GridPane.rowIndex="6" />
+                        <Label alignment="TOP_LEFT" text="Organ Donor" GridPane.rowIndex="7" />
+                        <Label alignment="TOP_LEFT" text="Phone:" GridPane.rowIndex="8" />
+                        <Label alignment="TOP_LEFT" text="Email:" GridPane.rowIndex="9" />
+                        <Label alignment="TOP_LEFT" text="Address:" GridPane.rowIndex="10" />
+                        <Label alignment="TOP_LEFT" text="Emergency Contact:" GridPane.rowIndex="11" />
+                        <TextField fx:id="nameField" disable="true" onKeyTyped="#dataChanged" prefHeight="26.0" prefWidth="203.0" promptText="Joe Mathis Snuffy" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="genderCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="dobPicker" disable="true" onAction="#dataChanged" onKeyTyped="#dataChanged" promptText="01/01/1995" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="ssnField" disable="true" onKeyTyped="#dataChanged" promptText="xxx-xx-1234" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="bloodTypeCombo" disable="true" onAction="#dataChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="155.0" text="Feet" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="147.0" text="lbs" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ToggleButton fx:id="organDonorToggleButton" disable="true" mnemonicParsing="false" onAction="#organDonorPressed" selected="true" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <TextField fx:id="phoneNumField" disable="true" onKeyTyped="#dataChanged" promptText="555-555-5555" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="emailField" disable="true" onKeyTyped="#dataChanged" promptText="blahblahblah@test.com" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                     </children>
+                  </GridPane>
+                  <ScrollBar layoutX="416.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="565.0" prefWidth="21.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="446.0" layoutY="233.0" prefHeight="564.0" prefWidth="545.0">
+               <children>
+                  <ScrollBar layoutX="520.0" layoutY="2.0" orientation="VERTICAL" prefHeight="560.0" prefWidth="22.0" />
+                  <GridPane gridLinesVisible="true" prefHeight="245.0" prefWidth="521.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="178.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="343.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Physician Name" />
+                        <Label text="Dr. Smith" GridPane.columnIndex="1" />
+                        <Label text="Office Phone" GridPane.rowIndex="1" />
+                        <TextField fx:id="phoneNumField1" disable="true" onKeyTyped="#dataChanged" promptText="666-666-6666" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label alignment="TOP_LEFT" text="Email:" GridPane.rowIndex="2" />
+                        <TextField fx:id="emailField1" disable="true" onKeyTyped="#dataChanged" promptText="blahblahblah@test.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Conditions:" GridPane.rowIndex="4" />
+                        <Label text="Treatments:" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
+                  <GridPane gridLinesVisible="true" layoutY="271.0" prefHeight="268.0" prefWidth="523.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="312.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Physician Name" />
+                        <Label text="Dr. Mathis" GridPane.columnIndex="1" />
+                        <Label text="Office Phone" GridPane.rowIndex="1" />
+                        <TextField fx:id="phoneNumField11" disable="true" onKeyTyped="#dataChanged" promptText="777-777-7777" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label alignment="TOP_LEFT" text="Email:" GridPane.rowIndex="2" />
+                        <TextField fx:id="emailField11" disable="true" onKeyTyped="#dataChanged" promptText="blahblahblah@test.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Conditions:" GridPane.rowIndex="4" />
+                        <Label text="Treatments:" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>
