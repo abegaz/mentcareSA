@@ -1,0 +1,83 @@
+Daily Scrum Meeting- November 9, 2017 (Thursday)
+
+-----------------Questions and Answers-----------------
+1. What have you done since we last met to contribute to the project?
+2. What will you do today to contribute to the project?
+3. Are you aware of any impediments to the progress of the team?
+
+Josh
+1.	Finished physician view and most of its controller
+2.	Fixing bugs
+3.	Can't do much more with the current overall state of the project
+
+Mario
+1.	Mostly done with patient view in scenebuilder
+2.	Finishing up on it
+3.	No.
+
+Chloe
+1.	Monitored everyone's progress
+2.	Continue to do that, and when the time comes email the product to Abegaz
+3.	No.
+
+Kevin
+1.	Worked with Celia on patient database
+2.	Will talk to Abegaz about the problem mentioned below
+3.	Still not a contributer on our Github
+
+Celia
+1.	Worked with Kevin on patient database
+2.	Will post the .sql file on Github
+3.	No.
+
+Levi
+1.	Completed most of the login view
+2.	Work on trying to fix the resizing issue
+3.	The resizing issue
+
+Garrett
+1.	Wrote physician database
+2.	Merge the databases into one .sql file, post pictures of posterboard
+3.	No.
+
+
+---------Summary of Progress Made During Meeting----------
+-Tweaking and testing done with the views/controllers
+-Posterboard rearranged to reflect current state of the project
+
+--------------------Upcoming Deadlines--------------------
+-Tuesday (November 14) is when we will do our first Sprint Review and present our work. 
+-Everything needs to be submitted to Chloe by Monday.
+
+-----------------------Other Notes------------------------
+-We need to agree on what we will consider "done" come Monday. See the "WHAT NEEDS TO GET DONE" section below.
+-If anyone needs help on anything, now is the time to speak up. Let the group know on GroupMe. I (Garrett) may need help with connecting
+the database to the views. I'll let you guys know this weekend if I do require assistance. 
+
+-----------------WHAT NEEDS TO GET DONE-------------------
+Each group member needs to add everything they will have personally completed by Monday.
+In other words, your personal To-Do list. Add them as bullet points to the list.
+
+Garrett
+-Merge Databases
+-Link .sql file to views/controllers (Help may be needed)
+-If I need to, I'll contact the respective view creator if I need to modify their files to do the above task.
+-Email finished .sql file and any .java files I modify.
+
+Josh
+-
+
+Mario
+-
+
+Chloe
+-
+
+Kevin
+-
+
+Celia
+-
+
+Levi
+-
