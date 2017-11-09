@@ -197,16 +197,10 @@ public class PhysicianMainController {
 			TableRow<Patient> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if(event.getClickCount() == 2 && (! row.isEmpty())){
-					if(nameFieldIsBlank() && selectedPatient != null){
-						showEmptyNameError();
-					}
-					else if(unsavedChanges){
-						promptSaveChanges();
-					} else{
-						Patient rowData = row.getItem();
-						selectedPatient = rowData;
-						tableCellDoubleClicked();
-					}
+					Patient oldPatient = selectedPatient;
+					Patient rowData = row.getItem();
+					selectedPatient = rowData;
+					tableCellDoubleClicked(oldPatient, selectedPatient);
 				}
 			});
 			return row;
@@ -379,7 +373,7 @@ public class PhysicianMainController {
 			if(newPatient){
 				patientList.remove(selectedPatient);
 			}
-			tableCellDoubleClicked();
+			
 			newPatient = false;
 			
 		} else if(alert.getResult() == ButtonType.CANCEL){
@@ -515,8 +509,58 @@ public class PhysicianMainController {
 		p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
 		//add the new patient to the patientList
 		patientList.add(p);
+	}
+	
+	public void loadData(){
+		Patient p = selectedPatient;
 		
-		newPatient = false;
+		String name = p.getLastName() + ", " + p.getFirstName();
+		
+		if(p.getMiddleName() != ""){
+			name += ", " + p.getMiddleName();
+		}
+		nameField.setText(name);
+		dobPicker.setValue(p.getDob());
+		
+		String gender;
+		if(p.isMale()){
+			gender = "Male";
+		} else {
+			gender = "Female";
+		}
+		genderCombo.setValue(gender);
+		
+		ssnField.setText(p.getSsn());
+		bloodTypeCombo.setValue(p.getBloodType());
+		phoneNumField.setText(p.getPhoneNum());
+		emailField.setText(p.getEmail());
+		
+		int inches, feet, total;
+		total = Integer.parseInt(p.getHeight());
+		feet = total / 12;
+		inches = total % 12;
+		feetPicker.setValue("" + feet);
+		inchesPicker.setValue("" + inches);
+		
+		EmergencyContact emer = p.getEmerContact();
+		emerNameField.setText(emer.getName());
+		emerPhoneField.setText(emer.getPhoneNum());
+		emerEmailField.setText(emer.getEmail());
+		emerRelationField.setText(emer.getRelation());
+		
+		Address a = p.getAddress();
+		address1Field.setText(a.getAddress1());
+		address2Field.setText(a.getAddress2());
+		cityField.setText(a.getCity());
+		statePicker.setValue(a.getState());
+		zipField.setText(a.getZip());
+		
+		weightField.setText(p.getWeight());
+		conditionArea.setText(p.getCondition());
+		treatmentArea.setText(p.getTreatment());
+		notesArea.setText(p.getNotes());
+		
+		patientNameLabel.setText(selectedPatient.getDisplayName());
 	}
 
 	//******************Button Actions**********************
@@ -574,12 +618,20 @@ public class PhysicianMainController {
 		if(nameFieldIsBlank()){
 			showEmptyNameError();
 		}
+		saveData();
 		//upload any changes to the database
+		
 		if(unsavedChanges) {
 			unsavedChanges = false;
 			String patientName = patientNameLabel.getText();
 			patientName = patientName.substring(1);
 			patientNameLabel.setText(patientName);
+		}
+		if(newPatient){
+			editToggleButton.setSelected(false);
+			editToggleButton.setText("Edit");
+			patientNameLabel.setText(selectedPatient.getDisplayName());
+			newPatient = false;
 		}
 	}
 
@@ -594,33 +646,40 @@ public class PhysicianMainController {
 		if(selectedPatient == null) {
 			editToggleButton.setSelected(false);
 		}
-		if(editToggleButton.isSelected()){//If the button is toggled on
-			editToggleButton.setText("Done");
-			//enable the view elements
-			enableAllElements();
+		else {
+			if(editToggleButton.isSelected()){//If the button is toggled on
+				editToggleButton.setText("Done");
+				//enable the view elements
+				enableAllElements();
 
-		} else {//If the button is toggled off
-			//ask user if they would like to save changes if any are present
-			if(unsavedChanges) {
-				Alert alert = promptSaveChanges();
-
-				if(alert.getResult() == ButtonType.YES){//Data is saved
-					//save the data
-					saveButtonPressed();
-
-					editToggleButton.setText("Edit");
-					disableAllElements();
-				} else if(alert.getResult() == ButtonType.NO){//Data is discarded
-					//reload the data from the database
-
-					editToggleButton.setText("Edit");
-					disableAllElements();
-				} else if(alert.getResult() == ButtonType.CANCEL){//Dialog box is dismissed. Editing is allowed
+			} else {//If the button is toggled off
+				//check to see if the nameField is blank. disallow saving if it is
+				if(nameFieldIsBlank()){
+					showEmptyNameError();
 					editToggleButton.setSelected(true);
 				}
-			} else {
-				editToggleButton.setText("Edit");
-				disableAllElements();
+				//ask user if they would like to save changes if any are present
+				else if(unsavedChanges) {
+					Alert alert = promptSaveChanges();
+	
+					if(alert.getResult() == ButtonType.YES){//Data is saved
+						//save the data
+						saveButtonPressed();
+	
+						editToggleButton.setText("Edit");
+						disableAllElements();
+					} else if(alert.getResult() == ButtonType.NO){//Data is discarded
+						//reload the data from the database
+	
+						editToggleButton.setText("Edit");
+						disableAllElements();
+					} else if(alert.getResult() == ButtonType.CANCEL){//Dialog box is dismissed. Editing is allowed
+						editToggleButton.setSelected(true);
+					}
+				} else {
+					editToggleButton.setText("Edit");
+					disableAllElements();
+				}
 			}
 		}
 	}
@@ -631,7 +690,7 @@ public class PhysicianMainController {
 	public void printButtonPressed(){
 
 	}
-
+	
 	/*orgonDonorPressed
 	 * if the button says yes, change text to no; and vice versa
 	 */
@@ -645,64 +704,27 @@ public class PhysicianMainController {
 		}
 		dataChanged();
 	}
-	
 	/*tableCellDoubleClicked
 	 * called when a cell in the patientViewTable is double clicked
 	 * used to load the data from the patient into the view
 	 */
-	public void tableCellDoubleClicked(){
-		if(!unsavedChanges){
-			Patient p = selectedPatient;
+	
+	public void tableCellDoubleClicked(Patient old, Patient newPatient){
+		if(nameFieldIsBlank() && old != null){
+			showEmptyNameError();
+		} else if(unsavedChanges){
+			Alert alert = promptSaveChanges();
 			
-			String name = p.getLastName() + ", " + p.getFirstName();
-			
-			if(p.getMiddleName() != ""){
-				name += ", " + p.getMiddleName();
+			if(alert.getResult() == ButtonType.YES){
+				selectedPatient = old;
+				saveData();
+				selectedPatient = newPatient;
+				loadData();
+			} else if(alert.getResult() == ButtonType.NO){
+				loadData();
 			}
-			nameField.setText(name);
-			dobPicker.setValue(p.getDob());
-			
-			String gender;
-			if(p.isMale()){
-				gender = "Male";
-			} else {
-				gender = "Female";
-			}
-			genderCombo.setValue(gender);
-			
-			ssnField.setText(p.getSsn());
-			bloodTypeCombo.setValue(p.getBloodType());
-			phoneNumField.setText(p.getPhoneNum());
-			emailField.setText(p.getEmail());
-			
-			int inches, feet, total;
-			total = Integer.parseInt(p.getHeight());
-			feet = total / 12;
-			inches = total % 12;
-			feetPicker.setValue("" + feet);
-			inchesPicker.setValue("" + inches);
-			
-			EmergencyContact emer = p.getEmerContact();
-			emerNameField.setText(emer.getName());
-			emerPhoneField.setText(emer.getPhoneNum());
-			emerEmailField.setText(emer.getEmail());
-			emerRelationField.setText(emer.getRelation());
-			
-			Address a = p.getAddress();
-			address1Field.setText(a.getAddress1());
-			address2Field.setText(a.getAddress2());
-			cityField.setText(a.getCity());
-			statePicker.setValue(a.getState());
-			zipField.setText(a.getZip());
-			
-			weightField.setText(p.getWeight());
-			conditionArea.setText(p.getCondition());
-			treatmentArea.setText(p.getTreatment());
-			notesArea.setText(p.getNotes());
-			
-			patientNameLabel.setText(selectedPatient.getDisplayName());
 		} else{
-			//promptSaveChanges();
+			loadData();
 		}
 	}
 }
