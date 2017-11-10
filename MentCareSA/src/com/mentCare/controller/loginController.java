@@ -49,8 +49,8 @@ if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText(
 	    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
 	    Parent tableViewParent = loader.load();
 	    Scene tableViewScene = new Scene(tableViewParent);
-	    //access the controller and calls a method
-	    //This line gets the Stage information
+	    
+	    
 	    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
 	    window.setScene(tableViewScene);
