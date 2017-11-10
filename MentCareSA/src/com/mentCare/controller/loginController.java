@@ -21,32 +21,54 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import java.io.IOException;
 
 public class loginController {
-	
-	
+
+
 	@FXML private ColorPicker colorTextField;
     @FXML private Button loginButton;
-	
-	
-	
+    private String physicianLogin = "Physician";
+    private String physicianPassword = "Physician";
+    private String patientLogin = "Patient";
+    private String patientPassword = "Patient";
+    @FXML private TextField usernameBar;
+    @FXML private TextField passwordBar;
+
+
  public void initialize() {
-	
-	
+
+
  }
-	
- public void loginButtonClicked(ActionEvent event)
+
+ public void loginButtonClicked(ActionEvent event) throws IOException
  {
-    
-	 Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Login Was Clicked", ButtonType.OK, ButtonType.CANCEL);
-		buttonWasClicked.showAndWait(); 
-	 
+if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
+	
+	 FXMLLoader loader = new FXMLLoader();
+	    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
+	    Parent tableViewParent = loader.load();
+	    Scene tableViewScene = new Scene(tableViewParent);
+	    //access the controller and calls a method
+	    //This line gets the Stage information
+	    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+	    window.setScene(tableViewScene);
+	    window.show();
+	
+}
+else{
+	Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
+buttonWasClicked.showAndWait();
  }
-	
-	
-	
-	
-	
-	
+ }
+
+
+ 
+
+ 
+
+
+
 
 }
