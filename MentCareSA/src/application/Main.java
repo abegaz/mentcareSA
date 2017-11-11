@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent  root = FXMLLoader.load(getClass().getResource("../com/mentCare/view/PhysicianMainView.fxml"));
+			Parent  root = FXMLLoader.load(getClass().getResource("../com/mentCare/view/login.fxml"));
 			Scene scene = new Scene(root,800,708);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
