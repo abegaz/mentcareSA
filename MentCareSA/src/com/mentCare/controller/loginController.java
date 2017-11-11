@@ -40,7 +40,14 @@ public class loginController {
 
 
  }
-
+ 
+ 
+ 
+//=================================================================================================
+//When you click the login button, and the username/password are correct, go to the correct view.
+//=================================================================================================
+ 
+ 
  public void loginButtonClicked(ActionEvent event) throws IOException
  {
 if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
@@ -49,24 +56,39 @@ if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText(
 	    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
 	    Parent tableViewParent = loader.load();
 	    Scene tableViewScene = new Scene(tableViewParent);
-	    
-	    
 	    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-	    window.setScene(tableViewScene);
+        window.setScene(tableViewScene);
 	    window.show();
 	
 }
+
+else if(usernameBar.getText().equalsIgnoreCase(patientLogin)&& passwordBar.getText().equalsIgnoreCase(patientPassword)){
+	
+	
+	FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
+    Parent tableViewParent = loader.load();
+    Scene tableViewScene = new Scene(tableViewParent);
+    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+    window.setScene(tableViewScene);
+    window.show();
+	
+	
+	
+}
+
+
+
 else{
 	Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
 buttonWasClicked.showAndWait();
  }
+
+ 
+ 
+ 
+ 
  }
-
-
- 
-
- 
 
 
 
