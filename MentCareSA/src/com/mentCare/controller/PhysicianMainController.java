@@ -434,7 +434,7 @@ public class PhysicianMainController {
 	}
 	
 	public void saveData(){
-		patientList.remove(selectedPatient);//remove the placeholder patient
+		patientList.remove(selectedPatient);//discard the old changes
 		//initialize local variables used to assign input fields to
 		String lastName, firstName, middleName;
 		LocalDate dob;
@@ -509,6 +509,7 @@ public class PhysicianMainController {
 		p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
 		//add the new patient to the patientList
 		patientList.add(p);
+		System.out.println("Patient has been saved");
 	}
 	
 	public void loadData(){
@@ -604,7 +605,9 @@ public class PhysicianMainController {
 				patientList.remove(selectedPatient);
 				clearAllElements();//The Input fields are cleared
 				editToggleButton.setSelected(false);
-				editButtonToggled();
+				editToggleButton.setText("Edit");
+				disableAllElements();
+				selectedPatient = null;
 			}
 		}
 	}
