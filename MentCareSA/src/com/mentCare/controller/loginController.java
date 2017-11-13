@@ -48,49 +48,40 @@ public class loginController {
 //=================================================================================================
  
  
- public void loginButtonClicked(ActionEvent event) throws IOException
- {
-if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
+	 public void loginButtonClicked(ActionEvent event) throws IOException
+	 {
+		if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
+			
+			 FXMLLoader loader = new FXMLLoader();
+			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
+			    Parent tableViewParent = loader.load();
+			    Scene tableViewScene = new Scene(tableViewParent);
+			    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		        window.setScene(tableViewScene);
+			    window.show();
+			
+		}
 	
-	 FXMLLoader loader = new FXMLLoader();
-	    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
-	    Parent tableViewParent = loader.load();
-	    Scene tableViewScene = new Scene(tableViewParent);
-	    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-	    window.show();
-	
-}
-
-else if(usernameBar.getText().equalsIgnoreCase(patientLogin)&& passwordBar.getText().equalsIgnoreCase(patientPassword)){
-	
-	
-	FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
-    Parent tableViewParent = loader.load();
-    Scene tableViewScene = new Scene(tableViewParent);
-    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-    window.setScene(tableViewScene);
-    window.show();
-	
-	
-	
-}
-
-
-
-else{
-	Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
-buttonWasClicked.showAndWait();
- }
-
- 
- 
- 
- 
- }
-
-
-
-
+		else if(usernameBar.getText().equalsIgnoreCase(patientLogin)&& passwordBar.getText().equalsIgnoreCase(patientPassword)){
+			
+			
+			FXMLLoader loader = new FXMLLoader();
+		    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
+		    Parent tableViewParent = loader.load();
+		    Scene tableViewScene = new Scene(tableViewParent);
+		    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		    window.setScene(tableViewScene);
+		    window.show();
+			
+			
+			
+		}
+		
+		
+		
+		else{
+			Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
+			buttonWasClicked.showAndWait();
+		 }
+	 }
 }
