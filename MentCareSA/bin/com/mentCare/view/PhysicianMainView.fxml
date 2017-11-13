@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
         <items>
@@ -131,13 +132,13 @@
                                              <children>
                                                 <TextField fx:id="address1Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 1" />
                                                 <TextField fx:id="address2Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 2 (optional)" GridPane.rowIndex="1" />
-                                                <TextField fx:id="zipField" editable="false" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
                                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                    <children>
                                                       <TextField fx:id="cityField" editable="false" promptText="City" />
                                                       <ComboBox fx:id="statePicker" disable="true" layoutX="195.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="68.0" />
                                                    </children>
                                                 </Pane>
+                                                <TextField fx:id="zipField" editable="false" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="10">
@@ -186,7 +187,12 @@
       <ToggleButton fx:id="editToggleButton" layoutX="749.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
       <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
         <items>
-          <MenuItem mnemonicParsing="false" text="Print" />
+          <MenuItem mnemonicParsing="false" onAction="#printButtonPressed" text="Print">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="P" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" text="Export" />
+            <MenuItem mnemonicParsing="false" onAction="#logoutButtonPressed" text="Log Out" />
         </items>
       </MenuButton>
       <Button fx:id="saveButton" layoutX="53.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveButtonPressed" text="Save" />
