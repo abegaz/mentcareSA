@@ -41,6 +41,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -181,7 +183,7 @@ public class PhysicianMainController {
 	private boolean unsavedChanges;//used to track if an unsaved change has been made to a patient
 	private boolean newPatient;//used to track if the physician is currently working on creating a new patient
 	private ObservableList<Patient> patientList;//used to track all patients locally
-	private Patient selectedPatient;//used to track which patient is currently selected. 
+	private Patient selectedPatient;//used to track which patient is currently selected.
 									//This is changed when a patient in the table is double clicked
 
 	public void initialize() {
@@ -214,7 +216,7 @@ public class PhysicianMainController {
 			});
 			return row;
 		});
-		
+
 		//set up the columns in the table
 		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
 		//static data, will replace with the database record later
@@ -224,11 +226,18 @@ public class PhysicianMainController {
 		patientTableView.setEditable(false);
 		patientTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-
+		//Set the icon of the delete button to an image of a trash can
+		Image trashImage = new Image("file:trashIcon.jpg");
+		deleteButton.setGraphic(new ImageView(trashImage));
+		
+		//Set icon of the new button to an image of a new icon
+		
+		
+		//Set icon of the save button to an image of a floppy disk
 	}
-	
+
 	/**********************Supporting Actions***************************/
-	
+
 	/*addStaticData
 	 * used to create a static list of patients
 	 * mainly used for testing purposes
@@ -269,17 +278,17 @@ public class PhysicianMainController {
 		patientList.add(josh);
 		patientList.add(joe);
 	}
-	
+
 	/* separateNames
 	 * takes in a string as input. Separates the string up into 3 strings using a space
 	 * as the separator.
-	 * 
+	 *
 	 * Used to separate the different names in the nameField
 	 */
 	public String[] separateNames(String name) {
 		return name.split(", ");
 	}
-	
+
 	/*enableAllElements
 	 * used to set the disabled property for all elements in the window to false
 	 * textField's setEditable property is set to true to allow for better readability
@@ -374,7 +383,7 @@ public class PhysicianMainController {
 	 * used to create an alert on screen asking if the user would like to save changes
 	 * usually used before changes are about to be discarded, in order to preserve data.
 	 * returns an Alert to allow the calling method to handle the options
-	 * 
+	 *
 	 * generic options are used in this method: save the data if yes, discard the data if no.
 	 */
 	public Alert promptSaveChanges() {
@@ -387,13 +396,13 @@ public class PhysicianMainController {
 			if(newPatient){//if the data being edited is a new patient, discard the entire patient
 				patientList.remove(selectedPatient);
 			}
-			
+
 			newPatient = false;
-			
+
 		}
 
 		newButton.setDisable(newPatient);
-		
+
 		return alert;
 	}
 
@@ -416,7 +425,7 @@ public class PhysicianMainController {
 	public void searchPatients(){
 		ObservableList<Patient> searchList = FXCollections.observableArrayList();
 		String searchText = searchField.getText();
-		
+
 		if(searchField.getText() == ""){
 			patientTableView.setItems(patientList);
 		} else{
@@ -426,16 +435,12 @@ public class PhysicianMainController {
 				CharSequence c = searchText.toLowerCase();//change the search text to lowercase to match the patientList name's case
 				if(fullLowercase.contains(c)){
 					searchList.add(currentIndex);
-					System.out.println("Input: " + c + "\nCurrent Patient: " + currentIndex.getFullName() + "\nPatient found\n");
-				}
-				else {
-					System.out.println("Input: " + c + "\nCurrent Patient: " + currentIndex.getFullName() + "\nPatient NOT found\n");
 				}
 			}
 			patientTableView.setItems(searchList);
 		}
 	}
-	
+
 	/*nameFieldIsBlank
 	 * called when attempting to save patient data
 	 * returns true if nameField is blank, false otherwise
@@ -448,7 +453,7 @@ public class PhysicianMainController {
 			return false;
 		}
 	}
-	
+
 	/*showEmptyNameError
 	 * called when attempting to save data, but the nameField is blank, indicating that the patient has no name
 	 * Shows an error message on screen, prompting the user that they must enter a name
@@ -458,7 +463,7 @@ public class PhysicianMainController {
 		error.setContentText("Patient must have a name!");
 		error.show();
 	}
-	
+
 	/*saveData
 	 * called when the save button is pressed, or otherwise attempting to save information
 	 * updates data in the patient list and pushes that data to the database
@@ -477,7 +482,7 @@ public class PhysicianMainController {
 		EmergencyContact emer;
 		Patient p;
 		int in, ft, height;
-		
+
 		String name = nameField.getText();//get name from the input field
 		String[] sepNames = separateNames(name);
 		//in case the name is not inserted as predicted, the program will not crash
@@ -486,7 +491,7 @@ public class PhysicianMainController {
 		} catch(ArrayIndexOutOfBoundsException e) {
 			lastName = "";
 		}
-		try {	
+		try {
 			firstName = sepNames[1];
 		} catch(ArrayIndexOutOfBoundsException e) {
 			firstName = "";
@@ -527,7 +532,7 @@ public class PhysicianMainController {
 		height = in + ft;
 		//convert the total inches into a String
 		String heightString = "" + height;
-		
+
 		boolean isMale;
 		//assign the isMale variable
 		if(gender.equalsIgnoreCase("Male")){
@@ -541,22 +546,22 @@ public class PhysicianMainController {
 		patientList.add(p);
 		System.out.println("Patient has been saved\t" + patientList.size() + " Patients in database.");
 	}
-	
+
 	/*loadData
 	 * called when a patient in the table has been double clicked
 	 * used to load data from the patientList into the view fields
 	 */
 	public void loadData(){
 		Patient p = selectedPatient;
-		
+
 		String name = p.getLastName() + ", " + p.getFirstName();
-		
+
 		if(p.getMiddleName() != ""){
 			name += ", " + p.getMiddleName();
 		}
 		nameField.setText(name);
 		dobPicker.setValue(p.getDob());
-		
+
 		String gender;
 		if(p.isMale()){
 			gender = "Male";
@@ -564,42 +569,42 @@ public class PhysicianMainController {
 			gender = "Female";
 		}
 		genderCombo.setValue(gender);
-		
+
 		ssnField.setText(p.getSsn());
 		bloodTypeCombo.setValue(p.getBloodType());
 		phoneNumField.setText(p.getPhoneNum());
 		emailField.setText(p.getEmail());
-		
+
 		int inches, feet, total;
 		total = Integer.parseInt(p.getHeight());
 		feet = total / 12;
 		inches = total % 12;
 		feetPicker.setValue("" + feet);
 		inchesPicker.setValue("" + inches);
-		
+
 		EmergencyContact emer = p.getEmerContact();
 		emerNameField.setText(emer.getName());
 		emerPhoneField.setText(emer.getPhoneNum());
 		emerEmailField.setText(emer.getEmail());
 		emerRelationField.setText(emer.getRelation());
-		
+
 		Address a = p.getAddress();
 		address1Field.setText(a.getAddress1());
 		address2Field.setText(a.getAddress2());
 		cityField.setText(a.getCity());
 		statePicker.setValue(a.getState());
 		zipField.setText(a.getZip());
-		
+
 		weightField.setText(p.getWeight());
 		conditionArea.setText(p.getCondition());
 		treatmentArea.setText(p.getTreatment());
 		notesArea.setText(p.getNotes());
-		
+
 		patientNameLabel.setText(selectedPatient.getDisplayName());
 	}
 
 	//******************Button Actions**********************
-	
+
 	/*newPatientButtonPushed
 	 * Executes when the button labeled "New Patient" is pressed
 	 * if unsaved data exists, a prompt pops up on screen asking to save the data
@@ -631,9 +636,9 @@ public class PhysicianMainController {
 	 */
 	public void deleteButtonPressed() {
 		if(selectedPatient != null){
-			Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete " + 
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete " +
 		selectedPatient.getFirstName() + " " + selectedPatient.getLastName() + "?", ButtonType.YES, ButtonType.CANCEL);
-			
+
 			alert.showAndWait();
 
 			if(alert.getResult() == ButtonType.YES){
@@ -657,9 +662,9 @@ public class PhysicianMainController {
 		if(nameFieldIsBlank()){
 			showEmptyNameError();
 		}
-		
+
 		//upload any changes to the database
-		
+
 		if(unsavedChanges) {
 			saveData();
 			unsavedChanges = false;
@@ -701,13 +706,13 @@ public class PhysicianMainController {
 				//ask user if they would like to save changes if any are present
 				else if(unsavedChanges) {
 					Alert alert = promptSaveChanges();
-	
+
 					if(alert.getResult() == ButtonType.YES){//Data is saved
 						editToggleButton.setText("Edit");
 						disableAllElements();
 					} else if(alert.getResult() == ButtonType.NO){//Data is discarded
 						//reload the data from the database
-	
+
 						editToggleButton.setText("Edit");
 						disableAllElements();
 					} else if(alert.getResult() == ButtonType.CANCEL){//Dialog box is dismissed. Editing is allowed
@@ -727,7 +732,7 @@ public class PhysicianMainController {
 	public void printButtonPressed(){
 		System.out.println("Print Button Pressed");
 	}
-	
+
 	/*orgonDonorPressed
 	 * if the button says yes, change text to no; and vice versa
 	 */
@@ -741,7 +746,7 @@ public class PhysicianMainController {
 		}
 		dataChanged();
 	}
-	
+
 	/*tableCellDoubleClicked
 	 * called when a cell in the patientViewTable is double clicked
 	 * used to load the data from the patient into the view
@@ -751,7 +756,7 @@ public class PhysicianMainController {
 			showEmptyNameError();
 		} else if(unsavedChanges){
 			Alert alert = promptSaveChanges();
-			
+
 			if(alert.getResult() == ButtonType.YES){
 				selectedPatient = old;
 				saveData();
@@ -764,7 +769,7 @@ public class PhysicianMainController {
 			loadData();
 		}
 	}
-	
+
 	/*logoutButtonPressed
 	 * called when the logout button is pressed
 	 * used to log the user out of the system and load the login screen
