@@ -99,4 +99,108 @@ public class PatientAdapter {
 		query = "";
 		return query;
 	}
+	
+	public String getAddressLine2() {
+		String address2 = adaptee.getAddress().getAddress2();
+		query = "";
+		return query;
+	}
+	
+	public String getAddressCity() {
+		String city = adaptee.getAddress().getCity();
+		query = "";
+		return query;
+	}
+	
+	public String getAddressState() {
+		String state = adaptee.getAddress().getState();
+		query = "";
+		return query;
+	}
+	
+	public String getAddressZip() {
+		String zip = adaptee.getAddress().getZip();
+		query = "";
+		return query;
+	}
+	
+	public String getHeightQuery() {
+		String height = adaptee.getHeight();
+		query = "";
+		return query;
+	}
+	
+	public String getWeightQuery() {
+		String weight = adaptee.getWeight();
+		query = "";
+		return query;
+	}
+	
+	public String getOrganDonorQuery() {
+		String organDonor;
+		
+		if(adaptee.isOrganDonor()) {
+			organDonor = "Yes";
+		} else {
+			organDonor = "No";
+		}
+		
+		query = "";
+		return query;
+	}
+	
+	public String getEmerContactName() {
+		String name = adaptee.getEmerContact().getName();
+		query = "";
+		return query;
+	}
+	
+	public String getEmerContactPhone() {
+		String phone = adaptee.getEmerContact().getPhoneNum();
+		query = "";
+		return query;
+	}
+	
+	public String getEmerContactEmail() {
+		String email = adaptee.getEmerContact().getEmail();
+		query = "";
+		return query;
+	}
+	
+	public String getEmerContactRelation() {
+		String relation = adaptee.getEmerContact().getRelation();
+		query = "";
+		return query;
+	}
+	
+	public String getTreatmentQuery() {
+		String treatment = adaptee.getTreatment();
+		query = "";
+		return query;
+	}
+	
+	public String getConditionQuery() {
+		String condition = adaptee.getCondition();
+		query = "";
+		return query;
+	}
+	
+	public String getNotesQuery() {
+		String notes = adaptee.getNotes();
+		query = "";
+		return query;
+	}
+	
+	public String getGenderQuery() {
+		String gender;
+		
+		if(adaptee.isMale()) {
+			gender = "Male";
+		} else {
+			gender = "Female";
+		}
+		
+		query = "";
+		return query;
+	}
 }
