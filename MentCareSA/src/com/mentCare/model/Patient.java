@@ -1,8 +1,6 @@
 package com.mentCare.model;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javafx.beans.property.SimpleStringProperty;
 
 public class Patient {
