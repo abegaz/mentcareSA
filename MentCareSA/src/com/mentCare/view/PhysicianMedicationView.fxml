@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMedicationController">
+   <children>
+      <TableView fx:id="medicationTableView" prefHeight="304.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="rxTableColumn" prefWidth="75.0" text="Rx #" />
+          <TableColumn fx:id="nameTableColumn" prefWidth="142.0" text="Medication Name" />
+            <TableColumn fx:id="dosageTableColumn" prefWidth="79.0" text="Dosage" />
+            <TableColumn fx:id="drTableColumn" prefWidth="188.0" text="Prescribing Physician" />
+            <TableColumn fx:id="dateTableColumn" prefWidth="115.0" text="Date Prescribed" />
+        </columns>
+      </TableView>
+      <Label fx:id="patientNameLabel" alignment="CENTER" layoutY="304.0" prefHeight="17.0" prefWidth="600.0" text="Showing Medication for: " textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="medNameComboBox" layoutX="14.0" layoutY="331.0" prefWidth="150.0" />
+      <TextField fx:id="dosageTextField" layoutX="164.0" layoutY="331.0" promptText="Dosage" />
+      <DatePicker fx:id="datePicker" layoutX="313.0" layoutY="331.0" />
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#addMedication" text="Add Medication" />
+      <Button fx:id="todayButton" layoutX="487.0" layoutY="331.0" mnemonicParsing="false" onAction="#todayButtonPressed" text="Today" />
+   </children>
+</AnchorPane>
