@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.mentCare.adapter.PatientAdapter;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Patient {
 	//Declare variables
@@ -20,9 +22,10 @@ public class Patient {
 	private String height, weight;
 	private boolean organDonor;
 	private EmergencyContact emerContact;
-	private String condition, treatment, notes;
+	private String condition, notes;
 	private boolean isMale;
 	private PatientAdapter adapter;
+	private ObservableList<Medication> medicationList;
 
 //******************Constructors******************************
 	public Patient() {
@@ -42,15 +45,15 @@ public class Patient {
 		organDonor = false;
 		emerContact = new EmergencyContact();
 		condition = "";
-		treatment = "";
 		notes = "";
 		isMale = true;
+		medicationList = FXCollections.observableArrayList();
 		adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
-			EmergencyContact emerContact, String condition, String treatment, String notes) {
+			EmergencyContact emerContact, String condition, Medication med, String notes) {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
@@ -68,8 +71,64 @@ public class Patient {
 		this.organDonor = organDonor;
 		this.emerContact = emerContact;
 		this.condition = condition;
-		this.treatment = treatment;
+		this.medicationList = FXCollections.observableArrayList();
+		this.medicationList.add(med);
 		this.notes = notes;
+		adapter = new PatientAdapter(this);
+	}
+	
+	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
+			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
+			EmergencyContact emerContact, String condition, Medication[] med, String notes) {
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.firstName = firstName;
+		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		this.dob = dob;
+		this.isMale = isMale;
+		this.email = email;
+		this.password = password;
+		this.ssn = ssn;
+		this.bloodType = bloodType;
+		this.phoneNum = phoneNum;
+		this.address = address;
+		this.height = height;
+		this.weight = weight;
+		this.organDonor = organDonor;
+		this.emerContact = emerContact;
+		this.condition = condition;
+		this.medicationList = FXCollections.observableArrayList();
+		for(Medication medication : med) {
+			this.medicationList.add(medication);
+		}
+		this.notes = notes;
+		adapter = new PatientAdapter(this);
+	}
+	
+	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
+			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
+			EmergencyContact emerContact, String condition, ObservableList<Medication> med, String notes) {
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.firstName = firstName;
+		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		this.dob = dob;
+		this.isMale = isMale;
+		this.email = email;
+		this.password = password;
+		this.ssn = ssn;
+		this.bloodType = bloodType;
+		this.phoneNum = phoneNum;
+		this.address = address;
+		this.height = height;
+		this.weight = weight;
+		this.organDonor = organDonor;
+		this.emerContact = emerContact;
+		this.condition = condition;
+		this.medicationList = FXCollections.observableArrayList();
+		this.medicationList.addAll(med);
+		this.notes = notes;
+		adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String firstName, String middleName) {
@@ -77,6 +136,21 @@ public class Patient {
 		this.middleName = middleName;
 		this.firstName = firstName;
 		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		email = "";
+		password = "";
+		ssn = "";
+		bloodType = "";
+		phoneNum = "";
+		address = new Address();
+		height = "";
+		weight = "";
+		organDonor = false;
+		emerContact = new EmergencyContact();
+		condition = "";
+		notes = "";
+		isMale = true;
+		medicationList = FXCollections.observableArrayList();
+		adapter = new PatientAdapter(this);
 	}
 
 //*********************Getters*********************
@@ -170,13 +244,6 @@ public class Patient {
 	}
 
 	/**
-	 * @return the treatment
-	 */
-	public String getTreatment() {
-		return treatment;
-	}
-
-	/**
 	 * @return the notes
 	 */
 	public String getNotes() {
@@ -221,6 +288,14 @@ public class Patient {
 
 	public PatientAdapter getAdapter(){
 		return adapter;
+	}
+	
+
+	/**
+	 * @return the medicationList
+	 */
+	public ObservableList<Medication> getMedicationList() {
+		return medicationList;
 	}
 
 	//*********************Setters*********************
@@ -307,13 +382,6 @@ public class Patient {
 	}
 
 	/**
-	 * @param treatment the treatment to set
-	 */
-	public void setTreatment(String treatment) {
-		this.treatment = treatment;
-	}
-
-	/**
 	 * @param notes the notes to set
 	 */
 	public void setNotes(String notes) {
@@ -344,6 +412,27 @@ public class Patient {
 	public void setMale(boolean isMale) {
 		this.isMale = isMale;
 	}
+	
+	/**
+	 * @param medicationList the medicationList to set
+	 */
+	public void setMedicationList(ObservableList<Medication> medicationList) {
+		this.medicationList = medicationList;
+	}
+	
+	public void addMedication(Medication med) {
+		this.medicationList.add(med);
+	}
+	
+	public void addMedication(Medication[] medicationList) {
+		for(Medication medication : medicationList) {
+			this.medicationList.add(medication);
+		}
+	}
+	
+	public void addMedication(ObservableList<Medication> medicationList) {
+		this.medicationList.addAll(medicationList);
+	}
 
 	/*equals
 	 * used to compare 2 patients to each other. Returns true if they are the exact same, false otherwise.
@@ -354,7 +443,7 @@ public class Patient {
 
 		if(lastName.equals(newPatient.getLastName()) &&
 		   middleName.equals(newPatient.getMiddleName()) &&
-		   lastName.equals(newPatient.getLastName()) &&
+		   firstName.equals(newPatient.getFirstName()) &&
 		   address.equals(newPatient.getAddress()) &&
 		   bloodType.equals(newPatient.getBloodType()) &&
 		   condition.equals(newPatient.getCondition()) &&
@@ -365,8 +454,10 @@ public class Patient {
 		   isOrganDonor() == newPatient.isOrganDonor() &&
 		   phoneNum.equals(newPatient.getPhoneNum()) &&
 		   ssn.equals(newPatient.getSsn()) &&
-		   treatment.equals(newPatient.getTreatment()) &&
-		   weight.equals(newPatient.getWeight())) {
+		   weight.equals(newPatient.getWeight()) &&
+		   dob.equals(newPatient.getDob()) &&
+		   isMale() == newPatient.isMale() &&
+		   getMedicationList().equals(newPatient.getMedicationList())) {
 			theSame = true;
 		}
 
@@ -382,33 +473,39 @@ public class Patient {
 		boolean theSame = false;
 
 		if(lastName.equalsIgnoreCase(newPatient.getLastName()) &&
-		   middleName.equalsIgnoreCase(newPatient.getMiddleName()) &&
-		   lastName.equalsIgnoreCase(newPatient.getLastName()) &&
-		   address.equalsIgnoreCase(newPatient.getAddress()) &&
-		   bloodType.equalsIgnoreCase(newPatient.getBloodType()) &&
-		   condition.equalsIgnoreCase(newPatient.getCondition()) &&
-		   email.equalsIgnoreCase(newPatient.getEmail()) &&
-		   emerContact.equalsIgnoreCase(newPatient.getEmerContact()) &&
-		   height.equalsIgnoreCase(newPatient.getHeight()) &&
-		   notes.equalsIgnoreCase(newPatient.getNotes()) &&
-		   isOrganDonor() == newPatient.isOrganDonor() &&
-		   phoneNum.equalsIgnoreCase(newPatient.getPhoneNum()) &&
-		   ssn.equalsIgnoreCase(newPatient.getSsn()) &&
-		   treatment.equalsIgnoreCase(newPatient.getTreatment()) &&
-		   weight.equalsIgnoreCase(newPatient.getWeight())) {
+				   middleName.equalsIgnoreCase(newPatient.getMiddleName()) &&
+				   firstName.equalsIgnoreCase(newPatient.getFirstName()) &&
+				   address.equalsIgnoreCase(newPatient.getAddress()) &&
+				   bloodType.equalsIgnoreCase(newPatient.getBloodType()) &&
+				   condition.equalsIgnoreCase(newPatient.getCondition()) &&
+				   email.equalsIgnoreCase(newPatient.getEmail()) &&
+				   emerContact.equalsIgnoreCase(newPatient.getEmerContact()) &&
+				   height.equalsIgnoreCase(newPatient.getHeight()) &&
+				   notes.equalsIgnoreCase(newPatient.getNotes()) &&
+				   isOrganDonor() == newPatient.isOrganDonor() &&
+				   phoneNum.equalsIgnoreCase(newPatient.getPhoneNum()) &&
+				   ssn.equalsIgnoreCase(newPatient.getSsn()) &&
+				   weight.equalsIgnoreCase(newPatient.getWeight()) &&
+				   dob.equals(newPatient.getDob()) &&
+				   isMale() == newPatient.isMale() &&
+				   getMedicationList().equals(newPatient.getMedicationList())) {
 			theSame = true;
 		}
 
 		return theSame;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() {
-		return "Patient [lastName=" + lastName + ", MiddleName=" + middleName + ", firstName=" + firstName + ", email="
-				+ email + ", password=" + password + ", ssn=" + ssn + ", bloodType=" + bloodType + ", phoneNum="
-				+ phoneNum + ", address=" + address + ", height=" + height + ", weight=" + weight + ", organDonor="
-				+ organDonor + ", emerContact=" + emerContact + ", condition=" + condition + ", treatment=" + treatment
-				+ ", notes=" + notes + "]";
+		return "Patient [lastName=" + lastName + ", middleName=" + middleName + ", firstName=" + firstName + ", dob="
+				+ dob + ", email=" + email + ", ssn=" + ssn + ", bloodType=" + bloodType + ", phoneNum=" + phoneNum
+				+ ", address=" + address + ", height=" + height + ", weight=" + weight + ", organDonor=" + organDonor
+				+ ", emerContact=" + emerContact + ", condition=" + condition + ", notes=" + notes + ", isMale="
+				+ isMale + ", medicationList=" + medicationList + "]";
 	}
-
-
+	
+	
 }
