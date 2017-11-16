@@ -39,11 +39,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -189,21 +189,44 @@ public class PhysicianMainController {
 	public void initialize() {
 		patientList = FXCollections.observableArrayList();
 		unsavedChanges = false;
+
+		//Create tooltip text for buttons
+		Tooltip newButtonTip = new Tooltip();
+		newButtonTip.setText("Create a new Patient");
+		newButton.setTooltip(newButtonTip);
+
+		Tooltip setButtonTip = new Tooltip();
+		setButtonTip.setText("Save the Patient information");
+		saveButton.setTooltip(setButtonTip);
+		
+		Tooltip deleteButtonTip = new Tooltip();
+		deleteButtonTip.setText("Delete the selected Patient");
+		deleteButton.setTooltip(deleteButtonTip);
+		
+		Tooltip editButtonTip = new Tooltip();
+		editButtonTip.setText("Edit the Patient information");
+		editToggleButton.setTooltip(editButtonTip);
+
 		//populate genderCombo
 		genderCombo.setItems(genderOptions);
 		genderCombo.getSelectionModel().selectFirst();
+
 		//populate bloodTypeCombo
 		bloodTypeCombo.setItems(bloodTypeOptions);
 		bloodTypeCombo.getSelectionModel().selectFirst();
+
 		//populate feetPicker
 		feetPicker.setItems(feetOptions);
 		feetPicker.getSelectionModel().selectFirst();
+
 		//populate inchesPicker
 		inchesPicker.setItems(inchesOptions);
 		inchesPicker.getSelectionModel().selectFirst();
+
 		//populate statePicker
 		statePicker.setItems(stateOptions);
 		statePicker.getSelectionModel().selectFirst();
+
 		//set up the tableView to detect double clicks
 		patientTableView.setRowFactory(tv -> {
 			TableRow<Patient> row = new TableRow<>();
@@ -231,9 +254,12 @@ public class PhysicianMainController {
 		deleteButton.setGraphic(new ImageView(trashImage));
 
 		//Set icon of the new button to an image of a new icon
-
+		Image newImage = new Image("file:newIcon.png");
+		newButton.setGraphic(new ImageView(newImage));
 
 		//Set icon of the save button to an image of a floppy disk
+		Image saveImage = new Image("file:saveIcon.png");
+		saveButton.setGraphic(new ImageView(saveImage));
 	}
 
 	/**********************Supporting Actions***************************/
@@ -782,5 +808,8 @@ public class PhysicianMainController {
 	    Stage window = new Stage();
 	    window.setScene(tableViewScene);
 	    window.show();
+
+	    Stage thisStage = (Stage) newButton.getScene().getWindow();
+	    thisStage.close();
 	}
 }
