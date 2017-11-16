@@ -1,6 +1,9 @@
 package com.mentCare.model;
 
 import java.time.LocalDate;
+
+import com.mentCare.adapter.PatientAdapter;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class Patient {
@@ -19,6 +22,7 @@ public class Patient {
 	private EmergencyContact emerContact;
 	private String condition, treatment, notes;
 	private boolean isMale;
+	private PatientAdapter adapter;
 
 //******************Constructors******************************
 	public Patient() {
@@ -41,6 +45,7 @@ public class Patient {
 		treatment = "";
 		notes = "";
 		isMale = true;
+		adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
@@ -96,14 +101,14 @@ public class Patient {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	/**
 	 * @return the displayName
 	 */
 	public String getDisplayName(){
 		return displayName.get();
 	}
-	
+
 	public LocalDate getDob() {
 		return dob;
 	}
@@ -198,11 +203,11 @@ public class Patient {
 	public EmergencyContact getEmerContact() {
 		return emerContact;
 	}
-	
+
 	public boolean isMale() {
 		return isMale;
 	}
-	
+
 	public String getFullName(){
 		return getFirstName() + " " + getMiddleName() + " " + getLastName();
 	}
@@ -236,7 +241,7 @@ public class Patient {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
