@@ -1,9 +1,8 @@
 /*Class Name: PhysicianMainController
  *
- *Version: 00.02
+ *Version: 01.01
  *Changes from last version:
- 	*Bug fixes that would cause unexpected output
- 	*Bug fixes that would cause search to return incorrect results
+ 	*Added support for Medication table
  *
  *The purpose of this class is to be the behind-the-scenes work behind the PhysicianMainView class.
  *
@@ -20,6 +19,7 @@ import java.time.LocalDate;
 
 import com.mentCare.model.Address;
 import com.mentCare.model.EmergencyContact;
+import com.mentCare.model.Medication;
 import com.mentCare.model.Patient;
 
 import javafx.collections.FXCollections;
@@ -163,7 +163,6 @@ public class PhysicianMainController {
 	@FXML private TextField zipField;
 	@FXML private TextField weightField;
 	@FXML private TextArea conditionArea;
-	@FXML private TextArea treatmentArea;
 	@FXML private TextArea notesArea;
 	@FXML private GridPane gridPane;
 	@FXML private ComboBox<String> feetPicker;
@@ -178,11 +177,22 @@ public class PhysicianMainController {
 	@FXML private Label patientNameLabel;
 	@FXML private TextField searchField;
 	@FXML private TextField cityField;
+	
+	//configure medication fields
+	@FXML private TableView<Medication> medicationTableView;
+	@FXML private TableColumn<Medication, String> rxTableColumn;
+	@FXML private TableColumn<Medication, String> medicationNameTableColumn;
+	@FXML private TableColumn<Medication, String> dosageTableColumn;
+	@FXML private TableColumn<Medication, String> drPrescribedTableColumn;
+	@FXML private TableColumn<Medication, String> medicationDateTableColumn;
+	@FXML private Button addMedicationButton;
+	@FXML private Button removeMedicationButton;
 
 	//configure misc variables
 	private boolean unsavedChanges;//used to track if an unsaved change has been made to a patient
 	private boolean newPatient;//used to track if the physician is currently working on creating a new patient
 	private ObservableList<Patient> patientList;//used to track all patients locally
+	private ObservableList<Medication> selectedPatientMedications;
 	private Patient selectedPatient;//used to track which patient is currently selected.
 									//This is changed when a patient in the table is double clicked
 
@@ -234,12 +244,18 @@ public class PhysicianMainController {
 				if(event.getClickCount() == 2 && (! row.isEmpty())){//do the following when the click count is 2 (double click) and we arent clicking an empty row
 					Patient oldPatient = selectedPatient;
 					selectedPatient = row.getItem();//get the item in the clicked row and assign it to selectedPatient.
+					try {
+						selectedPatientMedications = selectedPatient.getMedicationList();
+					} catch(NullPointerException e) {
+						System.out.println("Selected Patient is null");
+					}
 					tableCellDoubleClicked(oldPatient, selectedPatient);
 				}
 			});
 			return row;
 		});
 
+		//***********Patient Table***************//
 		//set up the columns in the table
 		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
 		//static data, will replace with the database record later
@@ -249,6 +265,20 @@ public class PhysicianMainController {
 		patientTableView.setEditable(false);
 		patientTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
+		//************Medication Table************//
+		//set up the columns in the table
+		rxTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("rxNum"));
+		medicationNameTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("medicationName"));
+		dosageTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("dosage"));
+		drPrescribedTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("drPrescribed"));
+		medicationDateTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("medDate"));
+		
+		rxTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		medicationNameTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		dosageTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		drPrescribedTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		medicationDateTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		
 		//Set the icon of the delete button to an image of a trash can
 		Image trashImage = new Image("file:trashIcon.jpg");
 		deleteButton.setGraphic(new ImageView(trashImage));
@@ -281,9 +311,26 @@ public class PhysicianMainController {
 		josh.setPassword("p@ssW0rd!");
 		josh.setPhoneNum("706-201-9393");
 		josh.setSsn("111-22-3333");
-		josh.setTreatment("There is no hope for him");
 		josh.setWeight("190");
 		josh.setMale(true);
+		
+		Medication med1 = new Medication();
+		med1.setRxNum("1111111");
+		med1.setMedicationName("Test medication");
+		med1.setDrPrescribed("Doctor Strange");
+		med1.setDosage("2 pills 2x/day");
+		med1.setMedDate("12/25/17");
+		
+		Medication med2 = new Medication();
+		med2.setRxNum("123456");
+		med2.setMedicationName("Alzheimer's Pills");
+		med2.setDrPrescribed("Witch Doctor");
+		med2.setDosage("7 pills 8x/hour");
+		med2.setMedDate("1/1/17");
+		
+		Medication[] medList = {med1, med2};
+		
+		josh.addMedication(medList);
 
 		Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
 		joe.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
@@ -297,7 +344,6 @@ public class PhysicianMainController {
 		joe.setPassword("toor");
 		joe.setPhoneNum("770-555-1234");
 		joe.setSsn("123-45-6789");
-		joe.setTreatment("Alzheimer's pills 2/dy");
 		joe.setWeight("175");
 		joe.setMale(true);
 
@@ -340,7 +386,8 @@ public class PhysicianMainController {
 		emerEmailField.setEditable(true);
 		emerRelationField.setEditable(true);
 		conditionArea.setEditable(true);
-		treatmentArea.setEditable(true);
+		addMedicationButton.setDisable(false);
+		removeMedicationButton.setDisable(false);
 		notesArea.setEditable(true);
 		cityField.setEditable(true);
 	}
@@ -370,7 +417,8 @@ public class PhysicianMainController {
 		emerEmailField.setEditable(false);
 		emerRelationField.setEditable(false);
 		conditionArea.setEditable(false);
-		treatmentArea.setEditable(false);
+		addMedicationButton.setDisable(true);
+		removeMedicationButton.setDisable(true);
 		notesArea.setEditable(false);
 		cityField.setEditable(false);
 	}
@@ -379,6 +427,7 @@ public class PhysicianMainController {
 	 * wipes the data in all of the input fields
 	 */
 	private void clearAllElements(){
+		selectedPatient = null;
 		nameField.setText("");
 		dobPicker.setValue(null);
 		genderCombo.setValue("Male");
@@ -399,7 +448,6 @@ public class PhysicianMainController {
 		emerEmailField.setText("");
 		emerRelationField.setText("");
 		conditionArea.setText("");
-		treatmentArea.setText("");
 		notesArea.setText("");
 		weightField.setText("");
 		cityField.setText("");
@@ -503,7 +551,7 @@ public class PhysicianMainController {
 		boolean organDonor;
 		String phoneNum, email, address1, address2, city, state, zip;
 		String emerName, emerEmail, emerPhone, emerRelation, condition;
-		String treatments, notes, weight;
+		String notes, weight;
 		Address address;
 		EmergencyContact emer;
 		Patient p;
@@ -547,7 +595,6 @@ public class PhysicianMainController {
 		emerPhone = emerPhoneField.getText();
 		emerRelation = emerRelationField.getText();
 		condition = conditionArea.getText();
-		treatments = treatmentArea.getText();
 		notes = notesArea.getText();
 		weight = weightField.getText();
 		address = new Address(address1, address2, city, state, zip);
@@ -567,10 +614,9 @@ public class PhysicianMainController {
 			isMale = false;
 		}
 		//create a new patient based on the input data
-		p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatments, notes);
+		p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, selectedPatientMedications, notes);
 		//add the new patient to the patientList
 		patientList.add(p);
-		System.out.println("Patient has been saved\t" + patientList.size() + " Patients in database.");
 	}
 
 	/*loadData
@@ -623,7 +669,12 @@ public class PhysicianMainController {
 
 		weightField.setText(p.getWeight());
 		conditionArea.setText(p.getCondition());
-		treatmentArea.setText(p.getTreatment());
+		try {
+			ObservableList<Medication> selectedMedicationList = p.getMedicationList();
+			medicationTableView.setItems(selectedMedicationList);
+		} catch(NullPointerException e) {
+			System.out.println("Medication List is null");
+		}
 		notesArea.setText(p.getNotes());
 
 		patientNameLabel.setText(selectedPatient.getDisplayName());
@@ -787,11 +838,15 @@ public class PhysicianMainController {
 				selectedPatient = old;
 				saveData();
 				selectedPatient = newPatient;
+				selectedPatientMedications = newPatient.getMedicationList();
 				loadData();
 			} else if(alert.getResult() == ButtonType.NO){
 				loadData();
 			}
 		} else{
+			selectedPatient = newPatient;
+			selectedPatientMedications = selectedPatient.getMedicationList();
+			System.out.println(selectedPatient.toString());
 			loadData();
 		}
 	}
