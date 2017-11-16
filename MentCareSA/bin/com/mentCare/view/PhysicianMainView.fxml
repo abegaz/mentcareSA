@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.22717149220489977" layoutY="32.0" prefHeight="675.0" prefWidth="900.0">
         <items>
@@ -179,8 +179,8 @@
                                                       <TableColumn fx:id="medicationDateTableColumn" prefWidth="98.0" text="Date" />
                                                   </columns>
                                                 </TableView>
-                                                <Button fx:id="addMedicationButton" layoutY="329.0" mnemonicParsing="false" text="Add Medication" />
-                                                <Button fx:id="removeMedicationButton" layoutX="293.0" layoutY="329.0" mnemonicParsing="false" text="Remove Medication" />
+                                                <Button fx:id="addMedicationButton" layoutY="329.0" mnemonicParsing="false" onAction="#addMedicationButtonPressed" text="Add Medication" />
+                                                <Button fx:id="removeMedicationButton" layoutX="293.0" layoutY="329.0" mnemonicParsing="false" onAction="#removeMedicationButtonPressed" text="Remove Medication" />
                                              </children>
                                           </Pane>
                                           <Pane prefHeight="200.0" prefWidth="200.0">
@@ -201,9 +201,9 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button fx:id="deleteButton" layoutX="778.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
+      <Button fx:id="deleteButton" layoutX="795.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
       <Button fx:id="newButton" layoutY="2.0" mnemonicParsing="false" onAction="#newButtonPressed" style="-fx-graphic: trashIcon;" text="New" AnchorPane.topAnchor="2.0" />
-      <ToggleButton fx:id="editToggleButton" layoutX="844.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
+      <ToggleButton fx:id="editToggleButton" layoutX="855.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
       <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#printButtonPressed" text="Print">
