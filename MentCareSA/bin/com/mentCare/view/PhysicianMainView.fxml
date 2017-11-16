@@ -21,9 +21,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
-      <SplitPane dividerPositions="0.2556390977443609" layoutY="32.0" prefHeight="675.0" prefWidth="800.0">
+      <SplitPane dividerPositions="0.22717149220489977" layoutY="32.0" prefHeight="675.0" prefWidth="900.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -43,37 +43,36 @@
                   <TextField fx:id="searchField" layoutY="2.0" onKeyTyped="#searchPatients" prefHeight="25.0" prefWidth="200.0" promptText="Search" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="604.0">
                <children>
-                  <SplitPane prefHeight="675.0" prefWidth="590.0">
+                  <SplitPane prefHeight="675.0" prefWidth="690.0">
                     <items>
-                        <ScrollPane prefHeight="745.0" prefWidth="588.0">
+                        <ScrollPane prefHeight="673.0" prefWidth="629.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="571.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1200.0" prefWidth="671.0">
                                  <children>
-                                    <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="800.0" prefWidth="588.0">
+                                    <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="1200.0" prefWidth="679.0">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="266.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="209.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="242.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="446.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints maxHeight="92.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="86.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="116.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="181.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="209.0" minHeight="7.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="92.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="110.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="123.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="152.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="181.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="209.0" minHeight="7.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="209.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="269.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="255.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="255.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="456.0" minHeight="10.0" prefHeight="364.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="139.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Full Name: (Last Name, First Name, Middle name)" />
                                           <Label text="SSN:" GridPane.rowIndex="3" />
                                           <Label text="Date of Birth:" GridPane.rowIndex="1" />
                                           <Label text="Gender:" GridPane.rowIndex="2" />
@@ -98,8 +97,8 @@
                                           </Pane>
                                           <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                              <children>
-                                                <TextField fx:id="weightField" editable="false" layoutX="14.0" layoutY="11.0" onKeyTyped="#dataChanged" prefHeight="25.0" prefWidth="67.0" promptText="175" />
-                                                <Label layoutX="88.0" layoutY="15.0" text="lbs" />
+                                                <TextField fx:id="weightField" editable="false" layoutY="1.0" onKeyTyped="#dataChanged" prefHeight="25.0" prefWidth="67.0" promptText="175" />
+                                                <Label layoutX="67.0" layoutY="6.0" text="lbs" />
                                              </children>
                                           </Pane>
                                           <ToggleButton fx:id="organDonorToggleButton" disable="true" mnemonicParsing="false" onAction="#organDonorPressed" selected="true" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -163,13 +162,33 @@
                                                 <Label text="Relation:" GridPane.rowIndex="3" />
                                              </children>
                                           </GridPane>
-                                          <TextArea fx:id="conditionArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <TextArea fx:id="treatmentArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                          <TextArea fx:id="conditionArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="339.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                                           <TextArea fx:id="notesArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                                           <Label text="Height" GridPane.rowIndex="5" />
                                           <Label text="Weight" GridPane.rowIndex="6" />
                                           <Label text="Organ Donor" GridPane.rowIndex="7" />
                                           <Label text="Address:" GridPane.rowIndex="9" />
+                                          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                             <children>
+                                                <TableView fx:id="MedicationTableView" prefHeight="317.0" prefWidth="440.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="rxTableColumn" prefWidth="75.0" text="Rx #" />
+                                                    <TableColumn fx:id="medicationNameTableColumn" prefWidth="75.0" text="Name" />
+                                                      <TableColumn fx:id="dosageTableColumn" prefWidth="65.0" text="Dosage" />
+                                                      <TableColumn fx:id="drPrescribedTableColumn" prefWidth="126.0" text="Doctor Prescribed" />
+                                                      <TableColumn fx:id="medicationDateTableColumn" prefWidth="98.0" text="Date" />
+                                                  </columns>
+                                                </TableView>
+                                                <Button fx:id="addMedicationButton" layoutY="329.0" mnemonicParsing="false" text="Add Medication" />
+                                                <Button fx:id="removeMedicationButton" layoutX="293.0" layoutY="329.0" mnemonicParsing="false" text="Remove Medication" />
+                                             </children>
+                                          </Pane>
+                                          <Pane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Label layoutX="4.0" layoutY="5.0" text="Full Name: " />
+                                                <Label layoutY="20.0" text="(Last Name, First Name, Middle name)" />
+                                             </children>
+                                          </Pane>
                                        </children>
                                     </GridPane>
                                  </children>
@@ -182,9 +201,9 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button fx:id="deleteButton" layoutX="682.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
+      <Button fx:id="deleteButton" layoutX="778.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
       <Button fx:id="newButton" layoutY="2.0" mnemonicParsing="false" onAction="#newButtonPressed" style="-fx-graphic: trashIcon;" text="New" AnchorPane.topAnchor="2.0" />
-      <ToggleButton fx:id="editToggleButton" layoutX="749.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
+      <ToggleButton fx:id="editToggleButton" layoutX="844.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
       <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#printButtonPressed" text="Print">
@@ -196,7 +215,7 @@
         </items>
       </MenuButton>
       <Button fx:id="saveButton" layoutX="53.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveButtonPressed" text="Save" />
-      <Label fx:id="patientNameLabel" alignment="CENTER" layoutX="187.0" layoutY="1.0" prefHeight="27.0" prefWidth="488.0" text="Select Patient From Sidebar" textAlignment="CENTER">
+      <Label fx:id="patientNameLabel" alignment="CENTER" layoutX="193.0" layoutY="1.0" prefHeight="27.0" prefWidth="583.0" text="Select Patient From Sidebar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
