@@ -1,10 +1,12 @@
 /*Class Name: PatientAdapter
- * 
+ *
  * Version: 00.01
  * Recent Changes:
- * 
+ *
  * Description:
  * This class provides a way for the user to communicate with the SQL database.
+ * The get methods return the SQL code required to SELECT data from the database
+ * The set methods return the SQL code required to INSERT data into the database
  */
 
 package com.mentCare.adapter;
@@ -16,190 +18,190 @@ import com.mentCare.model.Patient;
 public class PatientAdapter {
 	private Patient adaptee;
 	private String query;
-	
+
 	public PatientAdapter(){
 		adaptee = null;
 		query = "";
 	}
-	
+
 	public PatientAdapter(Patient adaptee) {
 		this.adaptee = adaptee;
 	}
-	
+
 	public Patient getPatient() {
 		return adaptee;
 	}
-	
+
 	public void setPatient(Patient adaptee) {
 		this.adaptee = adaptee;
 	}
-	
-	public String getFullNameQuery() {
+
+	public String setFullNameQuery() {
 		String fullName = adaptee.getFullName();
 		query = "";
 		return query;
 	}
-	
-	public String getLastNameQuery() {
+
+	public String setLastNameQuery() {
 		String lastName = adaptee.getLastName();
 		query = "";
 		return query;
 	}
-	
-	public String getFirstNameQuery() {
+
+	public String setFirstNameQuery() {
 		String firstName = adaptee.getFirstName();
 		query = "";
 		return query;
 	}
-	
-	public String getMiddleNameQuery() {
+
+	public String setMiddleNameQuery() {
 		String middleName = adaptee.getMiddleName();
 		query = "";
 		return query;
 	}
-	
-	public String getDobQuery() {
+
+	public String setDobQuery() {
 		LocalDate dob = adaptee.getDob();
 		query = "";
 		return query;
 	}
-	
-	public String getEmailQuery() {
+
+	public String setEmailQuery() {
 		String email = adaptee.getEmail();
 		query = "";
 		return query;
 	}
-	
-	public String getPhoneNumQuery() {
+
+	public String setPhoneNumQuery() {
 		String phoneNum = adaptee.getPhoneNum();
 		query = "";
 		return query;
 	}
-	
-	public String getPasswordQuery() {
+
+	public String setPasswordQuery() {
 		String pass = adaptee.getPassword();
 		query = "";
 		return query;
 	}
-	
-	public String getSSNQuery() {
+
+	public String setSSNQuery() {
 		String ssn = adaptee.getSsn();
 		query = "";
 		return query;
 	}
-	
-	public String getBloodType() {
+
+	public String setBloodType() {
 		String bloodType = adaptee.getBloodType();
 		query = "";
 		return query;
 	}
-	
-	public String getAddressLine1() {
+
+	public String setAddressLine1() {
 		String address1 = adaptee.getAddress().getAddress1();
 		query = "";
 		return query;
 	}
-	
-	public String getAddressLine2() {
+
+	public String setAddressLine2() {
 		String address2 = adaptee.getAddress().getAddress2();
 		query = "";
 		return query;
 	}
-	
-	public String getAddressCity() {
+
+	public String setAddressCity() {
 		String city = adaptee.getAddress().getCity();
 		query = "";
 		return query;
 	}
-	
-	public String getAddressState() {
+
+	public String setAddressState() {
 		String state = adaptee.getAddress().getState();
 		query = "";
 		return query;
 	}
-	
-	public String getAddressZip() {
+
+	public String setAddressZip() {
 		String zip = adaptee.getAddress().getZip();
 		query = "";
 		return query;
 	}
-	
-	public String getHeightQuery() {
+
+	public String setHeightQuery() {
 		String height = adaptee.getHeight();
 		query = "";
 		return query;
 	}
-	
-	public String getWeightQuery() {
+
+	public String setWeightQuery() {
 		String weight = adaptee.getWeight();
 		query = "";
 		return query;
 	}
-	
-	public String getOrganDonorQuery() {
+
+	public String setOrganDonorQuery() {
 		String organDonor;
-		
+
 		if(adaptee.isOrganDonor()) {
 			organDonor = "Yes";
 		} else {
 			organDonor = "No";
 		}
-		
+
 		query = "";
 		return query;
 	}
-	
-	public String getEmerContactName() {
+
+	public String setEmerContactName() {
 		String name = adaptee.getEmerContact().getName();
 		query = "";
 		return query;
 	}
-	
-	public String getEmerContactPhone() {
+
+	public String setEmerContactPhone() {
 		String phone = adaptee.getEmerContact().getPhoneNum();
 		query = "";
 		return query;
 	}
-	
-	public String getEmerContactEmail() {
+
+	public String setEmerContactEmail() {
 		String email = adaptee.getEmerContact().getEmail();
 		query = "";
 		return query;
 	}
-	
-	public String getEmerContactRelation() {
+
+	public String setEmerContactRelation() {
 		String relation = adaptee.getEmerContact().getRelation();
 		query = "";
 		return query;
 	}
-	
-	public String getTreatmentQuery() {
+
+	public String setTreatmentQuery() {
 		String treatment = adaptee.getTreatment();
 		query = "";
 		return query;
 	}
-	
-	public String getConditionQuery() {
+
+	public String setConditionQuery() {
 		String condition = adaptee.getCondition();
 		query = "";
 		return query;
 	}
-	
-	public String getNotesQuery() {
+
+	public String setNotesQuery() {
 		String notes = adaptee.getNotes();
 		query = "";
 		return query;
 	}
-	
-	public String getGenderQuery() {
+
+	public String setGenderQuery() {
 		String gender;
-		
+
 		if(adaptee.isMale()) {
 			gender = "Male";
 		} else {
 			gender = "Female";
 		}
-		
+
 		query = "";
 		return query;
 	}
