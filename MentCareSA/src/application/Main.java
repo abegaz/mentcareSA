@@ -27,7 +27,7 @@ public class Main extends Application {
 			//Parent  root = FXMLLoader.load(getClass().getResource("../com/mentCare/view/login.fxml"));
 			Parent  root = FXMLLoader.load(getClass().getResource("../com/mentCare/view/PhysicianMainView.fxml"));
 			//Parent  root = FXMLLoader.load(getClass().getResource("../com/mentCare/view/PatientMainView.fxml"));
-			Scene scene = new Scene(root,800,708);
+			Scene scene = new Scene(root,900,708);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
