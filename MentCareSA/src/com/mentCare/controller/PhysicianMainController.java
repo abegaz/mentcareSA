@@ -867,4 +867,29 @@ public class PhysicianMainController {
 	    Stage thisStage = (Stage) newButton.getScene().getWindow();
 	    thisStage.close();
 	}
+	
+	/*addMedicationButtonPressed
+	 * called when the add medication button is pressed
+	 * used to open a new window where the user can select medication and other options.
+	 * Upon exiting the window, the data is transfered back to this class where it can be added to the
+	 * medication list as well as the patient's database
+	 */
+	public void addMedicationButtonPressed() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMedicationView.fxml"));
+		Parent tableViewParent = loader.load();
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = new Stage();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+	
+	/*removeMedicationButtonPressed
+	 * called when the remove medication button is pressed
+	 * used to open a new window where the user can select medication and other options
+	 * upon exiting the window, the selected medication will be deleted.
+	 */
+	public void removeMedicationButtonPressed(){
+		
+	}
 }
