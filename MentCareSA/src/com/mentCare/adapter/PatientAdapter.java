@@ -13,7 +13,10 @@ package com.mentCare.adapter;
 
 import java.time.LocalDate;
 
+import com.mentCare.model.Medication;
 import com.mentCare.model.Patient;
+
+import javafx.collections.ObservableList;
 
 public class PatientAdapter {
 	private Patient adaptee;
@@ -175,8 +178,8 @@ public class PatientAdapter {
 		return query;
 	}
 
-	public String setTreatmentQuery() {
-		String treatment = adaptee.getTreatment();
+	public String setMedicationQuery() {
+		ObservableList<Medication> meds = adaptee.getMedicationList();
 		query = "";
 		return query;
 	}
