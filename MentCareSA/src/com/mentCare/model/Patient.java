@@ -219,6 +219,10 @@ public class Patient {
 		return displayName;
 	}
 
+	public PatientAdapter getAdapter(){
+		return adapter;
+	}
+
 	//*********************Setters*********************
 
 	/**
