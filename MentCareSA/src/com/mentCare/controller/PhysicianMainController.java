@@ -229,10 +229,10 @@ public class PhysicianMainController {
 		//Set the icon of the delete button to an image of a trash can
 		Image trashImage = new Image("file:trashIcon.jpg");
 		deleteButton.setGraphic(new ImageView(trashImage));
-		
+
 		//Set icon of the new button to an image of a new icon
-		
-		
+
+
 		//Set icon of the save button to an image of a floppy disk
 	}
 
@@ -268,7 +268,7 @@ public class PhysicianMainController {
 		joe.setHeight("72");
 		joe.setNotes("uhhh. I can't remember.");
 		joe.setOrganDonor(false);
-		joe.setPassword("root");
+		joe.setPassword("toor");
 		joe.setPhoneNum("770-555-1234");
 		joe.setSsn("123-45-6789");
 		joe.setTreatment("Alzheimer's pills 2/dy");
