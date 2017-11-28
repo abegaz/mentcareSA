@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `mentcareDB`.`Pat_Info` (
   `SSN` INT NULL,
   `Blood_Type` VARCHAR(45) NULL,
   `Pphone` VARCHAR(45) NULL,
-  `PEmal` VARCHAR(45) NULL,
+  `PEmail` VARCHAR(45) NULL,
   `Organ_donor` VARCHAR(45) NULL,
   `PAddress` VARCHAR(45) NULL,
   `Weight` VARCHAR(45) NULL,
