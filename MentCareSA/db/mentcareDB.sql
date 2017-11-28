@@ -66,14 +66,16 @@ ENGINE = InnoDB;
 -- Table `PatientView`.`Pat_Info`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mentcareDB`.`Pat_Info` (
-  `Pname` INT NOT NULL,
+  `PID` INT NOT NULL,
+  `PName` VARCHAR(45) NULL,
   `DOB` VARCHAR(45) NULL,
-  `Gender` VARCHAR(45) NULL,
+  `Is_Male` BOOLEAN,
+  #Need Assigned Physician variable added here. linked to phys_id
   `SSN` INT NULL,
   `Blood_Type` VARCHAR(45) NULL,
   `Pphone` VARCHAR(45) NULL,
   `PEmail` VARCHAR(45) NULL,
-  `Organ_donor` VARCHAR(45) NULL,
+  `Organ_donor` BOOLEAN,
   `PAddress` VARCHAR(45) NULL,
   `Weight` VARCHAR(45) NULL,
   `Height` VARCHAR(45) NULL,
