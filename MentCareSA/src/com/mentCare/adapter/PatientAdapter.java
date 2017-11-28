@@ -7,23 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PatientAdapter 
+public class PatientAdapter
 {
 	private static Connection myConn;
 	public static void connect()
 	{
 		try
 		{
-			String host = "jdbc:mysql://50.62.209.186:3306/mentcaresb";
-			String uName = "TeamMentCareSB";
-			String uPass = "P4$$word";
-			// Data below is for my local database, so ignore it
-			/*String host = "jdbc:mysql://localhost:3306/mentcaresb";
-			String uName = "Sarefx";
-			String uPass = "1234";*/
+			String host = "jdbc:mysql://localhost:3306/mentcareDB";
+			String userName = "root";
+			String userPass = "";
 			if (myConn != null && !myConn.isClosed())
 				myConn.close();
-			myConn = DriverManager.getConnection(host, uName, uPass);
+			myConn = DriverManager.getConnection(host, userName, userPass);
 		}
 		catch(SQLException err)
 		{
@@ -69,7 +65,7 @@ public class PatientAdapter
 			System.out.println( err.getMessage( ) );
 		}
 	}
-	
+
 	public static void deleteRow(String tableName, String fieldName, String matching)
 	{
 		String sql = "DELETE FROM "+tableName+" WHERE "+fieldName+" = '"+matching+"';";
@@ -119,9 +115,9 @@ public class PatientAdapter
 		}
 		return MyResultSet;
 	}
-	
-	
-	
+
+
+
 	///////////////////////////////////////////////////// NOT USED ////////////////////////////////////////////////////////////////////////////
 	public static int getInt(String tableName, String fieldName, String whatever, String searchValue)
 	{
