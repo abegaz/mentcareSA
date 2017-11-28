@@ -18,8 +18,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
+import com.mentCare.adapter.PatientAdapter;
 import com.mentCare.model.Address;
 import com.mentCare.model.EmergencyContact;
 import com.mentCare.model.Medication;
@@ -180,7 +183,7 @@ public class PhysicianMainController {
 	@FXML private Label patientNameLabel;
 	@FXML private TextField searchField;
 	@FXML private TextField cityField;
-	
+
 	//configure medication fields
 	@FXML private TableView<Medication> medicationTableView;
 	@FXML private TableColumn<Medication, String> rxTableColumn;
@@ -200,6 +203,7 @@ public class PhysicianMainController {
 									//This is changed when a patient in the table is double clicked
 
 	public void initialize() {
+		PatientAdapter.connect();
 		patientList = FXCollections.observableArrayList();
 		unsavedChanges = false;
 
@@ -211,11 +215,11 @@ public class PhysicianMainController {
 		Tooltip setButtonTip = new Tooltip();
 		setButtonTip.setText("Save the Patient information");
 		saveButton.setTooltip(setButtonTip);
-		
+
 		Tooltip deleteButtonTip = new Tooltip();
 		deleteButtonTip.setText("Delete the selected Patient");
 		deleteButton.setTooltip(deleteButtonTip);
-		
+
 		Tooltip editButtonTip = new Tooltip();
 		editButtonTip.setText("Edit the Patient information");
 		editToggleButton.setTooltip(editButtonTip);
@@ -262,7 +266,8 @@ public class PhysicianMainController {
 		//set up the columns in the table
 		patientTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("displayName"));
 		//static data, will replace with the database record later
-		addStaticData();
+		//addStaticData();
+		importPatientData();
 		patientTableView.setItems(patientList);//use the data in patientList to populate the patientTableView
 
 		patientTableView.setEditable(false);
@@ -275,7 +280,7 @@ public class PhysicianMainController {
 		dosageTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("dosage"));
 		drPrescribedTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("drPrescribed"));
 		medicationDateTableColumn.setCellValueFactory(new PropertyValueFactory<Medication, String>("medDate"));
-		
+
 		rxTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		medicationNameTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		dosageTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -304,23 +309,23 @@ public class PhysicianMainController {
 		josh.setSsn("111-22-3333");
 		josh.setWeight("190");
 		josh.setMale(true);
-		
+
 		Medication med1 = new Medication();
 		med1.setRxNum("1111111");
 		med1.setMedicationName("Test medication");
 		med1.setDrPrescribed("Doctor Strange");
 		med1.setDosage("2 pills 2x/day");
 		med1.setMedDate("12/25/17");
-		
+
 		Medication med2 = new Medication();
 		med2.setRxNum("123456");
 		med2.setMedicationName("Alzheimer's Pills");
 		med2.setDrPrescribed("Witch Doctor");
 		med2.setDosage("7 pills 8x/hour");
 		med2.setMedDate("1/1/17");
-		
+
 		Medication[] medList = {med1, med2};
-		
+
 		josh.addMedication(medList);
 
 		Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
@@ -340,6 +345,31 @@ public class PhysicianMainController {
 
 		patientList.add(josh);
 		patientList.add(joe);
+	}
+
+	public void importPatientData(){
+		ResultSet patients = PatientAdapter.getResultSet("Pat_Info");
+
+		try{
+
+			while(patients.next()){
+				String name = patients.getString("Pname");
+				String dob = patients.getString("DOB");
+				String gen = patients.getString("Gender");
+				String assignedDoctor = patients.getString("AssignedDoctor");
+				//so on and so forth
+
+				Patient p = new Patient();
+				//p.setFirstName(firstName);
+				//p.setDob(dob);
+				if(assignedDoctor.equals(doctorId)){
+					patientList.add(p);
+				}
+			}
+
+		} catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
 	}
 
 	/* separateNames
@@ -858,7 +888,7 @@ public class PhysicianMainController {
 	    Stage thisStage = (Stage) newButton.getScene().getWindow();
 	    thisStage.close();
 	}
-	
+
 	/*addMedicationButtonPressed
 	 * called when the add medication button is pressed
 	 * used to open a new window where the user can select medication and other options.
@@ -874,13 +904,13 @@ public class PhysicianMainController {
 		window.setScene(tableViewScene);
 		window.show();
 	}
-	
+
 	/*removeMedicationButtonPressed
 	 * called when the remove medication button is pressed
 	 * used to open a new window where the user can select medication and other options
 	 * upon exiting the window, the selected medication will be deleted.
 	 */
 	public void removeMedicationButtonPressed(){
-		
+
 	}
 }
