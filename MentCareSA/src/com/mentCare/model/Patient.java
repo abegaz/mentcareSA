@@ -10,12 +10,14 @@ import javafx.collections.ObservableList;
 
 public class Patient {
 	//Declare variables
+	private int id;
 	private SimpleStringProperty displayName;
 	private String lastName, middleName, firstName;
 	private LocalDate dob;
 	private String email;
 	private String password;
-	private String ssn;
+	private String assignedPhysician;
+	private int ssn;
 	private String bloodType;
 	private String phoneNum;
 	private Address address;
@@ -24,7 +26,6 @@ public class Patient {
 	private EmergencyContact emerContact;
 	private String condition, notes;
 	private boolean isMale;
-	private PatientAdapter adapter;
 	private ObservableList<Medication> medicationList;
 
 //******************Constructors******************************
@@ -36,7 +37,7 @@ public class Patient {
 		displayName = new SimpleStringProperty("Untitled Patient");
 		email = "";
 		password = "";
-		ssn = "";
+		ssn = 0;
 		bloodType = "";
 		phoneNum = "";
 		address = new Address();
@@ -48,7 +49,6 @@ public class Patient {
 		notes = "";
 		isMale = true;
 		medicationList = FXCollections.observableArrayList();
-		//adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
@@ -62,7 +62,7 @@ public class Patient {
 		this.isMale = isMale;
 		this.email = email;
 		this.password = password;
-		this.ssn = ssn;
+		this.ssn = 0;
 		this.bloodType = bloodType;
 		this.phoneNum = phoneNum;
 		this.address = address;
@@ -74,9 +74,8 @@ public class Patient {
 		this.medicationList = FXCollections.observableArrayList();
 		this.medicationList.add(med);
 		this.notes = notes;
-		//adapter = new PatientAdapter(this);
 	}
-	
+
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, Medication[] med, String notes) {
@@ -88,7 +87,7 @@ public class Patient {
 		this.isMale = isMale;
 		this.email = email;
 		this.password = password;
-		this.ssn = ssn;
+		this.ssn = 0;
 		this.bloodType = bloodType;
 		this.phoneNum = phoneNum;
 		this.address = address;
@@ -102,9 +101,8 @@ public class Patient {
 			this.medicationList.add(medication);
 		}
 		this.notes = notes;
-		//adapter = new PatientAdapter(this);
 	}
-	
+
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, ObservableList<Medication> med, String notes) {
@@ -116,7 +114,7 @@ public class Patient {
 		this.isMale = isMale;
 		this.email = email;
 		this.password = password;
-		this.ssn = ssn;
+		this.ssn = 0;
 		this.bloodType = bloodType;
 		this.phoneNum = phoneNum;
 		this.address = address;
@@ -128,7 +126,6 @@ public class Patient {
 		this.medicationList = FXCollections.observableArrayList();
 		this.medicationList.addAll(med);
 		this.notes = notes;
-		//adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String firstName, String middleName) {
@@ -138,7 +135,7 @@ public class Patient {
 		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
 		email = "";
 		password = "";
-		ssn = "";
+		ssn = 0;
 		bloodType = "";
 		phoneNum = "";
 		address = new Address();
@@ -150,7 +147,6 @@ public class Patient {
 		notes = "";
 		isMale = true;
 		medicationList = FXCollections.observableArrayList();
-		//adapter = new PatientAdapter(this);
 	}
 
 //*********************Getters*********************
@@ -197,7 +193,7 @@ public class Patient {
 	/**
 	 * @return the ssn
 	 */
-	public String getSsn() {
+	public int getSsn() {
 		return ssn;
 	}
 
@@ -286,16 +282,19 @@ public class Patient {
 		return displayName;
 	}
 
-	public PatientAdapter getAdapter(){
-		return adapter;
-	}
-	
-
 	/**
 	 * @return the medicationList
 	 */
 	public ObservableList<Medication> getMedicationList() {
 		return medicationList;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getAssignedPhysician() {
+		return assignedPhysician;
 	}
 
 	//*********************Setters*********************
@@ -335,7 +334,7 @@ public class Patient {
 	/**
 	 * @param ssn the ssn to set
 	 */
-	public void setSsn(String ssn) {
+	public void setSsn(int ssn) {
 		this.ssn = ssn;
 	}
 
@@ -412,24 +411,32 @@ public class Patient {
 	public void setMale(boolean isMale) {
 		this.isMale = isMale;
 	}
-	
+
 	/**
 	 * @param medicationList the medicationList to set
 	 */
 	public void setMedicationList(ObservableList<Medication> medicationList) {
 		this.medicationList = medicationList;
 	}
-	
+
 	public void addMedication(Medication med) {
 		this.medicationList.add(med);
 	}
-	
+
 	public void addMedication(Medication[] medicationList) {
 		for(Medication medication : medicationList) {
 			this.medicationList.add(medication);
 		}
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setAssignedPhysician(String assignedPhysician) {
+		this.assignedPhysician = assignedPhysician;
+	}
+
 	public void addMedication(ObservableList<Medication> medicationList) {
 		this.medicationList.addAll(medicationList);
 	}
@@ -453,7 +460,7 @@ public class Patient {
 		   notes.equals(newPatient.getNotes()) &&
 		   isOrganDonor() == newPatient.isOrganDonor() &&
 		   phoneNum.equals(newPatient.getPhoneNum()) &&
-		   ssn.equals(newPatient.getSsn()) &&
+		   ssn == newPatient.getSsn() &&
 		   weight.equals(newPatient.getWeight()) &&
 		   dob.equals(newPatient.getDob()) &&
 		   isMale() == newPatient.isMale() &&
@@ -484,7 +491,7 @@ public class Patient {
 				   notes.equalsIgnoreCase(newPatient.getNotes()) &&
 				   isOrganDonor() == newPatient.isOrganDonor() &&
 				   phoneNum.equalsIgnoreCase(newPatient.getPhoneNum()) &&
-				   ssn.equalsIgnoreCase(newPatient.getSsn()) &&
+				   ssn == newPatient.getSsn() &&
 				   weight.equalsIgnoreCase(newPatient.getWeight()) &&
 				   dob.equals(newPatient.getDob()) &&
 				   isMale() == newPatient.isMale() &&
@@ -506,6 +513,6 @@ public class Patient {
 				+ ", emerContact=" + emerContact + ", condition=" + condition + ", notes=" + notes + ", isMale="
 				+ isMale + ", medicationList=" + medicationList + "]";
 	}
-	
-	
+
+
 }
