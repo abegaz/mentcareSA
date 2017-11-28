@@ -210,7 +210,7 @@ public class PhysicianMainController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		patientList = FXCollections.observableArrayList();
 		unsavedChanges = false;
 
@@ -354,7 +354,7 @@ public class PhysicianMainController {
 		patientList.add(joe);
 	}
 
-	
+
 	public void importPatientData(){
 		ResultSet patients = PatientAdapter.getResultSet("Pat_Info");
 
@@ -366,12 +366,17 @@ public class PhysicianMainController {
 				String dob = patients.getString("DOB");//must be in YYYY-MM-DD format
 				boolean isMale = patients.getBoolean("Is_Male");
 				String assignedPhysician = patients.getString("AssignedPhysician");
+				String password = patients.getString("Ppass");
 				int ssn = patients.getInt("SSN");
 				String bloodType = patients.getString("Blood_Type");
 				String phone = patients.getString("Pphone");
 				String email = patients.getString("PEmail");
 				boolean organDonor = patients.getBoolean("Organ_Donor");
-				//Address must be split up
+				String address1;
+				String address2;
+				String city;
+				String state;
+				String zip;
 				String weight = patients.getString("Weight");
 				String height = patients.getString("Height");
 				String notes = patients.getString("Notes");
@@ -387,10 +392,29 @@ public class PhysicianMainController {
 				else{
 					p.setLastName(names[1]);
 				}
+
 				LocalDate ld;
 				ld = LocalDate.parse(dob);
-				
-				
+
+				Address addressActual = new Address();
+				addressActual.setAddress1(address1);
+				addressActual.setAddress2(address2);
+				addressActual.setCity(city);
+				addressActual.setState(state);
+				addressActual.setZip(zip);
+
+				p.setMale(isMale);
+				p.setPassword(password);
+				p.setSsn(ssn);
+				p.setBloodType(bloodType);
+				p.setPhoneNum(phone);
+				p.setEmail(email);
+				p.setOrganDonor(organDonor);
+				p.setWeight(weight);
+				p.setHeight(height);
+				p.setNotes(notes);
+				p.setAddress(addressActual);
+
 				if(assignedPhysician.equals(physicianId)){
 					patientList.add(p);
 				}
@@ -692,7 +716,7 @@ public class PhysicianMainController {
 		}
 		genderCombo.setValue(gender);
 
-		ssnField.setText(p.getSsn());
+		ssnField.setText("" + p.getSsn());
 		bloodTypeCombo.setValue(p.getBloodType());
 		phoneNumField.setText(p.getPhoneNum());
 		emailField.setText(p.getEmail());
