@@ -48,7 +48,7 @@ public class Patient {
 		notes = "";
 		isMale = true;
 		medicationList = FXCollections.observableArrayList();
-		adapter = new PatientAdapter(this);
+		//adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
@@ -74,7 +74,7 @@ public class Patient {
 		this.medicationList = FXCollections.observableArrayList();
 		this.medicationList.add(med);
 		this.notes = notes;
-		adapter = new PatientAdapter(this);
+		//adapter = new PatientAdapter(this);
 	}
 	
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
@@ -102,7 +102,7 @@ public class Patient {
 			this.medicationList.add(medication);
 		}
 		this.notes = notes;
-		adapter = new PatientAdapter(this);
+		//adapter = new PatientAdapter(this);
 	}
 	
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
@@ -128,7 +128,7 @@ public class Patient {
 		this.medicationList = FXCollections.observableArrayList();
 		this.medicationList.addAll(med);
 		this.notes = notes;
-		adapter = new PatientAdapter(this);
+		//adapter = new PatientAdapter(this);
 	}
 
 	public Patient(String lastName, String firstName, String middleName) {
@@ -150,7 +150,7 @@ public class Patient {
 		notes = "";
 		isMale = true;
 		medicationList = FXCollections.observableArrayList();
-		adapter = new PatientAdapter(this);
+		//adapter = new PatientAdapter(this);
 	}
 
 //*********************Getters*********************
