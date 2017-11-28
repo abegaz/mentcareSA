@@ -1,211 +1,172 @@
-/*Class Name: PatientAdapter
- *
- * Version: 00.01
- * Recent Changes:
- *
- * Description:
- * This class provides a way for the user to communicate with the SQL database.
- * The get methods return the SQL code required to SELECT data from the database
- * The set methods return the SQL code required to INSERT data into the database
- */
-
 package com.mentCare.adapter;
 
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import com.mentCare.model.Medication;
-import com.mentCare.model.Patient;
-
-import javafx.collections.ObservableList;
-
-public class PatientAdapter {
-	private Patient adaptee;
-	private String query;
-
-	public PatientAdapter(){
-		adaptee = null;
-		query = "";
-	}
-
-	public PatientAdapter(Patient adaptee) {
-		this.adaptee = adaptee;
-	}
-
-	public Patient getPatient() {
-		return adaptee;
-	}
-
-	public void setPatient(Patient adaptee) {
-		this.adaptee = adaptee;
-	}
-
-	public String setFullNameQuery() {
-		String fullName = adaptee.getFullName();
-		query = "";
-		return query;
-	}
-
-	public String setLastNameQuery() {
-		String lastName = adaptee.getLastName();
-		query = "";
-		return query;
-	}
-
-	public String setFirstNameQuery() {
-		String firstName = adaptee.getFirstName();
-		query = "";
-		return query;
-	}
-
-	public String setMiddleNameQuery() {
-		String middleName = adaptee.getMiddleName();
-		query = "";
-		return query;
-	}
-
-	public String setDobQuery() {
-		LocalDate dob = adaptee.getDob();
-		query = "";
-		return query;
-	}
-
-	public String setEmailQuery() {
-		String email = adaptee.getEmail();
-		query = "";
-		return query;
-	}
-
-	public String setPhoneNumQuery() {
-		String phoneNum = adaptee.getPhoneNum();
-		query = "";
-		return query;
-	}
-
-	public String setPasswordQuery() {
-		String pass = adaptee.getPassword();
-		query = "";
-		return query;
-	}
-
-	public String setSSNQuery() {
-		String ssn = adaptee.getSsn();
-		query = "";
-		return query;
-	}
-
-	public String setBloodType() {
-		String bloodType = adaptee.getBloodType();
-		query = "";
-		return query;
-	}
-
-	public String setAddressLine1() {
-		String address1 = adaptee.getAddress().getAddress1();
-		query = "";
-		return query;
-	}
-
-	public String setAddressLine2() {
-		String address2 = adaptee.getAddress().getAddress2();
-		query = "";
-		return query;
-	}
-
-	public String setAddressCity() {
-		String city = adaptee.getAddress().getCity();
-		query = "";
-		return query;
-	}
-
-	public String setAddressState() {
-		String state = adaptee.getAddress().getState();
-		query = "";
-		return query;
-	}
-
-	public String setAddressZip() {
-		String zip = adaptee.getAddress().getZip();
-		query = "";
-		return query;
-	}
-
-	public String setHeightQuery() {
-		String height = adaptee.getHeight();
-		query = "";
-		return query;
-	}
-
-	public String setWeightQuery() {
-		String weight = adaptee.getWeight();
-		query = "";
-		return query;
-	}
-
-	public String setOrganDonorQuery() {
-		String organDonor;
-
-		if(adaptee.isOrganDonor()) {
-			organDonor = "Yes";
-		} else {
-			organDonor = "No";
+public class PatientAdapter 
+{
+	private static Connection myConn;
+	public static void connect()
+	{
+		try
+		{
+			String host = "jdbc:mysql://50.62.209.186:3306/mentcaresb";
+			String uName = "TeamMentCareSB";
+			String uPass = "P4$$word";
+			// Data below is for my local database, so ignore it
+			/*String host = "jdbc:mysql://localhost:3306/mentcaresb";
+			String uName = "Sarefx";
+			String uPass = "1234";*/
+			if (myConn != null && !myConn.isClosed())
+				myConn.close();
+			myConn = DriverManager.getConnection(host, uName, uPass);
 		}
-
-		query = "";
-		return query;
-	}
-
-	public String setEmerContactName() {
-		String name = adaptee.getEmerContact().getName();
-		query = "";
-		return query;
-	}
-
-	public String setEmerContactPhone() {
-		String phone = adaptee.getEmerContact().getPhoneNum();
-		query = "";
-		return query;
-	}
-
-	public String setEmerContactEmail() {
-		String email = adaptee.getEmerContact().getEmail();
-		query = "";
-		return query;
-	}
-
-	public String setEmerContactRelation() {
-		String relation = adaptee.getEmerContact().getRelation();
-		query = "";
-		return query;
-	}
-
-	public String setMedicationQuery() {
-		ObservableList<Medication> meds = adaptee.getMedicationList();
-		query = "";
-		return query;
-	}
-
-	public String setConditionQuery() {
-		String condition = adaptee.getCondition();
-		query = "";
-		return query;
-	}
-
-	public String setNotesQuery() {
-		String notes = adaptee.getNotes();
-		query = "";
-		return query;
-	}
-
-	public String setGenderQuery() {
-		String gender;
-
-		if(adaptee.isMale()) {
-			gender = "Male";
-		} else {
-			gender = "Female";
+		catch(SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
 		}
-
-		query = "";
-		return query;
+	}
+	public static void addRow(String tableName, String fieldNames, String values)
+	{
+		String sql = "INSERT INTO "+tableName+" ("+fieldNames+") VALUES ("+values+");";
+		try
+		{
+			PreparedStatement pr = myConn.prepareStatement(sql);
+			pr.execute();
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+	}
+	public static void updateRow(String tableName, String values, String userIdNumber)
+	{
+		//UPDATE [table name] SET [VALUES] WHERE 'idNumber' = "userIdNumber";
+		String sql = "UPDATE "+tableName+" SET "+values+" WHERE idNumber = "+userIdNumber+"";
+		try
+		{
+			PreparedStatement pr = myConn.prepareStatement(sql);
+			pr.execute();
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+	}
+	public static void injection(String injection)
+	{
+		try
+		{
+			PreparedStatement pr = myConn.prepareStatement(injection);
+			pr.execute();
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+	}
+	
+	public static void deleteRow(String tableName, String fieldName, String matching)
+	{
+		String sql = "DELETE FROM "+tableName+" WHERE "+fieldName+" = '"+matching+"';";
+		try
+		{
+			PreparedStatement pr = myConn.prepareStatement(sql);
+			pr.execute();
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+	}
+	public static ResultSet getResultSet(String tableName)
+	{
+		ResultSet MyResultSet=null;
+		try
+		{
+			Statement myStat = myConn.createStatement();
+			MyResultSet = myStat.executeQuery("SELECT * FROM "+tableName);
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+		return MyResultSet;
+	}
+	public static ResultSet getResultSetRow(String tableName, String fieldName, String matching)
+	{
+		ResultSet MyResultSet=null;
+		try
+		{
+			Statement myStat = myConn.createStatement();
+			MyResultSet = myStat.executeQuery("SELECT * FROM "+tableName);
+			while (MyResultSet.next())
+			{
+				if (MyResultSet.getString(fieldName).equals(matching))
+				{
+					MyResultSet.absolute(MyResultSet.getRow());
+					break;
+				}
+			}
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+		return MyResultSet;
+	}
+	
+	
+	
+	///////////////////////////////////////////////////// NOT USED ////////////////////////////////////////////////////////////////////////////
+	public static int getInt(String tableName, String fieldName, String whatever, String searchValue)
+	{
+		//SELECT * FROM [table name] WHERE [field name] = "whatever";
+		int number = 0;
+		try
+		{
+			Statement myStat = myConn.createStatement();
+			ResultSet myRs = myStat.executeQuery("SELECT * FROM "+tableName);
+			while (myRs.next())
+			{
+				if (myRs.getString(fieldName).equals(whatever))
+				{
+					number = myRs.getInt(searchValue);
+					break;
+				}
+			}
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+		return number;
+	}
+	public static String getString(String tableName, String fieldName, String whatever, String searchValue)
+	{
+		//SELECT * FROM [table name] WHERE [field name] = "whatever";
+		String str="";
+		try
+		{
+			Statement myStat = myConn.createStatement();
+			ResultSet myRs = myStat.executeQuery("SELECT * FROM "+tableName);
+			while (myRs.next())
+			{
+				if (myRs.getString(fieldName).equals(whatever))
+				{
+					str = myRs.getString(searchValue);
+					break;
+				}
+			}
+		}
+		catch (SQLException err)
+		{
+			System.out.println( err.getMessage( ) );
+		}
+		return str;
 	}
 }
