@@ -361,16 +361,37 @@ public class PhysicianMainController {
 		try{
 
 			while(patients.next()){
+				int id = patients.getInt("PID");
 				String name = patients.getString("Pname");
-				String dob = patients.getString("DOB");
-				String gen = patients.getString("Gender");
-				String assignedDoctor = patients.getString("AssignedDoctor");
-				//so on and so forth
+				String dob = patients.getString("DOB");//must be in YYYY-MM-DD format
+				boolean isMale = patients.getBoolean("Is_Male");
+				String assignedPhysician = patients.getString("AssignedPhysician");
+				int ssn = patients.getInt("SSN");
+				String bloodType = patients.getString("Blood_Type");
+				String phone = patients.getString("Pphone");
+				String email = patients.getString("PEmail");
+				boolean organDonor = patients.getBoolean("Organ_Donor");
+				//Address must be split up
+				String weight = patients.getString("Weight");
+				String height = patients.getString("Height");
+				String notes = patients.getString("Notes");
+				//emergency contact
 
 				Patient p = new Patient();
-				//p.setFirstName(firstName);
-				//p.setDob(dob);
-				if(assignedDoctor.equals(physicianId)){
+				String[] names = separateNames(name);
+				p.setFirstName(names[0]);
+				if(names.length >= 3){
+					p.setMiddleName(names[1]);
+					p.setLastName(names[2]);
+				}
+				else{
+					p.setLastName(names[1]);
+				}
+				LocalDate ld;
+				ld = LocalDate.parse(dob);
+				
+				
+				if(assignedPhysician.equals(physicianId)){
 					patientList.add(p);
 				}
 			}
