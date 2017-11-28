@@ -201,9 +201,16 @@ public class PhysicianMainController {
 	private ObservableList<Medication> selectedPatientMedications;
 	private Patient selectedPatient;//used to track which patient is currently selected.
 									//This is changed when a patient in the table is double clicked
+	private static ResultSet physicianResult = loginController.getPhysicianResult();
+	private String physicianId;
 
 	public void initialize() {
-		PatientAdapter.connect();
+		try {
+			physicianId = physicianResult.getString("Phys_Id");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		patientList = FXCollections.observableArrayList();
 		unsavedChanges = false;
 
@@ -347,6 +354,7 @@ public class PhysicianMainController {
 		patientList.add(joe);
 	}
 
+	
 	public void importPatientData(){
 		ResultSet patients = PatientAdapter.getResultSet("Pat_Info");
 
@@ -362,7 +370,7 @@ public class PhysicianMainController {
 				Patient p = new Patient();
 				//p.setFirstName(firstName);
 				//p.setDob(dob);
-				if(assignedDoctor.equals(doctorId)){
+				if(assignedDoctor.equals(physicianId)){
 					patientList.add(p);
 				}
 			}
