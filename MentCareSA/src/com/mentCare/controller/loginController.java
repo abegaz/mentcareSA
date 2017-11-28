@@ -22,6 +22,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mentCare.adapter.PatientAdapter;
 
 public class loginController {
 
@@ -34,11 +38,13 @@ public class loginController {
     private String patientPassword = "Patient";
     @FXML private TextField usernameBar;
     @FXML private TextField passwordBar;
+    
+    private static ResultSet physicianResults;
+    private static ResultSet patientResults;
 
 
  public void initialize() {
-
-
+	 PatientAdapter.connect();
  }
  
  
@@ -48,9 +54,9 @@ public class loginController {
 //=================================================================================================
  
  
-	 public void loginButtonClicked(ActionEvent event) throws IOException
+	 public void loginButtonClicked(ActionEvent event) throws IOException, SQLException
 	 {
-		if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
+		/*if(usernameBar.getText().equalsIgnoreCase(physicianLogin)&& passwordBar.getText().equalsIgnoreCase(physicianPassword)){
 			
 			 FXMLLoader loader = new FXMLLoader();
 			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
@@ -83,5 +89,52 @@ public class loginController {
 			Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
 			buttonWasClicked.showAndWait();
 		 }
+		 */
+		 
+		 physicianResults = PatientAdapter.getResultSet("Doctor");
+		 patientResults = PatientAdapter.getResultSet("Pat_Info");
+		 
+		 int userType = 0; //set to 1 for physician, 2 for patient
+		 
+		 while(physicianResults.next()) {
+			 if(physicianResults.getString("Phys_Email").equals(usernameBar.getText()) && physicianResults.getString("Phys_Pass").equals(passwordBar.getText())) {
+				 physicianResults.absolute(physicianResults.getRow());
+				 userType = 1;
+			 }
+		 }
+		 
+		 while(patientResults.next()) {
+			 if(patientResults.getString("PEmail").equals(usernameBar.getText()) && patientResults.getString("PPass").equals(passwordBar.getText())) {
+				 patientResults.absolute(patientResults.getRow());
+				 userType = 2;
+			 }
+		 }
+		 
+		 if(userType == 1) {
+			 FXMLLoader loader = new FXMLLoader();
+			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PhysicianMainView.fxml"));
+			    Parent tableViewParent = loader.load();
+			    Scene tableViewScene = new Scene(tableViewParent);
+			    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		        window.setScene(tableViewScene);
+			    window.show();
+		 }
+		 if(userType == 2) {
+			 FXMLLoader loader = new FXMLLoader();
+			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
+			    Parent tableViewParent = loader.load();
+			    Scene tableViewScene = new Scene(tableViewParent);
+			    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			    window.setScene(tableViewScene);
+			    window.show();
+		 }
+	 }
+	 
+	 public static ResultSet getPhysicianResult() {
+		 return physicianResults;
+	 }
+	 
+	 public ResultSet getPatientResult() {
+		 return patientResults;
 	 }
 }
