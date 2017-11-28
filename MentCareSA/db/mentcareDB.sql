@@ -3,6 +3,7 @@ USE `mentcareDB` ;
 
 CREATE TABLE LOGIN (
     Username VARCHAR(6),
+-- The username is the patient/physican ID (Pat_Id/Phys_id respectively)
     Psswrd VARCHAR(20),
     PRIMARY KEY (Username)
 );
