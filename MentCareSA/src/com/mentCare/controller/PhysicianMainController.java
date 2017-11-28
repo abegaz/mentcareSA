@@ -14,7 +14,10 @@
 
 package com.mentCare.controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 import com.mentCare.model.Address;
@@ -278,18 +281,6 @@ public class PhysicianMainController {
 		dosageTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		drPrescribedTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		medicationDateTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		
-		//Set the icon of the delete button to an image of a trash can
-		Image trashImage = new Image("file:trashIcon.jpg");
-		deleteButton.setGraphic(new ImageView(trashImage));
-
-		//Set icon of the new button to an image of a new icon
-		Image newImage = new Image("file:newIcon.png");
-		newButton.setGraphic(new ImageView(newImage));
-
-		//Set icon of the save button to an image of a floppy disk
-		Image saveImage = new Image("file:saveIcon.png");
-		saveButton.setGraphic(new ImageView(saveImage));
 	}
 
 	/**********************Supporting Actions***************************/

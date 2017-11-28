@@ -30,11 +30,15 @@ public class PhysicianMedicationController {
 	@FXML Label patientNameLabel;
 	
 	//misc. Variables
-	ObservableList<Medication> medicationChoiceList;
+	ObservableList<Medication> medicationList;
+	ObservableList<String> medicationNameChoices;
 	
 	public void initialize(){
-		medicationChoiceList = FXCollections.observableArrayList();
+		medicationList = FXCollections.observableArrayList();
+		medicationNameChoices = FXCollections.observableArrayList();
 		addStaticMedication();
+		
+		medNameComboBox.setItems(medicationNameChoices);
 	}
 	
 	private void addStaticMedication(){
@@ -44,7 +48,11 @@ public class PhysicianMedicationController {
 		m1.setDrPrescribed("Dr. Strange");
 		m1.setDosage("11 pills 7x/hour");
 		m1.setMedDate("11/11/11");
-		medicationChoiceList.add(m1);
+		medicationList.add(m1);
+		
+		for(Medication m : medicationList){
+			medicationNameChoices.add(m.getMedicationName());
+		}
 	}
 	
 	public void todayButtonPressed(){

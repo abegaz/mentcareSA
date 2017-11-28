@@ -202,7 +202,7 @@
         </items>
       </SplitPane>
       <Button fx:id="deleteButton" layoutX="795.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
-      <Button fx:id="newButton" layoutY="2.0" mnemonicParsing="false" onAction="#newButtonPressed" style="-fx-graphic: trashIcon;" text="New" AnchorPane.topAnchor="2.0" />
+      <Button fx:id="newButton" layoutY="2.0" maxHeight="25.0" maxWidth="40.0" mnemonicParsing="false" onAction="#newButtonPressed" style="-fx-graphic: trashIcon;" text="New" AnchorPane.topAnchor="2.0" />
       <ToggleButton fx:id="editToggleButton" layoutX="855.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
       <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
         <items>
