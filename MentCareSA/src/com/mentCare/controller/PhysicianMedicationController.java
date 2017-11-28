@@ -1,5 +1,7 @@
 package com.mentCare.controller;
 
+import java.time.LocalDate;
+
 import com.mentCare.model.Medication;
 
 import javafx.collections.FXCollections;
@@ -46,7 +48,8 @@ public class PhysicianMedicationController {
 	}
 	
 	public void todayButtonPressed(){
-		
+		LocalDate today = LocalDate.now();
+		datePicker.setValue(today);
 	}
 	
 	public void addMedication(){
