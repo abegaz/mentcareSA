@@ -4,8 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,7 +11,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -21,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
+<AnchorPane id="AnchorPane" prefHeight="707.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.PhysicianMainController">
    <children>
       <SplitPane dividerPositions="0.22717149220489977" layoutY="32.0" prefHeight="675.0" prefWidth="900.0">
         <items>
@@ -51,7 +48,7 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1200.0" prefWidth="671.0">
                                  <children>
-                                    <GridPane fx:id="gridPane" gridLinesVisible="true" prefHeight="1200.0" prefWidth="679.0">
+                                    <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="-4.0" prefHeight="1200.0" prefWidth="679.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="242.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="446.0" />
@@ -124,20 +121,18 @@
                                             </columnConstraints>
                                             <rowConstraints>
                                               <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                                               <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TextField fx:id="address1Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 1" />
-                                                <TextField fx:id="address2Field" editable="false" onKeyTyped="#dataChanged" promptText="Address 2 (optional)" GridPane.rowIndex="1" />
-                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                <TextField fx:id="address1Field" editable="false" onKeyTyped="#dataChanged" promptText="Address" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                                    <children>
                                                       <TextField fx:id="cityField" editable="false" promptText="City" />
                                                       <ComboBox fx:id="statePicker" disable="true" layoutX="195.0" layoutY="1.0" onAction="#dataChanged" prefHeight="27.0" prefWidth="68.0" />
                                                    </children>
                                                 </Pane>
-                                                <TextField fx:id="zipField" editable="false" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="3" />
+                                                <TextField fx:id="zipField" editable="false" onKeyTyped="#dataChanged" promptText="Zip Code" GridPane.rowIndex="2" />
                                              </children>
                                           </GridPane>
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="10">
@@ -163,26 +158,12 @@
                                              </children>
                                           </GridPane>
                                           <TextArea fx:id="conditionArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="339.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                          <TextArea fx:id="treatmentTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                                           <TextArea fx:id="notesArea" editable="false" onKeyTyped="#dataChanged" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                                           <Label text="Height" GridPane.rowIndex="5" />
                                           <Label text="Weight" GridPane.rowIndex="6" />
                                           <Label text="Organ Donor" GridPane.rowIndex="7" />
                                           <Label text="Address:" GridPane.rowIndex="9" />
-                                          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                                             <children>
-                                                <TableView fx:id="MedicationTableView" prefHeight="317.0" prefWidth="440.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="rxTableColumn" prefWidth="75.0" text="Rx #" />
-                                                    <TableColumn fx:id="medicationNameTableColumn" prefWidth="75.0" text="Name" />
-                                                      <TableColumn fx:id="dosageTableColumn" prefWidth="65.0" text="Dosage" />
-                                                      <TableColumn fx:id="drPrescribedTableColumn" prefWidth="126.0" text="Doctor Prescribed" />
-                                                      <TableColumn fx:id="medicationDateTableColumn" prefWidth="98.0" text="Date" />
-                                                  </columns>
-                                                </TableView>
-                                                <Button fx:id="addMedicationButton" layoutY="329.0" mnemonicParsing="false" onAction="#addMedicationButtonPressed" text="Add Medication" />
-                                                <Button fx:id="removeMedicationButton" layoutX="293.0" layoutY="329.0" mnemonicParsing="false" onAction="#removeMedicationButtonPressed" text="Remove Medication" />
-                                             </children>
-                                          </Pane>
                                           <Pane prefHeight="200.0" prefWidth="200.0">
                                              <children>
                                                 <Label layoutX="4.0" layoutY="5.0" text="Full Name: " />
@@ -204,21 +185,12 @@
       <Button fx:id="deleteButton" layoutX="795.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" AnchorPane.topAnchor="2.0" />
       <Button fx:id="newButton" layoutY="2.0" maxHeight="25.0" maxWidth="40.0" mnemonicParsing="false" onAction="#newButtonPressed" style="-fx-graphic: trashIcon;" text="New" AnchorPane.topAnchor="2.0" />
       <ToggleButton fx:id="editToggleButton" layoutX="855.0" layoutY="2.0" mnemonicParsing="false" onAction="#editButtonToggled" text="Edit" />
-      <MenuButton fx:id="optionsMenuButton" layoutX="106.0" layoutY="2.0" mnemonicParsing="false" text="Options">
-        <items>
-          <MenuItem mnemonicParsing="false" onAction="#printButtonPressed" text="Print">
-               <accelerator>
-                  <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-               </accelerator></MenuItem>
-            <MenuItem mnemonicParsing="false" text="Export" />
-            <MenuItem mnemonicParsing="false" onAction="#logoutButtonPressed" text="Log Out" />
-        </items>
-      </MenuButton>
       <Button fx:id="saveButton" layoutX="53.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveButtonPressed" text="Save" />
       <Label fx:id="patientNameLabel" alignment="CENTER" layoutX="193.0" layoutY="1.0" prefHeight="27.0" prefWidth="583.0" text="Select Patient From Sidebar" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="114.0" layoutY="2.0" mnemonicParsing="false" onAction="#logoutButtonPressed" text="Log Out" />
    </children>
 </AnchorPane>
