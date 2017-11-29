@@ -1,26 +1,17 @@
 package com.mentCare.model;
 
 public class Address {
-	private String address1, address2, city, state, zip;
+	private String address, city, state, zip;
 	
 	public Address() {
-		address1 = "";
-		address2 = "";
+		address = "";
 		city = "";
 		state = "";
 		zip = "";
 	}
 	
 	public Address(String address, String city, String state, String zip){
-		this.address1 = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-	}
-	
-	public Address(String address, String address2, String city, String state, String zip) {
-		this.address1 = address;
-		this.address2 = address2;
+		this.address = address;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
@@ -29,15 +20,8 @@ public class Address {
 	/**
 	 * @return the address1
 	 */
-	public String getAddress1() {
-		return address1;
-	}
-
-	/**
-	 * @return the address2
-	 */
-	public String getAddress2() {
-		return address2;
+	public String getAddress() {
+		return address;
 	}
 
 	/**
@@ -64,15 +48,8 @@ public class Address {
 	/**
 	 * @param address1 the address1 to set
 	 */
-	public void setAddress1(String address1) {
-		this.address1 = address1;
-	}
-
-	/**
-	 * @param address2 the address2 to set
-	 */
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setAddress1(String address) {
+		this.address = address;
 	}
 
 	/**
@@ -103,8 +80,7 @@ public class Address {
 	public boolean equals(Address newAddress) {
 		boolean theSame = false;
 		
-		if(address1.equals(newAddress.getAddress1()) &&
-		   address2.equals(newAddress.getAddress2()) &&
+		if(address.equals(newAddress.getAddress()) &&
 		   city.equals(newAddress.getCity()) &&
 		   state.equals(newAddress.getState()) &&
 		   zip.equals(newAddress.getZip())) {
@@ -122,8 +98,7 @@ public class Address {
 	public boolean equalsIgnoreCase(Address newAddress) {
 		boolean theSame = false;
 		
-		if(address1.equalsIgnoreCase(newAddress.getAddress1()) &&
-		   address2.equalsIgnoreCase(newAddress.getAddress2()) &&
+		if(address.equalsIgnoreCase(newAddress.getAddress()) &&
 		   city.equalsIgnoreCase(newAddress.getCity()) &&
 		   state.equalsIgnoreCase(newAddress.getState()) &&
 		   zip.equalsIgnoreCase(newAddress.getZip())) {
@@ -134,13 +109,7 @@ public class Address {
 	}
 	
 	public String toString() {
-		String returnMe = address1;
-		
-		if(address2 != null) {
-			returnMe += " " + address2;
-		}
-		
-		returnMe += " " + city + ", " + state + " " + zip;
+		String returnMe = address + " " + city + ", " + state + " " + zip;
 		
 		return returnMe;
 	}
