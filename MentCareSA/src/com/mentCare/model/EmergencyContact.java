@@ -46,7 +46,7 @@ public class EmergencyContact {
 	/**
 	 * @param lastName the lastName to set
 	 */
-	public void setLastName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
