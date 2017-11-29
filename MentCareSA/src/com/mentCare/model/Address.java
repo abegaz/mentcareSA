@@ -48,7 +48,7 @@ public class Address {
 	/**
 	 * @param address1 the address1 to set
 	 */
-	public void setAddress1(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
