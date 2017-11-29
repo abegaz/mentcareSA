@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS mentcaredb;
 CREATE SCHEMA IF NOT EXISTS `mentcareDB` DEFAULT CHARACTER SET utf8 ;
 USE `mentcareDB` ;
 
@@ -13,7 +14,7 @@ VALUES ('123456','doctor1'),('213452','doctor2'),('234451','doctor3'),('213000',
 CREATE TABLE PHYSICIAN_INFO (
     Phys_id VARCHAR(6),
     Phys_name VARCHAR(25),
-    Phys_email VARCHAR(20),
+    Phys_email VARCHAR(30),
     Phys_phone VARCHAR(15),
     PRIMARY KEY (Phys_id)
 );
@@ -34,28 +35,28 @@ CREATE TABLE PAT_INFO (
     Weight INT,
     Height INT,
     Notes VARCHAR(45),
-    EmerContact VARCHAR(20),
-    EmerContactId VARCHAR(6),
-    Cond_Name VARCHAR(25),
-    Cond_Id VARCHAR(6),
-    AssignedDoctor VARCHAR(6),
+--    EmerContact VARCHAR(20),
+--    EmerContactId VARCHAR(6),
+--    Cond_Name VARCHAR(25),
+--    Cond_Id VARCHAR(6),
+--    AssignedDoctor VARCHAR(6),
     AssignedDoctorId VARCHAR(6),
     PRIMARY KEY (Pat_Id),
-    KEY (EmerContact),
-    FOREIGN KEY (EmerContact)
-        REFERENCES PAT_EMERGENCY (Ename),
-    KEY (EmerContactId),
-    FOREIGN KEY (EmerContactId)
-        REFERENCES PAT_EMERGENCY (Em_Id),
-    KEY (Cond_Name),
-    FOREIGN KEY (Cond_Name)
-        REFERENCES PCONDITION (Cond_Name),
-    KEY (Cond_Id),
-    FOREIGN KEY (Cond_Id)
-        REFERENCES PCONDITION (Cond_id),
-    KEY (AssignedDoctor),
-    FOREIGN KEY (AssignedDoctor)
-        REFERENCES PHYSICIAN_INFO (Phys_name),
+--    KEY (EmerContact),
+--    FOREIGN KEY (EmerContact)
+-- 		  REFERENCES PAT_EMERGENCY (Ename),
+--    KEY (EmerContactId),
+--    FOREIGN KEY (EmerContactId)
+--        REFERENCES PAT_EMERGENCY (Em_Id),
+--    KEY (Cond_Name),
+--    FOREIGN KEY (Cond_Name)
+--        REFERENCES PCONDITION (Cond_Name),
+--    KEY (Cond_Id),
+--    FOREIGN KEY (Cond_Id) 
+--        REFERENCES PCONDITION (Cond_id),
+--    KEY (AssignedDoctor),
+--    FOREIGN KEY (AssignedDoctor)
+--        REFERENCES PHYSICIAN_INFO (Phys_name),
     KEY (AssignedDoctorId),
     FOREIGN KEY (AssignedDoctorId)
         REFERENCES PHYSICIAN_INFO (Phys_id)
@@ -105,7 +106,7 @@ CREATE TABLE MEDICATION (
     PRIMARY KEY (Med_Id),
     KEY (Prescribed_By),
     FOREIGN KEY (Prescribed_By)
-        REFERENCES PHYSICIAN_INFO (Phys_Name)
+        REFERENCES PHYSICIAN_INFO (Phys_id)
 );
 
 CREATE TABLE PRESCRIBED (
@@ -122,7 +123,7 @@ CREATE TABLE PRESCRIBED (
 CREATE TABLE MED_FACILITY (
     Fac_id VARCHAR(6),
     Fac_address VARCHAR(30),
-    Fac_name VARCHAR(15),
+    Fac_name VARCHAR(25),
     Fac_phone VARCHAR(15),
     PRIMARY KEY (Fac_id)
 );
