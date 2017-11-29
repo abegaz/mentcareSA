@@ -44,6 +44,7 @@ public class loginController {
 
 
  public void initialize() {
+	 //System.out.println("Attempting to connect to Database...");
 	 PatientAdapter.connect();
  }
  
