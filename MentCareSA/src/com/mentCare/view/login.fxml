@@ -4,19 +4,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #82c4ff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.loginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #82c4ff;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mentCare.controller.loginController">
    <children>
      <TextField fx:id="usernameBar" layoutX="226.0" layoutY="138.0" promptText="Enter Username" />  
       <PasswordField fx:id="passwordBar" layoutX="226.0" layoutY="175.0" promptText="Enter Password" />
 <Button fx:id="loginButton" defaultButton="true" layoutX="273.0" layoutY="229.0" mnemonicParsing="false" onAction="#loginButtonClicked" text="Login" />
-      <Label layoutX="200.0" layoutY="67.0" prefHeight="53.0" prefWidth="238.0" text="MentCareSA">
+      <Label layoutX="200.0" layoutY="67.0" prefHeight="53.0" prefWidth="238.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
+      <ImageView fitHeight="107.0" fitWidth="200.0" layoutX="196.0" layoutY="31.0">
+         <image>
+            <Image url="@/Mentcare Logo.png" />
+         </image>
+      </ImageView>
      
    </children>
 </Pane>
