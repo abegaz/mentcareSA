@@ -8,8 +8,12 @@ CREATE TABLE LOGIN (
     Psswrd VARCHAR(20),
     PRIMARY KEY (Username)
 );
+-- Physician login info
 INSERT INTO LOGIN (Username, Psswrd)
 VALUES ('123456','doctor1'),('213452','doctor2'),('234451','doctor3'),('213000','doctor4');
+-- Patient login info
+INSERT INTO LOGIN (Username, Psswrd)
+VALUES ('999999','snitzal');
 
 CREATE TABLE PHYSICIAN_INFO (
     Phys_id VARCHAR(6),
@@ -34,7 +38,7 @@ CREATE TABLE PAT_INFO (
     PAddress VARCHAR(45),
     Weight INT,
     Height INT,
-    Notes VARCHAR(45),
+    Notes VARCHAR(45) NULL,
 --    EmerContact VARCHAR(20),
 --    EmerContactId VARCHAR(6),
 --    Cond_Name VARCHAR(25),
@@ -61,6 +65,8 @@ CREATE TABLE PAT_INFO (
     FOREIGN KEY (AssignedDoctorId)
         REFERENCES PHYSICIAN_INFO (Phys_id)
 );
+INSERT INTO PAT_INFO (Pat_id, Pname, DOB, Gender, SSN, Blood_Type, Pphone, PEmail, Organ_donor, PAddress, Weight, Height, Notes, AssignedDoctorId)
+VALUES ('999999', 'Hans Gruber', '09/09/59', yes, 999999999, 'A+', 9999999999, 'NeinHans@ss.de', no, 'Germany', 199, 99, 'Thinks he's Hitler', '123456')
 
 CREATE TABLE PAT_EMERGENCY (
     Em_Id VARCHAR(6),
