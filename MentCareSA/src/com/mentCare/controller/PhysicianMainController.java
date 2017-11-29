@@ -363,7 +363,7 @@ public class PhysicianMainController {
 				ld = LocalDate.parse(dob);
 
 				Address addressActual = new Address();
-				addressActual.setAddress1(address);
+				addressActual.setAddress(address);
 				addressActual.setCity(city);
 				addressActual.setState(state);
 				addressActual.setZip(zip);
