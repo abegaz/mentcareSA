@@ -26,7 +26,6 @@ import java.time.LocalDate;
 import com.mentCare.adapter.PatientAdapter;
 import com.mentCare.model.Address;
 import com.mentCare.model.EmergencyContact;
-import com.mentCare.model.Medication;
 import com.mentCare.model.Patient;
 
 import javafx.collections.FXCollections;
