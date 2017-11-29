@@ -12,7 +12,7 @@ public class Patient {
 	//Declare variables
 	private int id;
 	private SimpleStringProperty displayName;
-	private String lastName, middleName, firstName;
+	private String name;
 	private LocalDate dob;
 	private String email;
 	private String password;
@@ -30,9 +30,7 @@ public class Patient {
 //******************Constructors******************************
 	public Patient() {
 		super();
-		lastName = "";
-		middleName = "";
-		firstName = "";
+		name = "";
 		displayName = new SimpleStringProperty("Untitled Patient");
 		email = "";
 		password = "";
@@ -50,13 +48,11 @@ public class Patient {
 		isMale = true;
 	}
 
-	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
+	public Patient(String name, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
 			EmergencyContact emerContact, String condition, String treatment, String notes) {
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.firstName = firstName;
-		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+		this.name = name;
+		this.displayName = new SimpleStringProperty(name);
 		this.dob = dob;
 		this.isMale = isMale;
 		this.email = email;
@@ -74,11 +70,9 @@ public class Patient {
 		this.notes = notes;
 	}
 
-	public Patient(String lastName, String firstName, String middleName) {
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.firstName = firstName;
-		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
+	public Patient(String name) {
+		this.name = name;
+		this.displayName = new SimpleStringProperty(name);
 		email = "";
 		password = "";
 		ssn = 0;
@@ -100,22 +94,8 @@ public class Patient {
 	/**
 	 * @return the lastName
 	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @return the middleName
-	 */
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -217,10 +197,6 @@ public class Patient {
 		return isMale;
 	}
 
-	public String getFullName(){
-		return getFirstName() + " " + getMiddleName() + " " + getLastName();
-	}
-
 	/**
 	 * @return the displayName itself
 	 */
@@ -243,28 +219,18 @@ public class Patient {
 	//*********************Setters*********************
 
 	/**
-	 * @param lastName the lastName to set
+	 * @param dob the dob to set
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @param middleName the middleName to set
-	 */
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+		displayName = new SimpleStringProperty(name);
 	}
 
 	/**
@@ -374,9 +340,7 @@ public class Patient {
 	public boolean equals(Patient newPatient) {
 		boolean theSame = false;
 
-		if(lastName.equals(newPatient.getLastName()) &&
-		   middleName.equals(newPatient.getMiddleName()) &&
-		   firstName.equals(newPatient.getFirstName()) &&
+		if(name.equals(newPatient.getName()) &&
 		   address.equals(newPatient.getAddress()) &&
 		   bloodType.equals(newPatient.getBloodType()) &&
 		   condition.equals(newPatient.getCondition()) &&
@@ -404,9 +368,7 @@ public class Patient {
 	public boolean equalsIgnoreCase(Patient newPatient) {
 		boolean theSame = false;
 
-		if(lastName.equalsIgnoreCase(newPatient.getLastName()) &&
-				   middleName.equalsIgnoreCase(newPatient.getMiddleName()) &&
-				   firstName.equalsIgnoreCase(newPatient.getFirstName()) &&
+		if(name.equalsIgnoreCase(newPatient.getName()) &&
 				   address.equalsIgnoreCase(newPatient.getAddress()) &&
 				   bloodType.equalsIgnoreCase(newPatient.getBloodType()) &&
 				   condition.equalsIgnoreCase(newPatient.getCondition()) &&
@@ -431,7 +393,7 @@ public class Patient {
 	 */
 	@Override
 	public String toString() {
-		return "Patient [lastName=" + lastName + ", middleName=" + middleName + ", firstName=" + firstName + ", dob="
+		return "Patient [name= " + name + ", dob="
 				+ dob + ", email=" + email + ", ssn=" + ssn + ", bloodType=" + bloodType + ", phoneNum=" + phoneNum
 				+ ", address=" + address + ", height=" + height + ", weight=" + weight + ", organDonor=" + organDonor
 				+ ", emerContact=" + emerContact + ", condition=" + condition + ", treatment=" + treatment + ", notes=" + notes + ", isMale="
