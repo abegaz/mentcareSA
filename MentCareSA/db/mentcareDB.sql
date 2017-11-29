@@ -66,7 +66,7 @@ CREATE TABLE PAT_INFO (
         REFERENCES PHYSICIAN_INFO (Phys_id)
 );
 INSERT INTO PAT_INFO (Pat_id, Pname, DOB, Gender, SSN, Blood_Type, Pphone, PEmail, Organ_donor, PAddress, Weight, Height, Notes, AssignedDoctorId)
-VALUES ('999999', 'Hans Gruber', '09/09/59', yes, 999999999, 'A+', 9999999999, 'NeinHans@ss.de', no, 'Germany', 199, 99, 'Thinks he's Hitler', '123456')
+VALUES ('999999', 'Hans Gruber', '09/09/59', yes, 999999999, 'A+', '9999999999', 'NeinHans@ss.de', no, 'Germany', 199, 99, 'Thinks he's Hitler', '123456')
 
 CREATE TABLE PAT_EMERGENCY (
     Em_Id VARCHAR(6),
