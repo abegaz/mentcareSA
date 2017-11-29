@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -273,13 +274,14 @@ public class PhysicianMainController {
 	 * mainly used for testing purposes
 	 */
 	public void addStaticData(){
-		Patient josh = new Patient("Knight", "Joshua", "Matthew");
+		Patient josh = new Patient("Joshua Knight");
 		josh.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
 		josh.setBloodType("O+");
 		josh.setCondition("Mentally Handicapped");
 		josh.setEmail("jmknig0314@ung.edu");
 		josh.setEmerContact(new EmergencyContact("Snuffy", "Joseph", "770-555-1234", "joe.snuffy@ung.edu"));
 		josh.setHeight("69");
+		josh.setTreatment("There is no hope for him.");
 		josh.setNotes("None");
 		josh.setOrganDonor(true);
 		josh.setPassword("p@ssW0rd!");
@@ -288,27 +290,14 @@ public class PhysicianMainController {
 		josh.setWeight("190");
 		josh.setMale(true);
 
-		Medication med1 = new Medication();
-		med1.setRxNum("1111111");
-		med1.setMedicationName("Test medication");
-		med1.setDrPrescribed("Doctor Strange");
-		med1.setDosage("2 pills 2x/day");
-		med1.setMedDate("12/25/17");
-
-		Medication med2 = new Medication();
-		med2.setRxNum("123456");
-		med2.setMedicationName("Alzheimer's Pills");
-		med2.setDrPrescribed("Witch Doctor");
-		med2.setDosage("7 pills 8x/hour");
-		med2.setMedDate("1/1/17");
-
-		Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
+		Patient joe = new Patient("Joseph Mathis");
 		joe.setAddress(new Address("82 College cir.", "Dahlonega", "GA", "30597"));
 		joe.setBloodType("A-");
 		joe.setCondition("Alzheimer's");
 		joe.setEmail("joe.snuffy@ung.edu");
 		joe.setEmerContact(new EmergencyContact("Knight", "Joshua", "706-201-9393", "jmknig0314@ung.edu"));
 		joe.setHeight("72");
+		joe.setTreatment("Anti Alzheimer's pills");
 		joe.setNotes("uhhh. I can't remember.");
 		joe.setOrganDonor(false);
 		joe.setPassword("toor");
@@ -329,58 +318,62 @@ public class PhysicianMainController {
 
 			while(patients.next()){
 				int id = patients.getInt("PID");
-				String name = patients.getString("Pname");
-				String dob = patients.getString("DOB");//must be in YYYY-MM-DD format
-				boolean isMale = patients.getBoolean("Is_Male");
 				String assignedPhysician = patients.getString("AssignedPhysician");
-				String password = patients.getString("Ppass");
-				int ssn = patients.getInt("SSN");
-				String bloodType = patients.getString("Blood_Type");
-				String phone = patients.getString("Pphone");
-				String email = patients.getString("PEmail");
-				boolean organDonor = patients.getBoolean("Organ_Donor");
-				String address;
-				String city;
-				String state;
-				String zip;
-				String weight = patients.getString("Weight");
-				String height = patients.getString("Height");
-				String notes = patients.getString("Notes");
-				//emergency contact
-
-				Patient p = new Patient();
-				String[] names = separateNames(name);
-				p.setFirstName(names[0]);
-				if(names.length >= 3){
-					p.setMiddleName(names[1]);
-					p.setLastName(names[2]);
-				}
-				else{
-					p.setLastName(names[1]);
-				}
-
-				LocalDate ld;
-				ld = LocalDate.parse(dob);
-
-				Address addressActual = new Address();
-				addressActual.setAddress(address);
-				addressActual.setCity(city);
-				addressActual.setState(state);
-				addressActual.setZip(zip);
-
-				p.setMale(isMale);
-				p.setPassword(password);
-				p.setSsn(ssn);
-				p.setBloodType(bloodType);
-				p.setPhoneNum(phone);
-				p.setEmail(email);
-				p.setOrganDonor(organDonor);
-				p.setWeight(weight);
-				p.setHeight(height);
-				p.setNotes(notes);
-				p.setAddress(addressActual);
-
+				
 				if(assignedPhysician.equals(physicianId)){
+					String name = patients.getString("Pname");
+					Date dob = patients.getDate("DOB");//patients.getString("DOB");//must be in YYYY-MM-DD format
+					boolean isMale = patients.getBoolean("Is_Male");
+					String password = patients.getString("Ppass");
+					int ssn = patients.getInt("SSN");
+					String bloodType = patients.getString("Blood_Type");
+					String phone = patients.getString("Pphone");
+					String email = patients.getString("PEmail");
+					boolean organDonor = patients.getBoolean("Organ_Donor");
+					String address;
+					String city;
+					String state;
+					String zip;
+					String weight = patients.getString("Weight");
+					String height = patients.getString("Height");
+					String notes = patients.getString("Notes");
+					String emerName;
+					String emerPhone;
+					String emerEmail;
+					String emerRelation;
+
+					Patient p = new Patient();
+					p.setName(name);
+
+					/*Uncomment when figured out how to get the address info
+					Address addressActual = new Address();
+					addressActual.setAddress(address);
+					addressActual.setCity(city);
+					addressActual.setState(state);
+					addressActual.setZip(zip);
+					*/
+					
+					/*Uncomment when figured out how to get the Emergency Contact info
+					EmergencyContact emer = new EmergencyContact();
+					emer.setName(emerName);
+					emer.setEmail(emerEmail);
+					emer.setPhoneNum(emerPhone);
+					emer.setRelation(emerRelation);
+					*/
+
+					p.setMale(isMale);
+					p.setPassword(password);
+					p.setSsn(ssn);
+					p.setDob(dob.toLocalDate());
+					p.setBloodType(bloodType);
+					p.setPhoneNum(phone);
+					p.setEmail(email);
+					p.setOrganDonor(organDonor);
+					p.setWeight(weight);
+					p.setHeight(height);
+					p.setNotes(notes);
+					//p.setAddress(addressActual);
+					
 					patientList.add(p);
 				}
 			}
@@ -388,16 +381,6 @@ public class PhysicianMainController {
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
-	}
-
-	/* separateNames
-	 * takes in a string as input. Separates the string up into 3 strings using a space
-	 * as the separator.
-	 *
-	 * Used to separate the different names in the nameField
-	 */
-	public String[] separateNames(String name) {
-		return name.split(", ");
 	}
 
 	/*enableAllElements
@@ -542,7 +525,7 @@ public class PhysicianMainController {
 		} else{
 			for(int a = 0; a < patientList.size(); a++){//linear search implemented
 				Patient currentIndex = patientList.get(a);//start at the first index in the patientList
-				String fullLowercase = currentIndex.getFullName().toLowerCase();//get the full name and change it to lowercase
+				String fullLowercase = currentIndex.getName().toLowerCase();//get the name and change it to lowercase
 				CharSequence c = searchText.toLowerCase();//change the search text to lowercase to match the patientList name's case
 				if(fullLowercase.contains(c)){
 					searchList.add(currentIndex);
@@ -595,23 +578,6 @@ public class PhysicianMainController {
 		int in, ft, height;
 
 		String name = nameField.getText();//get name from the input field
-		String[] sepNames = separateNames(name);
-		//in case the name is not inserted as predicted, the program will not crash
-		try {
-			lastName = sepNames[0];
-		} catch(ArrayIndexOutOfBoundsException e) {
-			lastName = "";
-		}
-		try {
-			firstName = sepNames[1];
-		} catch(ArrayIndexOutOfBoundsException e) {
-			firstName = "";
-		}
-		try {
-			middleName = sepNames[2];
-		} catch(ArrayIndexOutOfBoundsException e){
-			middleName = "";
-		}
 		//get the values from the input fields and assign them to the local variables
 		dob = dobPicker.getValue();
 		gender = genderCombo.getValue();
@@ -651,7 +617,7 @@ public class PhysicianMainController {
 			isMale = false;
 		}
 		//create a new patient based on the input data
-		p = new Patient(lastName, middleName, firstName, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatment, notes);
+		p = new Patient(name, dob, isMale, email, "password", ssn, bloodType, phoneNum, address, heightString, weight, organDonor, emer, condition, treatment, notes);
 		//add the new patient to the patientList
 		patientList.add(p);
 	}
@@ -663,11 +629,8 @@ public class PhysicianMainController {
 	public void loadData(){
 		Patient p = selectedPatient;
 
-		String name = p.getLastName() + ", " + p.getFirstName();
+		String name = p.getName();
 
-		if(p.getMiddleName() != ""){
-			name += ", " + p.getMiddleName();
-		}
 		nameField.setText(name);
 		dobPicker.setValue(p.getDob());
 
@@ -745,7 +708,7 @@ public class PhysicianMainController {
 	public void deleteButtonPressed() {
 		if(selectedPatient != null){
 			Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete " +
-		selectedPatient.getFirstName() + " " + selectedPatient.getLastName() + "?", ButtonType.YES, ButtonType.CANCEL);
+		selectedPatient.getName() + "?", ButtonType.YES, ButtonType.CANCEL);
 
 			alert.showAndWait();
 
