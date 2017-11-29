@@ -21,3 +21,33 @@ KEY (Phys_id),
 FOREIGN KEY (Phys_id) REFERENCES PHYSICIAN_INFO (Phys_id),
 KEY (Fac_id),
 FOREIGN KEY (Fac_id) REFERENCES MED_FACILITY (Fac_id));
+
+
+
+INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
+VALUES (123456, Dr. John Smith, drjohnsmith@email.com, 5552223333)
+INSERT INTO MED_FACILITY (Fac_id, Fac_address, Fac_name, Fac_phone)
+VALUES ()
+INSERT INTO WORKS_AT (Phys_id, Fac_id, Off_phone, Room_no)
+VALUES ()
+
+INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
+VALUES (213452, Dr. Jane Black, drjaneblack@email.com, 7776668888)
+INSERT INTO MED_FACILITY (Fac_id, Fac_address, Fac_name, Fac_phone)
+VALUES ()
+INSERT INTO WORKS_AT (Phys_id, Fac_id, Off_phone, Room_no)
+VALUES ()
+
+INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
+VALUES (234451, Dr. Doug Dunbar, drdougdunbar@email.com, 2223334444)
+INSERT INTO MED_FACILITY (Fac_id, Fac_address, Fac_name, Fac_phone)
+VALUES ()
+INSERT INTO WORKS_AT (Phys_id, Fac_id, Off_phone, Room_no)
+VALUES ()
+
+INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
+VALUES (213452, Dr. Rebecca Regan, drrebeccaregan@email.com, 1119998888)
+INSERT INTO MED_FACILITY (Fac_id, Fac_address, Fac_name, Fac_phone)
+VALUES ()
+INSERT INTO WORKS_AT (Phys_id, Fac_id, Off_phone, Room_no)
+VALUES ()
