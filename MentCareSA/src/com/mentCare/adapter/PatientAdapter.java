@@ -24,7 +24,7 @@ public class PatientAdapter
 		}
 		catch(SQLException err)
 		{
-			System.out.println( err.getMessage( ) );
+			System.out.println(err.getMessage( ));
 		}
 	}
 	public static void addRow(String tableName, String fieldNames, String values)
