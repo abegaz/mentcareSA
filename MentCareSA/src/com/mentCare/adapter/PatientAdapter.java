@@ -20,6 +20,7 @@ public class PatientAdapter
 			if (myConn != null && !myConn.isClosed())
 				myConn.close();
 			myConn = DriverManager.getConnection(host, userName, userPass);
+			System.out.println("Connection Error");
 		}
 		catch(SQLException err)
 		{
