@@ -10,41 +10,15 @@ CREATE TABLE LOGIN (
 INSERT INTO LOGIN (Username, Psswrd)
 VALUES ('123456','doctor1'),('213452','doctor2'),('234451','doctor3'),('213000','doctor4');
 
-CREATE TABLE PAT_EMERGENCY (
-    Em_Id VARCHAR(6),
-    Pat_Id VARCHAR(6),
-    Ename VARCHAR(25),
-    EEmail VARCHAR(25),
-    Relation VARCHAR(15),
-    PRIMARY KEY (Em_Id),
-    KEY (Pat_Id),
-    FOREIGN KEY (Pat_Id)
-        REFERENCES PAT_INFO (Pat_Id)
+CREATE TABLE PHYSICIAN_INFO (
+    Phys_id VARCHAR(6),
+    Phys_name VARCHAR(25),
+    Phys_email VARCHAR(20),
+    Phys_phone VARCHAR(15),
+    PRIMARY KEY (Phys_id)
 );
-
-CREATE TABLE TREATMENT (
-    Treat_Id VARCHAR(6),
-    Treat_Name VARCHAR(20),
-    Details VARCHAR(45),
-    Date_Started DATE,
-    PRIMARY KEY (Treat_Id)
-);
-
--- The following table is named "PCONDITION" because "CONDITION" is an existing SQL term
-CREATE TABLE PCONDITION (
-    Cond_Id VARCHAR(6),
-    Cond_Name VARCHAR(25),
-    Date_Diagnosed DATE,
-    Diagnosed_By VARCHAR(6),
-    Treat_Id VARCHAR(6),
-    PRIMARY KEY (Cond_Id),
-    KEY (Diagnosed_By),
-    FOREIGN KEY (Diagnosed_By)
-        REFERENCES PHYSICIAN_INFO (Phys_id),
-    KEY (Treat_Id),
-    FOREIGN KEY (Treat_Id)
-        REFERENCES TREATMENT (Treat_Id)
-);
+INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
+VALUES ('123456', 'Dr. John Smith', 'drjohnsmith@email.com', '5552223333'),('213452', 'Dr. Jane Black', 'drjaneblack@email.com', '7776668888'),('234451', 'Dr. Doug Dunbar', 'drdougdunbar@email.com', '2223334444'),('213000', 'Dr. Rebecca Regan', 'drrebeccaregan@email.com', '1119998888');
 
 CREATE TABLE PAT_INFO (
     Pat_Id VARCHAR(6),
@@ -87,6 +61,42 @@ CREATE TABLE PAT_INFO (
         REFERENCES PHYSICIAN_INFO (Phys_id)
 );
 
+CREATE TABLE PAT_EMERGENCY (
+    Em_Id VARCHAR(6),
+    Pat_Id VARCHAR(6),
+    Ename VARCHAR(25),
+    EEmail VARCHAR(25),
+    Relation VARCHAR(15),
+    PRIMARY KEY (Em_Id),
+    KEY (Pat_Id),
+    FOREIGN KEY (Pat_Id)
+        REFERENCES PAT_INFO (Pat_Id)
+);
+
+CREATE TABLE TREATMENT (
+    Treat_Id VARCHAR(6),
+    Treat_Name VARCHAR(20),
+    Details VARCHAR(45),
+    Date_Started DATE,
+    PRIMARY KEY (Treat_Id)
+);
+
+-- The following table is named "PCONDITION" because "CONDITION" is an existing SQL term
+CREATE TABLE PCONDITION (
+    Cond_Id VARCHAR(6),
+    Cond_Name VARCHAR(25),
+    Date_Diagnosed DATE,
+    Diagnosed_By VARCHAR(6),
+    Treat_Id VARCHAR(6),
+    PRIMARY KEY (Cond_Id),
+    KEY (Diagnosed_By),
+    FOREIGN KEY (Diagnosed_By)
+        REFERENCES PHYSICIAN_INFO (Phys_id),
+    KEY (Treat_Id),
+    FOREIGN KEY (Treat_Id)
+        REFERENCES TREATMENT (Treat_Id)
+);
+
 CREATE TABLE MEDICATION (
     Med_Id VARCHAR(6),
     Prescribed_By VARCHAR(25),
@@ -108,16 +118,6 @@ CREATE TABLE PRESCRIBED (
     FOREIGN KEY (Medication_Med_Id)
         REFERENCES MEDICATION (Med_Id)
 );
-
-CREATE TABLE PHYSICIAN_INFO (
-    Phys_id VARCHAR(6),
-    Phys_name VARCHAR(25),
-    Phys_email VARCHAR(20),
-    Phys_phone VARCHAR(15),
-    PRIMARY KEY (Phys_id)
-);
-INSERT INTO PHYSICIAN_INFO (Phys_id, Phys_name, Phys_email, Phys_phone)
-VALUES ('123456', 'Dr. John Smith', 'drjohnsmith@email.com', '5552223333'),('213452', 'Dr. Jane Black', 'drjaneblack@email.com', '7776668888'),('234451', 'Dr. Doug Dunbar', 'drdougdunbar@email.com', '2223334444'),('213000', 'Dr. Rebecca Regan', 'drrebeccaregan@email.com', '1119998888');
 
 CREATE TABLE MED_FACILITY (
     Fac_id VARCHAR(6),
