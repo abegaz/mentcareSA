@@ -24,9 +24,8 @@ public class Patient {
 	private String height, weight;
 	private boolean organDonor;
 	private EmergencyContact emerContact;
-	private String condition, notes;
+	private String condition, treatment, notes;
 	private boolean isMale;
-	private ObservableList<Medication> medicationList;
 
 //******************Constructors******************************
 	public Patient() {
@@ -46,14 +45,14 @@ public class Patient {
 		organDonor = false;
 		emerContact = new EmergencyContact();
 		condition = "";
+		treatment = "";
 		notes = "";
 		isMale = true;
-		medicationList = FXCollections.observableArrayList();
 	}
 
 	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
 			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
-			EmergencyContact emerContact, String condition, Medication med, String notes) {
+			EmergencyContact emerContact, String condition, String treatment, String notes) {
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.firstName = firstName;
@@ -71,60 +70,7 @@ public class Patient {
 		this.organDonor = organDonor;
 		this.emerContact = emerContact;
 		this.condition = condition;
-		this.medicationList = FXCollections.observableArrayList();
-		this.medicationList.add(med);
-		this.notes = notes;
-	}
-
-	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
-			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
-			EmergencyContact emerContact, String condition, Medication[] med, String notes) {
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.firstName = firstName;
-		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
-		this.dob = dob;
-		this.isMale = isMale;
-		this.email = email;
-		this.password = password;
-		this.ssn = 0;
-		this.bloodType = bloodType;
-		this.phoneNum = phoneNum;
-		this.address = address;
-		this.height = height;
-		this.weight = weight;
-		this.organDonor = organDonor;
-		this.emerContact = emerContact;
-		this.condition = condition;
-		this.medicationList = FXCollections.observableArrayList();
-		for(Medication medication : med) {
-			this.medicationList.add(medication);
-		}
-		this.notes = notes;
-	}
-
-	public Patient(String lastName, String middleName, String firstName, LocalDate dob, boolean isMale, String email, String password, String ssn,
-			String bloodType, String phoneNum, Address address, String height, String weight, boolean organDonor,
-			EmergencyContact emerContact, String condition, ObservableList<Medication> med, String notes) {
-		this.lastName = lastName;
-		this.middleName = middleName;
-		this.firstName = firstName;
-		this.displayName = new SimpleStringProperty(lastName + ", " + firstName);
-		this.dob = dob;
-		this.isMale = isMale;
-		this.email = email;
-		this.password = password;
-		this.ssn = 0;
-		this.bloodType = bloodType;
-		this.phoneNum = phoneNum;
-		this.address = address;
-		this.height = height;
-		this.weight = weight;
-		this.organDonor = organDonor;
-		this.emerContact = emerContact;
-		this.condition = condition;
-		this.medicationList = FXCollections.observableArrayList();
-		this.medicationList.addAll(med);
+		this.treatment = treatment;
 		this.notes = notes;
 	}
 
@@ -144,9 +90,9 @@ public class Patient {
 		organDonor = false;
 		emerContact = new EmergencyContact();
 		condition = "";
+		treatment = "";
 		notes = "";
 		isMale = true;
-		medicationList = FXCollections.observableArrayList();
 	}
 
 //*********************Getters*********************
@@ -281,12 +227,9 @@ public class Patient {
 	public SimpleStringProperty displayNameProperty(){
 		return displayName;
 	}
-
-	/**
-	 * @return the medicationList
-	 */
-	public ObservableList<Medication> getMedicationList() {
-		return medicationList;
+	
+	public String getTreatment() {
+		return treatment;
 	}
 
 	public int getId() {
@@ -412,21 +355,8 @@ public class Patient {
 		this.isMale = isMale;
 	}
 
-	/**
-	 * @param medicationList the medicationList to set
-	 */
-	public void setMedicationList(ObservableList<Medication> medicationList) {
-		this.medicationList = medicationList;
-	}
-
-	public void addMedication(Medication med) {
-		this.medicationList.add(med);
-	}
-
-	public void addMedication(Medication[] medicationList) {
-		for(Medication medication : medicationList) {
-			this.medicationList.add(medication);
-		}
+	public void setTreatment(String treatment) {
+		
 	}
 
 	public void setId(int id) {
@@ -435,10 +365,6 @@ public class Patient {
 
 	public void setAssignedPhysician(String assignedPhysician) {
 		this.assignedPhysician = assignedPhysician;
-	}
-
-	public void addMedication(ObservableList<Medication> medicationList) {
-		this.medicationList.addAll(medicationList);
 	}
 
 	/*equals
@@ -463,8 +389,7 @@ public class Patient {
 		   ssn == newPatient.getSsn() &&
 		   weight.equals(newPatient.getWeight()) &&
 		   dob.equals(newPatient.getDob()) &&
-		   isMale() == newPatient.isMale() &&
-		   getMedicationList().equals(newPatient.getMedicationList())) {
+		   isMale() == newPatient.isMale()) {
 			theSame = true;
 		}
 
@@ -494,8 +419,7 @@ public class Patient {
 				   ssn == newPatient.getSsn() &&
 				   weight.equalsIgnoreCase(newPatient.getWeight()) &&
 				   dob.equals(newPatient.getDob()) &&
-				   isMale() == newPatient.isMale() &&
-				   getMedicationList().equals(newPatient.getMedicationList())) {
+				   isMale() == newPatient.isMale()) {
 			theSame = true;
 		}
 
@@ -510,8 +434,8 @@ public class Patient {
 		return "Patient [lastName=" + lastName + ", middleName=" + middleName + ", firstName=" + firstName + ", dob="
 				+ dob + ", email=" + email + ", ssn=" + ssn + ", bloodType=" + bloodType + ", phoneNum=" + phoneNum
 				+ ", address=" + address + ", height=" + height + ", weight=" + weight + ", organDonor=" + organDonor
-				+ ", emerContact=" + emerContact + ", condition=" + condition + ", notes=" + notes + ", isMale="
-				+ isMale + ", medicationList=" + medicationList + "]";
+				+ ", emerContact=" + emerContact + ", condition=" + condition + ", treatment=" + treatment + ", notes=" + notes + ", isMale="
+				+ isMale + "]";
 	}
 
 
