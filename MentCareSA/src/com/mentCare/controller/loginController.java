@@ -92,20 +92,21 @@ public class loginController {
 		 }
 		 */
 		 
-		 physicianResults = PatientAdapter.getResultSet("Doctor");
-		 patientResults = PatientAdapter.getResultSet("Pat_Info");
+		 physicianResults = PatientAdapter.getResultSet("physician_info");
+		 patientResults = PatientAdapter.getResultSet("pat_info");
 		 
 		 int userType = 0; //set to 1 for physician, 2 for patient
 		 
 		 while(physicianResults.next()) {
-			 if(physicianResults.getString("Phys_Email").equals(usernameBar.getText()) && physicianResults.getString("Phys_Pass").equals(passwordBar.getText())) {
+			 if(physicianResults.getString("Phys_email").equals(usernameBar.getText()) && physicianResults.getString("PASSWORD").equals(passwordBar.getText())) {
 				 physicianResults.absolute(physicianResults.getRow());
 				 userType = 1;
 			 }
+
 		 }
 		 
 		 while(patientResults.next()) {
-			 if(patientResults.getString("PEmail").equals(usernameBar.getText()) && patientResults.getString("PPass").equals(passwordBar.getText())) {
+			 if(patientResults.getString("PEmail").equals(usernameBar.getText()) && patientResults.getString("PASSWORD").equals(passwordBar.getText())) {
 				 patientResults.absolute(patientResults.getRow());
 				 userType = 2;
 			 }
@@ -122,7 +123,7 @@ public class loginController {
 		 }
 		 if(userType == 2) {
 			 FXMLLoader loader = new FXMLLoader();
-			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView2.fxml"));
+			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
 			    Parent tableViewParent = loader.load();
 			    Scene tableViewScene = new Scene(tableViewParent);
 			    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
