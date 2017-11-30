@@ -121,7 +121,9 @@ public class loginController {
 		        window.setScene(tableViewScene);
 			    window.show();
 		 }
-		 if(userType == 2) {
+		
+			 
+		 else if(userType == 2) {
 			 FXMLLoader loader = new FXMLLoader();
 			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
 			    Parent tableViewParent = loader.load();
@@ -130,6 +132,10 @@ public class loginController {
 			    window.setScene(tableViewScene);
 			    window.show();
 		 }
+		 else{
+				Alert buttonWasClicked = new Alert(AlertType.CONFIRMATION, "Wrong username or password", ButtonType.OK, ButtonType.CANCEL);
+				buttonWasClicked.showAndWait();
+			 }
 	 }
 	 
 	 public static ResultSet getPhysicianResult() {
