@@ -122,7 +122,7 @@ public class loginController {
 		 }
 		 if(userType == 2) {
 			 FXMLLoader loader = new FXMLLoader();
-			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView.fxml"));
+			    loader.setLocation(getClass().getResource("../../../com/mentCare/view/PatientMainView2.fxml"));
 			    Parent tableViewParent = loader.load();
 			    Scene tableViewScene = new Scene(tableViewParent);
 			    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

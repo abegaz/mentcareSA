@@ -159,11 +159,11 @@ public class PatientMainController {
 		public void initialize() {
 			unsavedChanges = false;
 			//populate genderCombo
-			genderCombo.setItems(genderOptions);
-			genderCombo.getSelectionModel().selectFirst();
+			//genderCombo.setItems(genderOptions);
+			//genderCombo.getSelectionModel().selectFirst();
 			//populate bloodTypeCombo
-			bloodTypeCombo.setItems(bloodTypeOptions);
-			bloodTypeCombo.getSelectionModel().selectFirst();
+			//bloodTypeCombo.setItems(bloodTypeOptions);
+			//bloodTypeCombo.getSelectionModel().selectFirst();
 			//populate feetPicker
 			//feetPicker.setItems(feetOptions);
 			//feetPicker.getSelectionModel().selectFirst();
@@ -213,8 +213,8 @@ public class PatientMainController {
 			josh.setOrganDonor(true);
 			josh.setPassword("p@ssW0rd!");
 			josh.setPhoneNum("706-201-9393");
-			josh.setSsn("111-22-3333");
-			josh.setTreatment("There is no hope for him");
+			//josh.setSsn("111-22-3333");
+			//josh.setTreatment("There is no hope for him");
 			josh.setWeight("190");
 
 			Patient joe = new Patient("Snuffy", "Joseph", "Mathis");
@@ -228,8 +228,8 @@ public class PatientMainController {
 			joe.setOrganDonor(false);
 			joe.setPassword("root");
 			joe.setPhoneNum("770-555-1234");
-			joe.setSsn("123-45-6789");
-			joe.setTreatment("Alzheimer's pills 2/dy");
+			//joe.setSsn("123-45-6789");
+			//joe.setTreatment("Alzheimer's pills 2/dy");
 			joe.setWeight("175");
 
 			patients.add(josh);
